@@ -147,7 +147,6 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         int index = 0;
         foreach(Toggle weaponToggle in weaponToggles)
         {
-            Debug.Log(index);
             if(weaponToggle.isOn)
                 return index;
             index++;

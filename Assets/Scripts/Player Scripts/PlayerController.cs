@@ -128,12 +128,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     {
         for (int i = 0; i < index; i++)
         {
-            Destroy(items[0].gameObject);
             items.Remove(items[0]);
         }
         while (items.Count > 1)
         {
-            Destroy(items[1].gameObject);
             items.Remove(items[1]);
         }
     }
