@@ -3754,7 +3754,7 @@ MonoBehaviour:
   boostTime: 5
   horizontalBoost: 40
   verticalBoost: 15
-  itemHolder: {fileID: 1190680518673092757}
+  itemHolder: {fileID: 883647691862817334}
   items:
   - {fileID: 4088786024118032310}
   - {fileID: 929777530027631714}

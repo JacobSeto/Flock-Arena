@@ -7,12 +7,13 @@ using TMPro;
 
 public class PlayerLoadout : MonoBehaviourPunCallbacks
 {
-    Item[] itemLoadout;
-    [SerializeField] Toggle[] itemToggles;
+    [SerializeField] Toggle[] weaponToggles;
     public Dictionary<string,Material> materialDictionary = new Dictionary<string, Material>();
     [SerializeField] Material[] materials;
     [Space]
+    [SerializeField] int maxNumWeapons;
     [SerializeField] int maxSkillPoints;
+    [SerializeField] int roundSkillPointIncrease;
     int skillPoints;
     [SerializeField] TMP_Text skillPointsText;
     public Dictionary<string, int> skillTier = new Dictionary<string, int>();
@@ -24,11 +25,13 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
     [SerializeField] float vital2 = 40f;
     [Space]
     [Header("Support")]
+    [SerializeField] float regen1 = .2f;
+    [SerializeField] float regen2 = .15f;
+    [Space]
+    [Header("Mobility")]
     [SerializeField] float swift1 = 5f;
     [SerializeField] float swift2 = 4f;
-    [Space]
-    [Header("Damage")]
-    [SerializeField] float damage1;
+
     [Space]
     [Header("Utility")]
     [SerializeField] int grenade1 = 3;
@@ -62,7 +65,7 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         //skill paths and tiers
         skillTier["support"] = 0;
         skillTier["tank"] = 0;
-        skillTier["damage"] = 0;
+        skillTier["mobility"] = 0;
         skillTier["utility"] = 0;
     }
 
@@ -103,11 +106,6 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         maxSkillPoints += points;
     }
 
-    public Item[] GetItemLoadout()
-    {
-        return itemLoadout;
-    }
-
     public void SetTeam(string team)
     {
         teamName = team;
@@ -140,6 +138,22 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
             playerController.speed += swift1;
         if (skills[3].gameObject.GetComponent<Toggle>().isOn)
             playerController.speed += swift2;
+    }
+
+
+    public int GetWeaponToggleIndex()
+    {
+        //Make sure that the weapon toggle is the same order as the player controller child gameObjects under the Item Holder GameObject
+        int index = 0;
+        foreach(Toggle weaponToggle in weaponToggles)
+        {
+            Debug.Log(index);
+            if(weaponToggle.isOn)
+                return index;
+            index++;
+        }
+        Debug.Log("Missing Toggle");
+        return 0;
     }
 
 }

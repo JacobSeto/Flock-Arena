@@ -55,10 +55,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     [Space]
     [Header("Items")]
-    [SerializeField] GameObject itemHolder;
-    [SerializeField] Item[] items;
-    List<GameObject> playerItems = new List<GameObject>(); //index 0
-    List<GameObject> enemyItems = new List<GameObject>(); //index 1
+    [SerializeField] Transform itemHolder;
+    [SerializeField] List<Item> items;
     int itemIndex = 0;
     int previousItemIndex = -1;
 
@@ -117,7 +115,27 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     {
         //set team color
         gameObject.GetComponent<Renderer>().sharedMaterial = playerLoadout.GetMaterial();
+        //set skill tree skills
         playerLoadout.SkillTree(gameObject.GetComponent<PlayerController>());
+        //set player weapon by destroying all other weapons in itemholder
+        view.RPC(nameof(RPC_SetWeapon), RpcTarget.All, playerLoadout.GetWeaponToggleIndex());
+        //set player weapon skills
+
+        //set item refrences
+    }
+    [PunRPC]
+    public void RPC_SetWeapon(int index)
+    {
+        for (int i = 0; i < index; i++)
+        {
+            Destroy(items[0].gameObject);
+            items.Remove(items[0]);
+        }
+        while (items.Count > 1)
+        {
+            Destroy(items[1].gameObject);
+            items.Remove(items[1]);
+        }
     }
 
     private void Update()
@@ -239,7 +257,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     {
         if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
         {
-            if(itemIndex >= items.Length - 1)
+            if(itemIndex >= items.Count - 1)
             {
                 EquipItem(0);
             }
@@ -252,7 +270,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         {
             if (itemIndex <= 0)
             {
-                EquipItem(items.Length-1);
+                EquipItem(items.Count-1);
             }
             else
             {
@@ -260,7 +278,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             }
         }
 
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < items.Count; i++)
         {
             if (Input.GetKeyDown((i + 1).ToString()))
             {

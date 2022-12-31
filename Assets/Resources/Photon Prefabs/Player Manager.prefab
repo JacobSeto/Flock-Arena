@@ -204,7 +204,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1485257642566186924
 RectTransform:
   m_ObjectHideFlags: 0
@@ -875,7 +875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61747804cc060404f84a91772741d29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToggles:
+  weaponToggles:
   - {fileID: 1852487010843802233}
   - {fileID: 3170119327564788588}
   - {fileID: 1516465694554949937}
@@ -889,7 +889,9 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: df2cac050c77ae746997581f7c66b14d, type: 2}
   - {fileID: 2100000, guid: db6e25d563bdd3d43811ce387c20c5a0, type: 2}
+  maxNumWeapons: 0
   maxSkillPoints: 5
+  roundSkillPointIncrease: 0
   skillPointsText: {fileID: 3228326355770597253}
   skills:
   - {fileID: 1072363470338544567}
@@ -898,9 +900,10 @@ MonoBehaviour:
   - {fileID: 8771360279719646555}
   vital1: 25
   vital2: 40
+  regen1: 0.2
+  regen2: 0.15
   swift1: 1.2
   swift2: 1.1
-  damage1: 10
   grenade1: 3
 --- !u!1 &2737094832136182650
 GameObject:
@@ -1104,9 +1107,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6604021823549962798}
-  - {fileID: 1203329947144458454}
+  m_Children: []
   m_Father: {fileID: 1096446556158825759}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1706,7 +1707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9188393751983095107
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1880,7 +1881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9056604, g: 0, b: 0.18394844, a: 0.3137255}
+  m_Color: {r: 0, g: 0.90588236, b: 0.47463802, a: 0.3137255}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1907,7 +1908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1860860333170595182}
   m_Layer: 0
-  m_Name: Damage
+  m_Name: Mobility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2099,7 +2100,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6604021823549962798}
+  - {fileID: 1203329947144458454}
   m_Father: {fileID: 1860860333170595182}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2333,7 +2336,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Damage
+  m_text: Mobility
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3911,7 +3914,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1270562144844135906}
+    m_TransformParent: {fileID: 8989472005505574168}
     m_Modifications:
     - target: {fileID: 1181083078297486350, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: m_Name
@@ -3952,6 +3955,14 @@ PrefabInstance:
     - target: {fileID: 1919546188895134772, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: m_SizeDelta.y
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919546188895134772, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919546188895134772, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5000002
       objectReference: {fileID: 0}
     - target: {fileID: 1919546188895134772, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5008,7 +5019,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1270562144844135906}
+    m_TransformParent: {fileID: 8989472005505574168}
     m_Modifications:
     - target: {fileID: 1181083078297486350, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: m_Name
@@ -5049,6 +5060,14 @@ PrefabInstance:
     - target: {fileID: 1919546188895134772, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: m_SizeDelta.y
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919546188895134772, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919546188895134772, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5000002
       objectReference: {fileID: 0}
     - target: {fileID: 1919546188895134772, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: m_LocalPosition.x

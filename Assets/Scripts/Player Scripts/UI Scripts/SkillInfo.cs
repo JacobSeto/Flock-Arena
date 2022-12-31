@@ -7,5 +7,5 @@ public class SkillInfo : ScriptableObject
     public string skillName;
     public int cost;
     public int tier;
-    public string path; //"tank","support","damage", "utility"
+    public string path; //"tank","support","mobility", "utility"
 }

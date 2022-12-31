@@ -15,4 +15,4 @@ MonoBehaviour:
   skillName: Swiftness I
   cost: 2
   tier: 1
-  path: support
+  path: mobility
