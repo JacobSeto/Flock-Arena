@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] GameObject UI;
     [SerializeField] Image healthbarImage;
     [SerializeField] TMP_Text healthText;
-    [SerializeField] Slider mouseSlider;
     [SerializeField] TMP_Text ammoText;
     [SerializeField] TMP_Text boostText;
     [SerializeField] GameObject cameraHolder;
@@ -25,10 +24,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] Transform camTransformRef;
     public Camera itemCamera { get; set; }
     [SerializeField] Camera itemCameraRef;
-    [Space]
-    [Header("Settings")]
-    [SerializeField] GameObject pauseMenu;
-    [SerializeField] float mouseSens;
+    public float mouseSens { get; set; }
 
     [Space]
     [Header("Player Stats")]
@@ -86,8 +82,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         {
             PlayerSetters();
             Cursor.lockState = CursorLockMode.Locked;
-            mouseSlider.value = mouseSlider.value = PlayerPrefs.GetFloat("Mouse Sensitivity", 300f);
-            SliderMouseSensitivity();
+            playerManager.SliderMouseSensitivity();
         }
         else
         {
@@ -192,11 +187,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             rb.AddForce(force);
     }
 
-    public void SliderMouseSensitivity()
-    {
-        mouseSens = mouseSlider.value/100;
-        PlayerPrefs.SetFloat("Mouse Sensitivity", mouseSlider.value);
-    }
 
     private void MouseLook()
     {
@@ -345,27 +335,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         }
     }
 
-    void PauseMenu()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            isPaused = !(isPaused);
-            pauseMenu.SetActive(isPaused);
-            if (isPaused)
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-        }
-    }
-
     public void Inputs()
     {
-        PauseMenu();
-        if (!canMove || isPaused)
+        if (!canMove)
             return;
         MouseLook();
         GunControl();
@@ -374,7 +346,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     }
     public void RBMovement()
     {
-        if (!canMove || isPaused)
+        if (!canMove)
             return;
         Move();
         MoveConstant();

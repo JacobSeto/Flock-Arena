@@ -6,14 +6,21 @@ using Photon.Realtime;
 using System.IO;
 using System.Linq;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
     PhotonView view;
     GameObject player;
+    PlayerController playerController;
     [SerializeField] PlayerLoadout playerLoadout;
     [SerializeField] GameObject playerLoadoutUI;
     [SerializeField] GameObject playerLoadoutCamera;
+
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] Slider mouseSlider;
+    bool isPaused = false;
+    bool inGame = false;
 
     int kills;
     int deaths;
@@ -23,11 +30,54 @@ public class PlayerManager : MonoBehaviour
         view = GetComponent<PhotonView>();
     }
 
+    private void Update()
+    {
+        if (!view.IsMine)
+            return;
+        Pause();
+    }
+
     private void Start()
     {
-        playerLoadout.SetTeam("blue");
         SetPlayerLoadout();
+        if (view.IsMine)
+        {
+            mouseSlider.value = PlayerPrefs.GetFloat("Mouse Sensitivity", 300f);
+        }
     }
+
+    public void SliderMouseSensitivity()
+    {
+        playerController.mouseSens = mouseSlider.value / 100;
+        PlayerPrefs.SetFloat("Mouse Sensitivity", mouseSlider.value);
+    }
+
+    void Pause()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = !isPaused;
+            if (inGame)
+            {
+                playerController.canMove = !isPaused;
+                if (isPaused)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+            }
+            pauseMenu.SetActive(isPaused);
+        }
+    }
+
+    public PlayerLoadout GetPlayerLoadout()
+    {
+        return playerLoadout;
+    }
+
 
     public void SetPlayerLoadout()
     {
@@ -52,17 +102,17 @@ public class PlayerManager : MonoBehaviour
         Transform spawnpoint = SpawnManager.Instance.GetSpawnpoint();
         //Instantiate the player controller
         player = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Player Controller"), spawnpoint.position, spawnpoint.rotation, 0, new object[] { view.ViewID});
+        playerController = player.GetComponent<PlayerController>();
         Debug.Log("Instantiated Player Controller");      
         playerLoadoutUI.SetActive(false);
+        inGame = true;
     }
 
-    public PlayerLoadout GetPlayerLoadout()
-    {
-        return playerLoadout;
-    }
 
     public void Die()
     {
+        if (view.IsMine)
+            inGame = false;
         PhotonNetwork.Destroy(player);
         SetPlayerLoadout();
 

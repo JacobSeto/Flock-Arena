@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: RPG
   m_EditorClassIdentifier: 
   itemName: Rocket Launcher
-  damage: 160
-  fireRate: 0
-  ammo: 1
-  reload: 3
+  damage: 70
+  fireRate: 0.4
+  ammo: 3
+  reload: 2.5
   isAutoFire: 0
   hipSpread: 0.1
   aimSpread: 0

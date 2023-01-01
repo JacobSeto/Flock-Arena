@@ -18,7 +18,7 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text skillPointsText;
     public Dictionary<string, int> skillTier = new Dictionary<string, int>();
     public Skill[] skills;
-    string teamName;
+    string teamName = "blue";
     [Space]
     [Header("Tank")]
     [SerializeField] float vital1 = 25f;

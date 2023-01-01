@@ -175,8 +175,8 @@ MonoBehaviour:
   explodes: 1
   explosionPrefab: {fileID: 7503346998604099719, guid: 224fb947625cfff42b8a1508fd5d76d2, type: 3}
   explosionRadius: 4
-  explosionDamage: 40
+  explosionDamage: 30
   selfDamage: 10
-  explosionBlastStrength: 2000
+  explosionBlastStrength: 500
   earlyExplosionMultiplyer: 2.5
   view: {fileID: 8633920270653301888}
