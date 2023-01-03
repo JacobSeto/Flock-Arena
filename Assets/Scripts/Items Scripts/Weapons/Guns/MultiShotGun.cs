@@ -59,7 +59,7 @@ public class MultiShotGun : Weapon
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 //item info class does not have the damage info,so cast iteminfo class to weaponinfo class to access damage variable
-                hit.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(((WeaponInfo)itemInfo).damage);
+                hit.collider.gameObject.GetComponentInParent<IDamageable>()?.TakeDamage(((WeaponInfo)itemInfo).damage);
                 bulletType = bulletMissPrefab;
                 if (hit.collider.gameObject.name == "Player Controller(Clone)")
                 {

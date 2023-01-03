@@ -10,7 +10,7 @@ public class SwordCollider : MonoBehaviourPunCallbacks
     {
         if (!view.IsMine)
             return;
-        other.gameObject.GetComponent<IDamageable>()?.TakeDamage(GetComponentInParent<Weapon>().GetDamage());
+        other.gameObject.GetComponentInParent<IDamageable>()?.TakeDamage(GetComponentInParent<Weapon>().GetDamage());
         gameObject.SetActive(false);
     }
 }

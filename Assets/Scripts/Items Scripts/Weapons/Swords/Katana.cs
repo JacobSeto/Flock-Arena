@@ -147,7 +147,7 @@ public class Katana : Weapon
         slashRay.origin = playerController.camTransform.position;
         if (Physics.Raycast(slashRay, out RaycastHit hit, lastSlashDistance))
         {
-            hit.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(lastSlashDamage);
+            hit.collider.gameObject.GetComponentInParent<IDamageable>()?.TakeDamage(lastSlashDamage);
             slashTeleport = hit.point + playerController.playerTransform.up / 2 - playerController.playerTransform.forward;
         }
         else
@@ -165,7 +165,7 @@ public class Katana : Weapon
         slashRay.origin = playerController.camTransform.position;
         if (Physics.Raycast(slashRay, out RaycastHit hit, lastSlashDistance))
         {
-            hit.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(lastSlashDamage);
+            hit.collider.gameObject.GetComponentInParent<IDamageable>()?.TakeDamage(lastSlashDamage);
             slashTeleport = hit.point + playerController.playerTransform.up / 2 - playerController.playerTransform.forward;
         }
         else

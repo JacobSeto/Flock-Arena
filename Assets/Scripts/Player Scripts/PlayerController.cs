@@ -109,7 +109,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     public void SetLoadout(PlayerLoadout playerLoadout)
     {
         //set team color
-        gameObject.GetComponent<Renderer>().sharedMaterial = playerLoadout.GetMaterial();
+        //gameObject.GetComponent<Renderer>().sharedMaterial = playerLoadout.GetMaterial();
+       
         //set skill tree skills
         playerLoadout.SkillTree(gameObject.GetComponent<PlayerController>());
         //set player weapon by destroying all other weapons in itemholder
