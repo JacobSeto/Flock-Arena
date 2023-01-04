@@ -28,10 +28,22 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     [Space]
     [Header("Player Stats")]
-    [SerializeField] float speedConst;
-    public float speed { get; set; }
-    [SerializeField] float baseSpeed = 20f;
-    [SerializeField] float sprintMultiplier;
+    [SerializeField] float groundDrag;
+    [SerializeField] float airDrag;
+    [SerializeField] float baseWalkSpeed;
+    [SerializeField] float baseSprintSpeed;
+    [SerializeField] float baseAirSpeed;
+    public float walkSpeed { get; set; }
+    public float sprintSpeed { get; set; }
+    public float airSpeed { get; set; }
+    float speed;
+    public MovementState moveState;
+    public enum MovementState
+    {
+        walking,
+        sprinting,
+        air
+    }
     [SerializeField] float jumpHeight;
     [SerializeField] float jumpCooldown;
     [SerializeField] float healthRegen;
@@ -41,12 +53,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     public float maxHealth { get; set; }
     [SerializeField] float baseHealth = 200f;
     float jumpCooldownTime = 0;
+    bool isJumping = false;
     public bool canMove { get; set; } = true;
     float nextRegen;
     [SerializeField] float boostTime;
     [SerializeField] float horizontalBoost;
     [SerializeField] float verticalBoost;
     float nextBoost;
+    bool isBoosting = false;
     float currentHealth;
 
     [Space]
@@ -61,6 +75,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     float verticalLookRotation;
     bool isGrounded;
     public Transform playerTransform { get; set; }
+    [SerializeField] Transform playerTransformRef;
 
     public Rigidbody rb { get; set; }
     [SerializeField] Rigidbody rbRef;
@@ -94,13 +109,16 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     }
     public void PlayerSetters()
     {
-        speed = baseSpeed;
+        walkSpeed = baseWalkSpeed;
+        sprintSpeed = baseSprintSpeed;
+        airSpeed = baseAirSpeed;
         maxHealth = baseHealth;
         playerTransform = transform;
         playerCamera = playerCameraRef;
         camTransform = camTransformRef;
         itemCamera = itemCameraRef;
         rb = rbRef;
+        playerTransform = playerTransformRef;
         playerManager = PhotonView.Find((int)view.InstantiationData[0]).GetComponent<PlayerManager>();
         SetLoadout(playerManager.GetPlayerLoadout());
         currentHealth = maxHealth;
@@ -139,6 +157,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             return;
         }
         Inputs();
+        UpdateMoveState();
+        SpeedControl();
 
         if (Time.time > nextRegen && currentHealth != maxHealth)
         {
@@ -150,7 +170,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         {
             Die();
         }
-
     }
 
     private void FixedUpdate()
@@ -159,7 +178,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         {
             return;
         }
-        RBMovement();
+        Movement();
     }
 
     public void PlayerCamerasActive(bool isActive)
@@ -201,44 +220,59 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         cameraHolder.transform.localEulerAngles = Vector3.left * verticalLookRotation;
     }
 
-    private void Move()
+    private void UpdateMoveState()
     {
-        Vector3 moveDirection = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
-        if (Input.GetKey(KeyCode.LeftShift))
+        //Mode Sprinting
+        if(isGrounded && Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.Mouse0) && !Input.GetKey(KeyCode.Mouse1))
         {
-            rb.AddForce(moveDirection.normalized * speed * sprintMultiplier, ForceMode.Force);
+            moveState = MovementState.sprinting;
+            speed = sprintSpeed;
+        }
+        else if (isGrounded || isJumping && !isBoosting)
+        {
+            moveState = MovementState.walking;
+            speed = walkSpeed;
         }
         else
         {
-            rb.AddForce(moveDirection.normalized * speed, ForceMode.Force);
-
+            moveState = MovementState.air;
+            speed = airSpeed;
         }
-
-        // Vector3 moveDir = new Vector3(-Input.GetAxisRaw("Horizontal"), 0, -Input.GetAxisRaw("Vertical")).normalized;
-        //moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
-
+        print(moveState);
     }
 
-    private void MoveConstant()
+    private void Move()
     {
-        //set rb velocity for snappy movement
-        if (Input.GetKey(KeyCode.W))
-            rb.position += transform.forward * speedConst;
-        else if (Input.GetKey(KeyCode.S))
-            rb.position += -transform.forward * speedConst;
-        if (Input.GetKey(KeyCode.D))
-            rb.position += transform.right * speedConst;
-        if (Input.GetKey(KeyCode.A))
-            rb.position += -transform.right * speedConst;
+        Vector3 moveDirection = playerTransform.forward * Input.GetAxisRaw("Vertical") + playerTransform.right * Input.GetAxisRaw("Horizontal");
+        rb.AddForce(moveDirection.normalized * speed * 10f, ForceMode.Force);
+    }
+
+    private void SpeedControl()
+    {
+        if (isGrounded)
+            rb.drag = groundDrag;
+        else
+            rb.drag = airDrag;
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        if (flatVel.magnitude > speed) 
+        {
+            Vector3 limitedVelocity = flatVel.normalized * speed;
+            rb.velocity = new Vector3(limitedVelocity.x, rb.velocity.y, limitedVelocity.z);
+        }
     }
 
     public void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && jumpCooldownTime <= Time.time)
         {
-            rb.velocity += transform.up * jumpHeight;
+            isJumping = true;
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            rb.AddForce(playerTransform.up * jumpHeight, ForceMode.Impulse);
             jumpCooldownTime = Time.time + jumpCooldown;
         }
+        if (isJumping && isGrounded && jumpCooldownTime <= Time.time)
+            isJumping = false;
     }
 
 
@@ -326,9 +360,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             boostText.text = "E";
             if (Input.GetKeyDown(KeyCode.E))
             {
-                rb.AddForce(cameraHolder.transform.forward * horizontalBoost + transform.up * verticalBoost, ForceMode.Impulse);
+                isBoosting = true;
+                rb.AddForce(cameraHolder.transform.forward * horizontalBoost + playerTransform.up * verticalBoost, ForceMode.Impulse);
                 nextBoost = Time.time + boostTime;
             }
+            if (isBoosting && nextBoost - boostTime + .5f < -Time.time)
+                isBoosting = false;
         }
         else
         {
@@ -345,12 +382,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         Jump();
         Boost();
     }
-    public void RBMovement()
+    public void Movement()
     {
         if (!canMove)
             return;
         Move();
-        MoveConstant();
     }
 
     public void SetGroundedState(bool _grounded)

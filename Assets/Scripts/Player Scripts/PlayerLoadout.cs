@@ -29,8 +29,8 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
     [SerializeField] float regen2 = .15f;
     [Space]
     [Header("Mobility")]
-    [SerializeField] float swift1 = 5f;
-    [SerializeField] float swift2 = 4f;
+    [SerializeField] float swift1 = 1.2f;
+    [SerializeField] float swift2 = 1.2f;
 
     [Space]
     [Header("Utility")]
@@ -135,9 +135,18 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         if (skills[1].gameObject.GetComponent<Toggle>().isOn)
             playerController.maxHealth += + vital2;
         if (skills[2].gameObject.GetComponent<Toggle>().isOn)
-            playerController.speed += swift1;
+        {
+            playerController.walkSpeed *= swift1;
+            playerController.sprintSpeed *= swift1;
+            playerController.airSpeed *= swift1;
+        }
+            
         if (skills[3].gameObject.GetComponent<Toggle>().isOn)
-            playerController.speed += swift2;
+        { 
+            playerController.walkSpeed *= swift2;
+            playerController.sprintSpeed *= swift2;
+            playerController.airSpeed *= swift2;           
+        }
     }
 
 
