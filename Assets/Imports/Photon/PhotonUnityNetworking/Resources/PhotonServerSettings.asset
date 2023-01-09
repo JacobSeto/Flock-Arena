@@ -61,6 +61,7 @@ MonoBehaviour:
   - RPC_SetWeapon
   - RPC_ProjectileHit
   - Hit
+  - RPC_UpdateTimeText
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
