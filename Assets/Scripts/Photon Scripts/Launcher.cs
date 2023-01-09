@@ -5,6 +5,7 @@ using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
@@ -19,10 +20,14 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject roomListPrefab;
     [SerializeField] GameObject playerListPrefab;
     [SerializeField] GameObject startGameButton;
+    [Space]
+    [SerializeField] int[] gamemodeSceneIndexs;
+    int gameIndex;
 
     void Awake()
     {
         Instance = this;
+        gameIndex = gamemodeSceneIndexs[0];
     }
 
     private void Start()

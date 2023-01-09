@@ -16,6 +16,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] PlayerLoadout playerLoadout;
     [SerializeField] GameObject playerLoadoutUI;
     [SerializeField] GameObject playerLoadoutCamera;
+    [SerializeField] Transform cameraHolder;
+    GameObject loadoutCam;
 
     [SerializeField] GameObject pauseMenu;
     [SerializeField] Slider mouseSlider;
@@ -28,6 +30,11 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         view = GetComponent<PhotonView>();
+        SetPlayerLoadout();
+        if (view.IsMine)
+        {
+            mouseSlider.value = PlayerPrefs.GetFloat("Mouse Sensitivity", 300f);
+        }
     }
 
     private void Update()
@@ -35,15 +42,6 @@ public class PlayerManager : MonoBehaviour
         if (!view.IsMine)
             return;
         Pause();
-    }
-
-    private void Start()
-    {
-        SetPlayerLoadout();
-        if (view.IsMine)
-        {
-            mouseSlider.value = PlayerPrefs.GetFloat("Mouse Sensitivity", 300f);
-        }
     }
 
     public void SliderMouseSensitivity()
@@ -84,11 +82,10 @@ public class PlayerManager : MonoBehaviour
         if (view.IsMine)
         {
             playerLoadoutUI.SetActive(true);
-            playerLoadoutCamera.SetActive(true);
+            loadoutCam = Instantiate(playerLoadoutCamera, cameraHolder.position, cameraHolder.rotation, cameraHolder);
         }
         else
         {
-            Destroy(playerLoadoutCamera);
             Destroy(playerLoadoutUI);
         }
     }
@@ -97,7 +94,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (!view.IsMine)
             return;
-        playerLoadoutCamera.SetActive(false);
+        Destroy(loadoutCam);
         //When Loadout set, create the player controller
         Transform spawnpoint = SpawnManager.Instance.GetSpawnpoint();
         //Instantiate the player controller

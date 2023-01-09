@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RPG
   m_EditorClassIdentifier: 
   itemName: Rocket Launcher
-  damage: 70
+  damage: 50
   fireRate: 0.4
   ammo: 3
   reload: 2.5

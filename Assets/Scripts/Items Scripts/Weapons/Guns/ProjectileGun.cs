@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class ProjectileGun : Weapon
 {
+    [SerializeField] PhotonView playerView;
     [SerializeField] Transform camHolder;
     [SerializeField] string projectileName;
     [SerializeField] Transform projectileSpawn;
@@ -56,8 +57,8 @@ public class ProjectileGun : Weapon
         GameObject projectile = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", projectileName), projectileSpawn.position, camHolder.rotation);
         Projectile projectileScript = projectile.GetComponent<Projectile>();
         projectileScript.playerController = playerController;
+        projectileScript.playerView = playerView;
         projectileScript.projectileDamage = ((WeaponInfo)itemInfo).damage;
-        projectileScript.playerOwner = true;
         projectileScript.ProjectileDestroy(projectileTime);
     }
 

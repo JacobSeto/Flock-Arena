@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Shotgun
   damage: 12
   fireRate: 0.25
-  ammo: 6
+  ammo: 3
   reload: 2
   isAutoFire: 0
   hipSpread: 0.0375

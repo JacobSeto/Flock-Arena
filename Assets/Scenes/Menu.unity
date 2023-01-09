@@ -1159,7 +1159,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &558710654
 MonoBehaviour:
@@ -1173,6 +1173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5073b7712be3b14cbda2fa0bd4d6e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamemodeNames:
+  - Deathmatch
 --- !u!1 &616239955
 GameObject:
   m_ObjectHideFlags: 0
@@ -2317,7 +2319,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1133249073
 GameObject:
@@ -3329,7 +3331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3734202351384468184, guid: bb67cd49324928f43970328012fe9bed, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3734202351384468184, guid: bb67cd49324928f43970328012fe9bed, type: 3}
       propertyPath: m_LocalRotation.y
@@ -3337,7 +3339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3734202351384468184, guid: bb67cd49324928f43970328012fe9bed, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3734202351384468184, guid: bb67cd49324928f43970328012fe9bed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3366,6 +3368,10 @@ PrefabInstance:
     - target: {fileID: 5411957712358010298, guid: bb67cd49324928f43970328012fe9bed, type: 3}
       propertyPath: sceneViewId
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813043777219626788, guid: bb67cd49324928f43970328012fe9bed, type: 3}
+      propertyPath: sceneViewId
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5817749375914883497, guid: bb67cd49324928f43970328012fe9bed, type: 3}
       propertyPath: m_IsActive
@@ -3419,6 +3425,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9032439714412215727, guid: bb67cd49324928f43970328012fe9bed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9135225419351351092, guid: bb67cd49324928f43970328012fe9bed, type: 3}
       propertyPath: sceneViewId
       value: 5
@@ -3433,6 +3443,9 @@ PrefabInstance:
     - {fileID: 4696173039417602386, guid: bb67cd49324928f43970328012fe9bed, type: 3}
     - {fileID: 6748700283932471603, guid: bb67cd49324928f43970328012fe9bed, type: 3}
     - {fileID: 2024073888913952704, guid: bb67cd49324928f43970328012fe9bed, type: 3}
+    - {fileID: 3527924434447973651, guid: bb67cd49324928f43970328012fe9bed, type: 3}
+    - {fileID: 6418177059078705575, guid: bb67cd49324928f43970328012fe9bed, type: 3}
+    - {fileID: 1335351993700572344, guid: bb67cd49324928f43970328012fe9bed, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bb67cd49324928f43970328012fe9bed, type: 3}
 --- !u!1 &1530073053
 GameObject:
@@ -4829,6 +4842,7 @@ MonoBehaviour:
   roomListPrefab: {fileID: 8257338924451892982, guid: facc83b2611a0d5409a5e47bc297d713, type: 3}
   playerListPrefab: {fileID: 5407197571147220132, guid: 9bd67c1149790b647ad747dd8b01ec47, type: 3}
   startGameButton: {fileID: 1711468885}
+  gamemodeSceneIndexs: 01000000
 --- !u!114 &2069144418
 MonoBehaviour:
   m_ObjectHideFlags: 0

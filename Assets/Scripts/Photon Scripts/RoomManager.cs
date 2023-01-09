@@ -7,8 +7,8 @@ using System.IO;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
-
     public static RoomManager Instance;
+    [SerializeField] List<string> gamemodeNames;
 
     private void Awake()
     {
@@ -35,9 +35,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        if (scene.name == "Game")  // in game scene
+        if (gamemodeNames.Contains(scene.name))  // in game scene
         {
             PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Player Manager"), Vector3.zero, Quaternion.identity);
+        }
+        else
+        {
+            Debug.Log("scene not in gamemode list");
         }
     }
 }

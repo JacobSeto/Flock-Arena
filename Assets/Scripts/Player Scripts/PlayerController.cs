@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] float baseWalkSpeed;
     [SerializeField] float baseSprintSpeed;
     [SerializeField] float baseAirSpeed;
+    [SerializeField] float airMaxSpeed;
+    [SerializeField] float maxYVelocity;
+    [SerializeField] float moveForceConstant;
     public float walkSpeed { get; set; }
     public float sprintSpeed { get; set; }
     public float airSpeed { get; set; }
@@ -53,7 +56,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     public float maxHealth { get; set; }
     [SerializeField] float baseHealth = 200f;
     float jumpCooldownTime = 0;
-    bool isJumping = false;
     public bool canMove { get; set; } = true;
     float nextRegen;
     [SerializeField] float boostTime;
@@ -158,7 +160,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         }
         Inputs();
         UpdateMoveState();
-        SpeedControl();
 
         if (Time.time > nextRegen && currentHealth != maxHealth)
         {
@@ -228,7 +229,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             moveState = MovementState.sprinting;
             speed = sprintSpeed;
         }
-        else if (isGrounded || isJumping && !isBoosting)
+        else if (isGrounded)
         {
             moveState = MovementState.walking;
             speed = walkSpeed;
@@ -244,7 +245,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     private void Move()
     {
         Vector3 moveDirection = playerTransform.forward * Input.GetAxisRaw("Vertical") + playerTransform.right * Input.GetAxisRaw("Horizontal");
-        rb.AddForce(moveDirection.normalized * speed * 10f, ForceMode.Force);
+        rb.AddForce(moveDirection.normalized * speed * moveForceConstant, ForceMode.Force);
     }
 
     private void SpeedControl()
@@ -253,26 +254,29 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             rb.drag = groundDrag;
         else
             rb.drag = airDrag;
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        if (flatVel.magnitude > speed) 
+        Vector3 flatVect = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        if(moveState == MovementState.air && flatVect.magnitude > airMaxSpeed)
         {
-            Vector3 limitedVelocity = flatVel.normalized * speed;
-            rb.velocity = new Vector3(limitedVelocity.x, rb.velocity.y, limitedVelocity.z);
+            Vector3 limitVect = flatVect.normalized * airMaxSpeed;
+            rb.velocity = new Vector3(limitVect.x, rb.velocity.y, limitVect.z);
         }
+        else if (moveState != MovementState.air && flatVect.magnitude > speed)
+        {
+            Vector3 limitVect = flatVect.normalized * speed;
+            rb.velocity = new Vector3(limitVect.x, rb.velocity.y, limitVect.z);
+        }
+        if (rb.velocity.y > maxYVelocity)
+            rb.velocity = new Vector3(rb.velocity.x, maxYVelocity, rb.velocity.z);
     }
 
     public void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && jumpCooldownTime <= Time.time)
         {
-            isJumping = true;
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             rb.AddForce(playerTransform.up * jumpHeight, ForceMode.Impulse);
             jumpCooldownTime = Time.time + jumpCooldown;
         }
-        if (isJumping && isGrounded && jumpCooldownTime <= Time.time)
-            isJumping = false;
     }
 
 
@@ -364,7 +368,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                 rb.AddForce(cameraHolder.transform.forward * horizontalBoost + playerTransform.up * verticalBoost, ForceMode.Impulse);
                 nextBoost = Time.time + boostTime;
             }
-            if (isBoosting && nextBoost - boostTime + .5f < -Time.time)
+            if (isBoosting && nextBoost - boostTime + .5f < Time.time)
                 isBoosting = false;
         }
         else
@@ -387,6 +391,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         if (!canMove)
             return;
         Move();
+        SpeedControl();
     }
 
     public void SetGroundedState(bool _grounded)

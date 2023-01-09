@@ -59,6 +59,8 @@ MonoBehaviour:
   - RPC_Slash
   - RPC_Swing
   - RPC_SetWeapon
+  - RPC_ProjectileHit
+  - Hit
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

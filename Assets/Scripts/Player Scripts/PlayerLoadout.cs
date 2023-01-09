@@ -25,8 +25,8 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
     [SerializeField] float vital2 = 40f;
     [Space]
     [Header("Support")]
-    [SerializeField] float regen1 = .2f;
-    [SerializeField] float regen2 = .15f;
+    //[SerializeField] float regen1 = .2f;
+    //[SerializeField] float regen2 = .15f;
     [Space]
     [Header("Mobility")]
     [SerializeField] float swift1 = 1.2f;
@@ -34,7 +34,8 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
 
     [Space]
     [Header("Utility")]
-    [SerializeField] int grenade1 = 3;
+    int i;
+    //[SerializeField] int grenade1 = 3;
 
 
     private void Awake()

@@ -19,9 +19,10 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] float selfDamage = 10f;
     [SerializeField] float explosionBlastStrength;
     [SerializeField] float earlyExplosionMultiplyer;
+    bool hit = false;
     bool exploaded = false;
     [SerializeField] PhotonView view;
-    public bool playerOwner { get; set; } = false;
+    public PhotonView playerView {get; set; }
     public float projectileDamage {get; set;}
     public PlayerController playerController { get; set;}
 
@@ -33,16 +34,19 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!view.IsMine)
-            return;
-        if (health > 0)
+        if (health > 0 && !hit && view.IsMine)
         {
-            other.gameObject.GetComponent<IDamageable>()?.TakeDamage(projectileDamage);
+            print(projectileDamage);
+            if(other.gameObject.GetComponentInParent<IDamageable>() != null)
+            {
+                other.gameObject.GetComponentInParent<IDamageable>().TakeDamage(projectileDamage);
+                hit = true;
+            }
             if (explodes && !exploaded)
             {
                 Explosion(explosionDamage);
             }
-            else
+            if (hit)
             {
                 ProjectileDestroy(0f);
             }
@@ -91,18 +95,25 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
         explosion.transform.localScale = new Vector3(2 * explosionRadius, 2 * explosionRadius, 2 * explosionRadius);
         Destroy(gameObject);
         Destroy(explosion, .5f);
-        if (!view.IsMine)
-            return;
         var cols = Physics.OverlapSphere(transform.position, explosionRadius);
+
         for (int i = 0; i < cols.Length; i++)
         {
-            if (cols[i].GetComponent<PlayerController>()?.view.IsMine == playerController.view)
+            if (cols[i].GetComponentInParent<PlayerController>() != null)
             {
-                cols[i].GetComponent<PlayerController>()?.AddPlayerForce(-transform.forward * explosionBlastStrength);
-                cols[i].GetComponent<IDamageable>()?.TakeDamage(selfDamage);
+                if (cols[i].GetComponentInParent<PlayerController>().view == playerController.view)
+                {
+                    cols[i].GetComponentInParent<PlayerController>().AddPlayerForce(-transform.forward * explosionBlastStrength);
+                    cols[i].GetComponentInParent<IDamageable>().TakeDamage(selfDamage);
+                    i += cols.Length;
+                }
+                else
+                {
+                    cols[i].GetComponentInParent<IDamageable>().TakeDamage(damage);
+                    i += cols.Length;
+                }
             }
-            else if(view.IsMine)
-                cols[i].GetComponent<IDamageable>()?.TakeDamage(damage);
+            
         }
     }
 
