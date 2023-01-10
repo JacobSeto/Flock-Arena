@@ -11,7 +11,6 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
     public Dictionary<string,Material> materialDictionary = new Dictionary<string, Material>();
     [SerializeField] Material[] materials;
     [Space]
-    [SerializeField] int maxNumWeapons;
     [SerializeField] int maxSkillPoints;
     [SerializeField] int roundSkillPointIncrease;
     int skillPoints;
@@ -25,8 +24,8 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
     [SerializeField] float vital2 = 40f;
     [Space]
     [Header("Support")]
-    //[SerializeField] float regen1 = .2f;
-    //[SerializeField] float regen2 = .15f;
+    [SerializeField] float regen1 = .3f;
+    [SerializeField] float regen2 = .2f;
     [Space]
     [Header("Mobility")]
     [SerializeField] float swift1 = 1.2f;
@@ -34,8 +33,8 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
 
     [Space]
     [Header("Utility")]
-    int i;
-    //[SerializeField] int grenade1 = 3;
+    [SerializeField] int medkit1;
+    [SerializeField] int grenade1;
 
 
     private void Awake()
@@ -135,6 +134,7 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
             playerController.maxHealth += vital1;
         if (skills[1].gameObject.GetComponent<Toggle>().isOn)
             playerController.maxHealth += + vital2;
+
         if (skills[2].gameObject.GetComponent<Toggle>().isOn)
         {
             playerController.walkSpeed *= swift1;
@@ -148,6 +148,11 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
             playerController.sprintSpeed *= swift2;
             playerController.airSpeed *= swift2;           
         }
+
+        if (skills[4].gameObject.GetComponent<Toggle>().isOn)
+            playerController.regenTime = regen1;
+        if(skills[5].gameObject.GetComponent<Toggle>().isOn)
+            playerController.regenTime = regen2;
     }
 
 
@@ -163,6 +168,14 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         }
         Debug.Log("Missing Toggle");
         return 0;
+    }
+
+    public void RoundSkillIncrease()
+    {
+        maxSkillPoints += roundSkillPointIncrease;
+        skillPoints += roundSkillPointIncrease;
+        SetSkillPointsText();
+        UpdateSkillTree();
     }
 
 }

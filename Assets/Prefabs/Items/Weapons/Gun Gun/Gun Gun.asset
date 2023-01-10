@@ -20,7 +20,7 @@ MonoBehaviour:
   isAutoFire: 0
   hipSpread: 0.1
   aimSpread: 0
-  aimSpeed: 3.5
-  hipSpeed: 3.5
+  aimSpeed: 5.25
+  hipSpeed: 6
   hipFOV: 60
   aimFOV: 30

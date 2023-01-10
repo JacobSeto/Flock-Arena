@@ -22,9 +22,9 @@ public class WeaponInfo : ItemInfo
 
     public float aimSpread; // no spread
 
-    public float aimSpeed = 3.5f; //speed to move gun into aim
+    public float aimSpeed = 5.25f; //speed to move gun into aim
 
-    public float hipSpeed = 3.5f; //speed to move gun out of aim
+    public float hipSpeed = 6f; //speed to move gun out of aim
 
     public float hipFOV = 60f;
 

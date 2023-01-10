@@ -50,7 +50,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] float jumpHeight;
     [SerializeField] float jumpCooldown;
     [SerializeField] float healthRegen;
-    [SerializeField] float regenTime;
+    public float regenTime { get; set; }
+    [SerializeField] float baseRegenTime;
     [SerializeField] float damageWaitTime;
 
     public float maxHealth { get; set; }
@@ -115,6 +116,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         sprintSpeed = baseSprintSpeed;
         airSpeed = baseAirSpeed;
         maxHealth = baseHealth;
+        regenTime = baseRegenTime;
         playerTransform = transform;
         playerCamera = playerCameraRef;
         camTransform = camTransformRef;
