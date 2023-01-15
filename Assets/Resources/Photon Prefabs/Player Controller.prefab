@@ -3520,7 +3520,7 @@ PrefabInstance:
       objectReference: {fileID: 6245256535259582154}
     - target: {fileID: 4993796733056849387, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: m_Name
-      value: Pistol
+      value: Revolver
       objectReference: {fileID: 0}
     - target: {fileID: 4993796733056849387, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: m_Layer

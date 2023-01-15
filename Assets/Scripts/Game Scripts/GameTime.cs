@@ -64,7 +64,6 @@ public class GameTime : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RPC_UpdateTimeText(int time)
     {
-        print(time);
         string minutes = ((int)(time / 60)).ToString();
         string seconds = (time % 60).ToString();
         if (seconds.Length == 1)

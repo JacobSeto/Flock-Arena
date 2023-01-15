@@ -9,18 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68a62415683538946834f70d87592d9c, type: 3}
-  m_Name: Pistol
+  m_Script: {fileID: 11500000, guid: d57c5db68c2fdd34396e6b1eb7f3402b, type: 3}
+  m_Name: Default
   m_EditorClassIdentifier: 
-  itemName: Pistol
-  damage: 45
-  fireRate: 0.2
-  ammo: 8
-  reload: 1.5
-  isAutoFire: 0
-  hipSpread: 0.025
-  aimSpread: 0.007
-  aimSpeed: 5.25
-  hipSpeed: 6
-  hipFOV: 60
-  aimFOV: 50
+  skillName: Empty
+  cost: 1
+  tier: 1
+  path: support

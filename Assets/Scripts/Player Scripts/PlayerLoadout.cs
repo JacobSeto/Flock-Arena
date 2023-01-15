@@ -8,6 +8,8 @@ using TMPro;
 public class PlayerLoadout : MonoBehaviourPunCallbacks
 {
     [SerializeField] Toggle[] weaponToggles;
+    public Skill[] skills;
+    public Skill[] weaponUpgrades;
     public Dictionary<string,Material> materialDictionary = new Dictionary<string, Material>();
     [SerializeField] Material[] materials;
     [Space]
@@ -16,7 +18,6 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
     int skillPoints;
     [SerializeField] TMP_Text skillPointsText;
     public Dictionary<string, int> skillTier = new Dictionary<string, int>();
-    public Skill[] skills;
     string teamName = "blue";
     [Space]
     [Header("Tank")]
@@ -67,6 +68,17 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         skillTier["tank"] = 0;
         skillTier["mobility"] = 0;
         skillTier["utility"] = 0;
+        //upgrade paths for weapons
+
+        skillTier["revolver 1"] = 0;
+        skillTier["revolver 2"] = 0;
+        skillTier["revolver 3"] = 0;
+
+        skillTier["rifle 1"] = 0;
+        skillTier["rifle 2"] = 0;
+        skillTier["rifle 3"] = 0;
+
+
     }
 
     public void SetSkillTier(string skillPath, int tier)
@@ -130,31 +142,72 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
 
     public void SkillTree(PlayerController playerController)
     {
+        //Checks each toggle in every category if selected to apply the skill to player
+        Tank(playerController);
+        Support(playerController);
+        Mobility(playerController);
+        Utility(playerController);
+
+     
+    }
+
+    public void Tank(PlayerController playerController)
+    {
+        //handles all tank skills.  Index 0-7
         if (skills[0].gameObject.GetComponent<Toggle>().isOn)
             playerController.maxHealth += vital1;
-        if (skills[1].gameObject.GetComponent<Toggle>().isOn)
-            playerController.maxHealth += + vital2;
-
         if (skills[2].gameObject.GetComponent<Toggle>().isOn)
+            playerController.maxHealth += +vital2;
+    }
+    public void Support(PlayerController playerController)
+    {
+        //handles all tank skills.  Index 8-15
+        if (skills[8].gameObject.GetComponent<Toggle>().isOn)
+            playerController.regenTime = regen1;
+        if (skills[10].gameObject.GetComponent<Toggle>().isOn)
+            playerController.regenTime = regen2;
+    }
+    public void Mobility(PlayerController playerController)
+    {
+        //handles all tank skills.  Index 16-23
+        if (skills[16].gameObject.GetComponent<Toggle>().isOn)
         {
             playerController.walkSpeed *= swift1;
             playerController.sprintSpeed *= swift1;
             playerController.airSpeed *= swift1;
         }
-            
-        if (skills[3].gameObject.GetComponent<Toggle>().isOn)
-        { 
+
+        if (skills[18].gameObject.GetComponent<Toggle>().isOn)
+        {
             playerController.walkSpeed *= swift2;
             playerController.sprintSpeed *= swift2;
-            playerController.airSpeed *= swift2;           
+            playerController.airSpeed *= swift2;
         }
-
-        if (skills[4].gameObject.GetComponent<Toggle>().isOn)
-            playerController.regenTime = regen1;
-        if(skills[5].gameObject.GetComponent<Toggle>().isOn)
-            playerController.regenTime = regen2;
+    }
+    public void Utility(PlayerController playerController)
+    {
+        //handles all tank skills.  Index 24-31
     }
 
+    public void WeaponUpgrades(Item weapon)
+    {
+        //applies upgrades to weapon being used.  Checks the name of the weapon, then applies corresponding upgrades
+
+        switch (weapon.itemInfo.itemName)
+        {
+            case "Revolver":
+                Debug.Log("revolver");
+                break;
+
+            case "Rifle":
+                Debug.Log("rifle");
+                break;
+
+            default:
+            Debug.Log("weapon does not exist");
+            break;
+        }
+    }
 
     public int GetWeaponToggleIndex()
     {

@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f3ac5ef19dbc9459300d09f015cd06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillInfo: {fileID: 0}
+  skillInfo: {fileID: 11400000, guid: db051020c752a584d9b02df9d128f49f, type: 2}
   toggle: {fileID: 6209988781033982982}
   skillText: {fileID: 3968807464012156866}
   playerLoadout: {fileID: 0}

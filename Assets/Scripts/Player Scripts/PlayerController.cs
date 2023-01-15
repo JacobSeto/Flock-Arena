@@ -135,6 +135,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
        
         //set skill tree skills
         playerLoadout.SkillTree(gameObject.GetComponent<PlayerController>());
+        //set weapon upgrades
+        playerLoadout.WeaponUpgrades(items[0]);
         //set player weapon by destroying all other weapons in itemholder
         view.RPC(nameof(RPC_SetWeapon), RpcTarget.All, playerLoadout.GetWeaponToggleIndex());
         //set player weapon skills
