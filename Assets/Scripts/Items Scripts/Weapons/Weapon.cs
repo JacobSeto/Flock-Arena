@@ -10,9 +10,19 @@ public abstract class Weapon : Item
     protected bool canAim = true;
     protected float nextShot;
     protected float spread;
-    protected float ammo;
+    public float ammo;  //if 0, ammo not set
     protected float reloadTime;
     protected bool reloading = false;
+
+    public float reload { get; set; } = -1;  //if -1, reload is not set
+
+    public override void Awake()
+    {
+        base.Awake();
+        print("weapon info");
+        if(reload == -1)
+            reload = ((WeaponInfo)itemInfo).reload;
+    }
 
     public override void ItemNotActive()
     {
@@ -72,7 +82,8 @@ public abstract class Weapon : Item
         if (((WeaponInfo)itemInfo).reload != 0 && !reloading && ammo != ((WeaponInfo)itemInfo).ammo)
         {
             reloading = true;
-            reloadTime = ((WeaponInfo)itemInfo).reload + Time.time;
+            print(reload);
+            reloadTime = reload + Time.time;
             UpdateAmmo();
         }
     }

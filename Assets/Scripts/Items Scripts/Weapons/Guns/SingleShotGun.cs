@@ -16,7 +16,7 @@ public class SingleShotGun : Weapon
         spread = ((WeaponInfo)itemInfo).hipSpread;
     }
 
-    private void Update()
+    public void Update()
     {
         if (!view.IsMine)
         {
@@ -43,7 +43,7 @@ public class SingleShotGun : Weapon
         
     }
 
-    void Shoot()
+    public void Shoot()
     {
         Ray ray = playerController.playerCamera.ViewportPointToRay(new Vector3(.5f, .5f));  //casts ray from the center of the screen
         ray.direction += new Vector3(Random.Range(-spread,spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
@@ -62,7 +62,7 @@ public class SingleShotGun : Weapon
     }
 
     [PunRPC]
-    void RPC_Shoot(Vector3 hitPosition, Vector3 hitNormal, bool isPlayer)
+    public void RPC_Shoot(Vector3 hitPosition, Vector3 hitNormal, bool isPlayer)
     {
 
         Collider[] colliders = Physics.OverlapSphere(hitPosition, .3f);
@@ -81,11 +81,6 @@ public class SingleShotGun : Weapon
             bullet.transform.SetParent(colliders[0].transform);
         }
         AudioSource.PlayClipAtPoint(gunShot, transform.position);
-    }
-
-    public void SetPlayerController(PlayerController player)
-    {
-        playerController = player;
     }
 
 }

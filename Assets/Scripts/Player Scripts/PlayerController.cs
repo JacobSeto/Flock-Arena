@@ -243,7 +243,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             moveState = MovementState.air;
             speed = airSpeed;
         }
-        print(moveState);
+        //print(moveState);
     }
 
     private void Move()

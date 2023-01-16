@@ -9,7 +9,7 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
 {
     [SerializeField] Toggle[] weaponToggles;
     public Skill[] skills;
-    public Skill[] weaponUpgrades;
+    [Space]
     public Dictionary<string,Material> materialDictionary = new Dictionary<string, Material>();
     [SerializeField] Material[] materials;
     [Space]
@@ -70,14 +70,30 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         skillTier["utility"] = 0;
         //upgrade paths for weapons
 
+        //tiers for revolver
         skillTier["revolver 1"] = 0;
         skillTier["revolver 2"] = 0;
         skillTier["revolver 3"] = 0;
-
+        //tiers for rifle
         skillTier["rifle 1"] = 0;
         skillTier["rifle 2"] = 0;
         skillTier["rifle 3"] = 0;
-
+        //tiers for shotgun
+        skillTier["shotgun 1"] = 0;
+        skillTier["shotgun 2"] = 0;
+        skillTier["shotgun 3"] = 0;
+        //tiers for rpg
+        skillTier["rpg 1"] = 0;
+        skillTier["rpg 2"] = 0;
+        skillTier["rpg 3"] = 0;
+        //tiers for gungun
+        skillTier["gungun 1"] = 0;
+        skillTier["gungun 2"] = 0;
+        skillTier["gungun 3"] = 0;
+        //tiers for katana
+        skillTier["katana 1"] = 0;
+        skillTier["katana 2"] = 0;
+        skillTier["katana 3"] = 0;
 
     }
 
@@ -196,7 +212,10 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         switch (weapon.itemInfo.itemName)
         {
             case "Revolver":
-                Debug.Log("revolver");
+                Revolver revolver = weapon.gameObject.GetComponent<Revolver>();
+                if (skills[36].gameObject.GetComponent<Toggle>().isOn)
+                    revolver.fasterFire = true;
+                revolver.RevolverUpgrades();
                 break;
 
             case "Rifle":

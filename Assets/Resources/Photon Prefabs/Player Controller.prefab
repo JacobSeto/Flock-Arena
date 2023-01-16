@@ -2939,7 +2939,7 @@ MonoBehaviour:
   verticalBoost: 10
   itemHolder: {fileID: 883647691862817334}
   items:
-  - {fileID: 4088786024118032310}
+  - {fileID: 4294031333539345964}
   - {fileID: 929777530027631714}
   - {fileID: 3683196033344129312}
   - {fileID: 5392711535492300111}
@@ -3490,31 +3490,19 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 3494761909522294382, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 3891767197097159477}
-    - target: {fileID: 3494761909522294382, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: gunCamera
-      value: 
-      objectReference: {fileID: 3928351302528065674}
-    - target: {fileID: 3494761909522294382, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: InInventory
+    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3494761909522294382, guid: 85668d320a71d49458c18e721c727861, type: 3}
+    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: aimPosition
       value: 
       objectReference: {fileID: 5689864117997599077}
-    - target: {fileID: 3494761909522294382, guid: 85668d320a71d49458c18e721c727861, type: 3}
+    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: hipPosition
       value: 
       objectReference: {fileID: 850561024024345691}
-    - target: {fileID: 3494761909522294382, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: playerCamera
-      value: 
-      objectReference: {fileID: 3891767197097159477}
-    - target: {fileID: 3494761909522294382, guid: 85668d320a71d49458c18e721c727861, type: 3}
+    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 6245256535259582154}
@@ -3530,22 +3518,23 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 85668d320a71d49458c18e721c727861, type: 3}
 --- !u!4 &949410617352434660 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 427087305237447228, guid: 85668d320a71d49458c18e721c727861, type: 3}
   m_PrefabInstance: {fileID: 630972653544894936}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4088786024118032310 stripped
+--- !u!114 &4294031333539345964 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3494761909522294382, guid: 85668d320a71d49458c18e721c727861, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
   m_PrefabInstance: {fileID: 630972653544894936}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5587891689296192563}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0623a0db3c12a543b128b5cd6f25b9c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e0d8457aceffd347b81f386dd575617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5587891689296192563 stripped
