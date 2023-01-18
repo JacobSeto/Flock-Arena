@@ -6,20 +6,33 @@ using Photon.Pun;
 
 public abstract class Weapon : Item
 {
+    [SerializeField] AudioSource[] weaponAudio;
+    public PhotonView view { get; set; }
     protected bool canShoot = true;
     protected bool canAim = true;
     protected float nextShot;
     protected float spread;
-    public float ammo;  //if 0, ammo not set
+    protected float ammo;  //if 0, ammo not set
     protected float reloadTime;
     protected bool reloading = false;
 
     public float reload { get; set; } = -1;  //if -1, reload is not set
 
+    public virtual void Update()
+    {
+        if (!view.IsMine)
+        {
+            return;
+        }
+        CheckUse();
+        CheckReload();
+        Aim();
+    }
+
     public override void Awake()
     {
         base.Awake();
-        print("weapon info");
+        view = GetComponent<PhotonView>();
         if(reload == -1)
             reload = ((WeaponInfo)itemInfo).reload;
     }
@@ -33,7 +46,22 @@ public abstract class Weapon : Item
         }
     }
     
-    public abstract override void Use();
+    public override void Use()
+    {
+        if (ammo == 0)
+            Reload();
+        if (canShoot && view.IsMine && ammo != 0 && !reloading)
+        {
+            Shoot();
+            nextShot = Time.time + ((WeaponInfo)itemInfo).fireRate;
+            canShoot = false;
+            if (ammo != -1)
+                ammo--;
+            UpdateAmmo();
+        }
+    }
+
+    public abstract void Shoot();
 
     public virtual void CheckUse()
     {

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2335079965934217332}
   - component: {fileID: 4516144567778731732}
-  - component: {fileID: 7830238920196605739}
+  - component: {fileID: 8664965513817791192}
   m_Layer: 7
   m_Name: Shotgun
   m_TagString: Untagged
@@ -57,7 +57,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &7830238920196605739
+--- !u!114 &8664965513817791192
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,19 +66,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 312640238753147564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 772289311b3f2784dafa2e6d798e59e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d9425aac84401a4392b03e10c794162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   InInventory: 1
   itemInfo: {fileID: 11400000, guid: 07a6ae5c94cf20d409dcca18bf574a8e, type: 2}
   itemGameObject: {fileID: 312640238753147564}
   playerController: {fileID: 0}
+  weaponAudio: []
   bulletImpactPrefab: {fileID: 7310387583158887988, guid: a5423b9a087337d4b8fed3034de22753, type: 3}
   bulletMissPrefab: {fileID: 7310387583158887988, guid: a86b5b0fc02de734ea32681353ecd45d, type: 3}
   hipPosition: {fileID: 0}
   aimPosition: {fileID: 0}
   numBullets: 10
-  spreadCo: 0.03
+  spreadCo: 0.035
 --- !u!1001 &3501166464403648685
 PrefabInstance:
   m_ObjectHideFlags: 0

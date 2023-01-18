@@ -13,44 +13,15 @@ public class ProjectileGun : Weapon
     [SerializeField] Transform projectileSpawn;
     [SerializeField] float projectileTime;
 
-    PhotonView view;
-
 
     public override void Awake()
     {
         base.Awake();
-        view = GetComponent<PhotonView>();
         ammo = ((WeaponInfo)itemInfo).ammo;
         spread = ((WeaponInfo)itemInfo).hipSpread;
     }
 
-    private void Update()
-    {
-        if (!view.IsMine)
-        {
-            return;
-        }
-        CheckUse();
-        CheckReload();
-        Aim();
-    }
-    public override void Use()
-    {
-        if (ammo == 0)
-            Reload();
-        if (canShoot && view.IsMine && ammo != 0 && !reloading)
-        {
-            Shoot();
-            nextShot = Time.time + ((WeaponInfo)itemInfo).fireRate;
-            canShoot = false;
-            if (ammo != -1)
-                ammo--;
-            UpdateAmmo();
-        }
-
-    }
-
-    void Shoot()
+    public override void Shoot()
     {
         if (!view.IsMine)
             return;

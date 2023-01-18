@@ -46,8 +46,13 @@ public class Katana : Weapon
     float lastSlashDistance;
     float slashCharge;
     float slashCoolDown;
-    [Space]
-    PhotonView view;
+
+
+    public void KatanaUpgrades()
+    {
+        //Checks each katana upgrade and applies to gun
+    }
+
 
     public override void Awake()
     {
@@ -57,7 +62,7 @@ public class Katana : Weapon
         UpdateSlashPercent();
     }
 
-    private void Update()
+    public override void Update()
     {
         if (!view.IsMine)
         {
@@ -80,7 +85,7 @@ public class Katana : Weapon
     {
         if (canShoot && ammo != 0 && !reloading && !slashing)
         {
-            Swing();
+            Shoot();
             nextShot = Time.time + ((WeaponInfo)itemInfo).fireRate;
             canShoot = false;
             if (ammo != -1)
@@ -140,6 +145,10 @@ public class Katana : Weapon
         }
     }
 
+    public override void Shoot()
+    {
+        Swing();
+    }
 
     public void Slash()
     {

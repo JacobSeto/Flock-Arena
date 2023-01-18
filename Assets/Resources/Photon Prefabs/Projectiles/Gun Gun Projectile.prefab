@@ -321,11 +321,11 @@ MonoBehaviour:
   itemInfo: {fileID: 11400000, guid: 329f915923048644f868008b718d793e, type: 2}
   itemGameObject: {fileID: 4042241079041345639}
   playerController: {fileID: 0}
+  weaponAudio: []
   bulletImpactPrefab: {fileID: 7310387583158887988, guid: a5423b9a087337d4b8fed3034de22753, type: 3}
   bulletMissPrefab: {fileID: 7310387583158887988, guid: a86b5b0fc02de734ea32681353ecd45d, type: 3}
   hipPosition: {fileID: 6109848724606004965}
   aimPosition: {fileID: 6109848724606004965}
-  gunShot: {fileID: 8300000, guid: 550951db7a44f1a48884db5ea10e1269, type: 3}
 --- !u!1001 &5897085738809803754
 PrefabInstance:
   m_ObjectHideFlags: 0

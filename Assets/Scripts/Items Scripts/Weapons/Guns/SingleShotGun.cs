@@ -5,45 +5,15 @@ using UnityEngine;
 
 public class SingleShotGun : Weapon
 {
-    [SerializeField] AudioClip gunShot;
 
-    PhotonView view;
     public override void Awake()
     {
         base.Awake();
-        view = GetComponent<PhotonView>();
         ammo = ((WeaponInfo)itemInfo).ammo;
         spread = ((WeaponInfo)itemInfo).hipSpread;
     }
 
-    public void Update()
-    {
-        if (!view.IsMine)
-        {
-            return;
-        }
-        CheckUse();
-        CheckReload();
-        Aim();
-    }
-
-    public override void Use()
-    {
-        if (ammo == 0)
-            Reload();
-        if (canShoot && view.IsMine && ammo != 0 && !reloading)
-        {
-            Shoot();
-            nextShot = Time.time + ((WeaponInfo)itemInfo).fireRate;
-            canShoot = false;
-            if (ammo != -1)
-                ammo--;
-            UpdateAmmo();
-        }
-        
-    }
-
-    public void Shoot()
+    public override void Shoot()
     {
         Ray ray = playerController.playerCamera.ViewportPointToRay(new Vector3(.5f, .5f));  //casts ray from the center of the screen
         ray.direction += new Vector3(Random.Range(-spread,spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
@@ -59,6 +29,7 @@ public class SingleShotGun : Weapon
             }
             view.RPC(nameof(RPC_Shoot), RpcTarget.All, hit.point, hit.normal, isPlayer);
         }
+        //weapon fire sound
     }
 
     [PunRPC]
@@ -80,7 +51,6 @@ public class SingleShotGun : Weapon
             Destroy(bullet, 2.5f);
             bullet.transform.SetParent(colliders[0].transform);
         }
-        AudioSource.PlayClipAtPoint(gunShot, transform.position);
     }
 
 }
