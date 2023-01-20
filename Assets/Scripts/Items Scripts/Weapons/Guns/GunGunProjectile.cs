@@ -21,7 +21,7 @@ public class GunGunProjectile : Projectile
     {
         boostTime += Time.time;
         AddSpeed(initialBoost);
-        if (playerView != null)
+        if (playerController != null)
         {
             playerCamTransform = playerController.camTransform;
             playerCamera = playerController.playerCamera;
@@ -40,7 +40,7 @@ public class GunGunProjectile : Projectile
 
     private void Update()
     {
-        if (playerView != null)
+        if (playerController != null)
         {
             GunGunLook();
         }
@@ -88,7 +88,7 @@ public class GunGunProjectile : Projectile
 
     private void OnDestroy()
     {
-        if (playerView != null)
+        if (playerController != null)
         {
             playerController.SetAmmoText("0", "1", false);
             gunCamera.SetActive(false);

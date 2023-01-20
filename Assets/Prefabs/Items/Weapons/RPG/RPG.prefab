@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 815223085645545215}
   - component: {fileID: 3716262610679287017}
-  - component: {fileID: 6688829953354323461}
+  - component: {fileID: 5339694701153362055}
   m_Layer: 7
   m_Name: RPG
   m_TagString: Untagged
@@ -57,7 +57,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6688829953354323461
+--- !u!114 &5339694701153362055
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,18 +66,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2312333169134531883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c18060bacce159468d304db0b925284, type: 3}
+  m_Script: {fileID: 11500000, guid: 44db4934873fd4841a34070f7b39ea64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   InInventory: 1
   itemInfo: {fileID: 11400000, guid: 02f22b9a1c9049047807ffd669f622b1, type: 2}
   itemGameObject: {fileID: 2312333169134531883}
   playerController: {fileID: 0}
+  weaponAudio: []
   bulletImpactPrefab: {fileID: 7310387583158887988, guid: a5423b9a087337d4b8fed3034de22753, type: 3}
   bulletMissPrefab: {fileID: 7310387583158887988, guid: a86b5b0fc02de734ea32681353ecd45d, type: 3}
   hipPosition: {fileID: 0}
   aimPosition: {fileID: 0}
-  camHolder: {fileID: 0}
   projectileName: RPG Projectile
   projectileSpawn: {fileID: 8558530236538716810}
   projectileTime: 7

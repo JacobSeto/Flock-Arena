@@ -19,12 +19,14 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] float selfDamage = 10f;
     [SerializeField] float explosionBlastStrength;
     [SerializeField] float earlyExplosionMultiplyer;
-    bool hit = false;
-    bool exploaded = false;
     [SerializeField] PhotonView view;
-    public PhotonView playerView {get; set; }
+
+    //prevent multiple collisions
+    bool hit = false;
+    bool hitExplosion = false;
+    public bool owner { get; set; } = false;
     public float projectileDamage {get; set;}
-    public PlayerController playerController { get; set;}
+    public PlayerController playerController { get; set; } = null;
 
     GameObject explosion;
 
@@ -34,22 +36,21 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (health > 0 && !hit && view.IsMine)
+        if (view.IsMine && !hit)
         {
-            print(projectileDamage);
             if(other.gameObject.GetComponentInParent<IDamageable>() != null)
             {
+                print("take damage");
+                print(other.gameObject.name);
                 other.gameObject.GetComponentInParent<IDamageable>().TakeDamage(projectileDamage);
-                hit = true;
             }
-            if (explodes && !exploaded)
+            if (explodes)
             {
                 Explosion(explosionDamage);
-            }
-            if (hit)
-            {
-                ProjectileDestroy(0f);
-            }
+            }   
+            
+            ProjectileDestroy(0f);
+            hit = true;
         }
     }
 
@@ -74,7 +75,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
         if (health <= 0)
         {
             //exploding it early does 4 times damage
-            if(explodes && !exploaded)
+            if(explodes)
                 Explosion(explosionDamage * earlyExplosionMultiplyer);
             else
             {
@@ -84,24 +85,23 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     }
     public void Explosion(float damage)
     {
-        exploaded = true;
         view.RPC(nameof(PUNExplosion), RpcTarget.All, damage);
     }
 
     [PunRPC]
     public void PUNExplosion(float damage)
     {
+        if (!view.IsMine || hitExplosion)
+            return;
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         explosion.transform.localScale = new Vector3(2 * explosionRadius, 2 * explosionRadius, 2 * explosionRadius);
-        Destroy(gameObject);
-        Destroy(explosion, .5f);
         var cols = Physics.OverlapSphere(transform.position, explosionRadius);
 
         for (int i = 0; i < cols.Length; i++)
         {
             if (cols[i].GetComponentInParent<PlayerController>() != null)
             {
-                if (cols[i].GetComponentInParent<PlayerController>().view == playerController.view)
+                if (playerController != null)
                 {
                     cols[i].GetComponentInParent<PlayerController>().AddPlayerForce(-transform.forward * explosionBlastStrength);
                     cols[i].GetComponentInParent<IDamageable>().TakeDamage(selfDamage);
@@ -112,9 +112,12 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
                     cols[i].GetComponentInParent<IDamageable>().TakeDamage(damage);
                     i += cols.Length;
                 }
+                hitExplosion = true;
             }
             
         }
+        Destroy(explosion, .5f);
+        Destroy(gameObject);
     }
 
     public void ProjectileDestroy(float delay)

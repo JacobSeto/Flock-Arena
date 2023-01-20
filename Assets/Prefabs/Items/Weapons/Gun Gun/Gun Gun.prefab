@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7433733021502833321}
   - component: {fileID: 134137687308082105}
-  - component: {fileID: 3554562565823788607}
+  - component: {fileID: 9071650641665276232}
   m_Layer: 7
   m_Name: Gun Gun
   m_TagString: Untagged
@@ -57,7 +57,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &3554562565823788607
+--- !u!114 &9071650641665276232
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,18 +66,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 778966592177148376}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c18060bacce159468d304db0b925284, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a5ca92c37203bb47b4844084fe3c7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   InInventory: 1
   itemInfo: {fileID: 11400000, guid: a3333f01dc14f2e4580938a4e0123153, type: 2}
   itemGameObject: {fileID: 778966592177148376}
   playerController: {fileID: 0}
+  weaponAudio: []
   bulletImpactPrefab: {fileID: 7310387583158887988, guid: a5423b9a087337d4b8fed3034de22753, type: 3}
   bulletMissPrefab: {fileID: 7310387583158887988, guid: a86b5b0fc02de734ea32681353ecd45d, type: 3}
   hipPosition: {fileID: 0}
   aimPosition: {fileID: 0}
-  camHolder: {fileID: 0}
   projectileName: Gun Gun Projectile
   projectileSpawn: {fileID: 6366839170476275271}
   projectileTime: 7

@@ -50,7 +50,7 @@ public abstract class Weapon : Item
     {
         if (ammo == 0)
             Reload();
-        if (canShoot && view.IsMine && ammo != 0 && !reloading)
+        if (canShoot && !reloading)
         {
             Shoot();
             nextShot = Time.time + ((WeaponInfo)itemInfo).fireRate;
@@ -110,7 +110,6 @@ public abstract class Weapon : Item
         if (((WeaponInfo)itemInfo).reload != 0 && !reloading && ammo != ((WeaponInfo)itemInfo).ammo)
         {
             reloading = true;
-            print(reload);
             reloadTime = reload + Time.time;
             UpdateAmmo();
         }
