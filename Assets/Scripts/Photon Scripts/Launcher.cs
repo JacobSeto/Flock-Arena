@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
+    [SerializeField] bool offline;
+
     public static Launcher Instance;
     private static Dictionary<string, RoomInfo> cachedRoomList = new Dictionary<string, RoomInfo>();
 
@@ -33,13 +35,23 @@ public class Launcher : MonoBehaviourPunCallbacks
     private void Start()
     {
         Debug.Log("Connecting To Master");
+        if (offline)
+            PhotonNetwork.OfflineMode = true;
         PhotonNetwork.ConnectUsingSettings();
     }
     public override void OnConnectedToMaster()
     {
         Debug.Log("Joined Master");
-        PhotonNetwork.JoinLobby();
         PhotonNetwork.AutomaticallySyncScene = true;
+        if (offline)
+        {
+            PhotonNetwork.CreateRoom("offline");
+            PhotonNetwork.LoadLevel(1);
+        }
+        else
+        {
+            PhotonNetwork.JoinLobby();
+        }
     }
 
     public override void OnJoinedLobby()
@@ -89,7 +101,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-        //level num must be same num as build index
+        //level num must be same num as build index of game
         PhotonNetwork.LoadLevel(1);
     }
 

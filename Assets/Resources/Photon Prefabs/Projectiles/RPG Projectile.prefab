@@ -177,6 +177,6 @@ MonoBehaviour:
   explosionRadius: 4
   explosionDamage: 30
   selfDamage: 10
-  explosionBlastStrength: 500
+  explosionBlastStrength: 1000
   earlyExplosionMultiplyer: 2.5
   view: {fileID: 8633920270653301888}
