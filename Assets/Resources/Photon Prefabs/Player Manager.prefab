@@ -401,7 +401,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6885848524647537427}
   m_HandleRect: {fileID: 1098151971766251979}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.5
   m_Size: 0.8032787
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1953,8 +1953,8 @@ RectTransform:
   m_Father: {fileID: 5333799334279341644}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.19672132}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0.09836066}
+  m_AnchorMax: {x: 1, y: 0.90163934}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2482,7 +2482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -120}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8535299394708290816
@@ -5569,7 +5569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3968807464012156866, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: m_text
-      value: Vitality II
+      value: Skill Text
       objectReference: {fileID: 0}
     - target: {fileID: 3968807464012156866, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: m_fontAsset
@@ -5754,7 +5754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3968807464012156866, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: m_text
-      value: Swiftness II
+      value: Skill Text
       objectReference: {fileID: 0}
     - target: {fileID: 8334666007147127225, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: skillInfo
@@ -5795,7 +5795,7 @@ PrefabInstance:
       objectReference: {fileID: 7544907343484985070}
     - target: {fileID: 4101085869121588686, guid: 1b28081bfe2dc2f4098eec8c6086670f, type: 3}
       propertyPath: m_Text
-      value: Recursive Shot
+      value: Recursive Round
       objectReference: {fileID: 0}
     - target: {fileID: 5103584167589807692, guid: 1b28081bfe2dc2f4098eec8c6086670f, type: 3}
       propertyPath: m_Pivot.x
@@ -5887,7 +5887,7 @@ PrefabInstance:
       objectReference: {fileID: 3433909038364042520}
     - target: {fileID: 8819312953363359540, guid: 1b28081bfe2dc2f4098eec8c6086670f, type: 3}
       propertyPath: m_Name
-      value: Recursive Shot
+      value: Recursive Round
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b28081bfe2dc2f4098eec8c6086670f, type: 3}
@@ -9535,7 +9535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3968807464012156866, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: m_text
-      value: Swiftness I
+      value: Skill Text
       objectReference: {fileID: 0}
     - target: {fileID: 8334666007147127225, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: skillInfo
@@ -11956,6 +11956,10 @@ PrefabInstance:
       propertyPath: playerLoadout
       value: 
       objectReference: {fileID: 8818609636147665015}
+    - target: {fileID: 5280868872447399401, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: m_text
+      value: Recursive Round Upgrades
+      objectReference: {fileID: 0}
     - target: {fileID: 5655108832034293984, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12050,7 +12054,7 @@ PrefabInstance:
       objectReference: {fileID: 8818609636147665015}
     - target: {fileID: 6436091216021783891, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: m_Name
-      value: Recursive Shot Path
+      value: Recursive Round Path
       objectReference: {fileID: 0}
     - target: {fileID: 6436091216021783891, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: m_IsActive
@@ -13084,7 +13088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3968807464012156866, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: m_text
-      value: Vitality I
+      value: SKill Text
       objectReference: {fileID: 0}
     - target: {fileID: 3968807464012156866, guid: cca55c83203c38844ab2df1e342ddc63, type: 3}
       propertyPath: m_fontAsset

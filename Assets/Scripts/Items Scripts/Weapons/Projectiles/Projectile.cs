@@ -7,9 +7,9 @@ using System.IO;
 
 public class Projectile : MonoBehaviourPunCallbacks, IDamageable
 {
-    [SerializeField] Rigidbody rb;
+    [SerializeField] protected Rigidbody rb;
     [SerializeField] Collider col;
-    [SerializeField] float speed;
+    [SerializeField] protected float speed;
     [SerializeField] float health;
     [Space]
     [SerializeField] bool explodes;
@@ -24,13 +24,12 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     //prevent multiple collisions
     bool hit = false;
     bool hitExplosion = false;
-    public bool owner { get; set; } = false;
     public float projectileDamage {get; set;}
     public PlayerController playerController { get; set; } = null;
 
     GameObject explosion;
 
-    private void FixedUpdate()
+    private void Start()
     {
         rb.velocity = transform.forward * speed;
     }
@@ -91,17 +90,19 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     [PunRPC]
     public void PUNExplosion(float damage)
     {
-        if (!view.IsMine || hitExplosion)
-            return;
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         explosion.transform.localScale = new Vector3(2 * explosionRadius, 2 * explosionRadius, 2 * explosionRadius);
+        Destroy(explosion, .5f);
+        if (!view.IsMine || hitExplosion)
+            return;
         var cols = Physics.OverlapSphere(transform.position, explosionRadius);
 
         for (int i = 0; i < cols.Length; i++)
         {
             if (cols[i].GetComponentInParent<PlayerController>() != null)
             {
-                if (playerController != null)
+                PlayerController player = cols[i].GetComponentInParent<PlayerController>();
+                if (player.view == playerController.view)
                 {
                     cols[i].GetComponentInParent<PlayerController>().AddPlayerForce(-transform.forward * explosionBlastStrength);
                     cols[i].GetComponentInParent<IDamageable>().TakeDamage(selfDamage);
@@ -116,7 +117,6 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
             }
             
         }
-        Destroy(explosion, .5f);
         Destroy(gameObject);
     }
 
