@@ -46,7 +46,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         if (offline)
         {
             PhotonNetwork.CreateRoom("offline");
-            PhotonNetwork.LoadLevel(1);
+            StartGame();
         }
         else
         {
@@ -56,6 +56,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
+        print("joined lobby");
         MenuManager.Instance.OpenMenu("title");
     }
 
@@ -70,6 +71,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        print("joined room");
         MenuManager.Instance.OpenMenu("room");
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
 

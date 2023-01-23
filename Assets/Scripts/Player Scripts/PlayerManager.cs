@@ -29,6 +29,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        PhotonNetwork.OfflineMode = true;
         view = GetComponent<PhotonView>();
         SetPlayerLoadout();
         if (view.IsMine)

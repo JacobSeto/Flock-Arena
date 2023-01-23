@@ -37,10 +37,6 @@ public class GunGunProjectile : Projectile
             Destroy(gunCamera);
         }
     }
-    private void FixedUpdate()
-    {
-        rb.velocity = transform.forward * speed;
-    }
 
     private void Update()
     {

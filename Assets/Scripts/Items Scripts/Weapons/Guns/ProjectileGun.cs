@@ -8,6 +8,7 @@ using UnityEngine;
 public class ProjectileGun : Weapon
 {
     [SerializeField] string projectileName;
+    [SerializeField] GameObject projectilePrefab;
     [SerializeField] Transform projectileSpawn;
     [SerializeField] float projectileTime;
 

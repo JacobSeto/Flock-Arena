@@ -3369,10 +3369,6 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 5539572643772965125, guid: bb67cd49324928f43970328012fe9bed, type: 3}
-      propertyPath: sceneViewId
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5813043777219626788, guid: bb67cd49324928f43970328012fe9bed, type: 3}
       propertyPath: sceneViewId
       value: 7
@@ -4855,7 +4851,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e1486995f5ff34ab0e8f73263e8d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offline: 0
+<<<<<<< HEAD
+  offline: 1
+=======
+>>>>>>> parent of 1b53b76 (Fixed Projectile Ownership)
   roomNameInputField: {fileID: 1603840994}
   errorText: {fileID: 1829874972}
   roomNameText: {fileID: 22570500}

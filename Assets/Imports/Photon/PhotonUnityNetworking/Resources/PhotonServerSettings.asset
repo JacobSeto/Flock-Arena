@@ -64,7 +64,6 @@ MonoBehaviour:
   - RPC_UpdateTimeText
   - RPC_UpdateRound
   - RPC_ProjectileSpawn
-  - RPC_UpdateLastSpawnIndex
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
