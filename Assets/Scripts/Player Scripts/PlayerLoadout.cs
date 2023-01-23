@@ -94,7 +94,10 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         skillTier["katana 1"] = 0;
         skillTier["katana 2"] = 0;
         skillTier["katana 3"] = 0;
-
+        //tiers for recursive shot
+        skillTier["recursive 1"] = 0;
+        skillTier["recursive 2"] = 0;
+        skillTier["recursive 3"] = 0;
     }
 
     public void SetSkillTier(string skillPath, int tier)
