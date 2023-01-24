@@ -170,12 +170,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4042241079041345632}
   col: {fileID: 4042241079041345634}
+  projectileDamage: 70
+  explosionDamage: 30
   speed: 18
   health: 50
+  projectileTime: 7
   explodes: 1
   explosionPrefab: {fileID: 7503346998604099719, guid: 224fb947625cfff42b8a1508fd5d76d2, type: 3}
   explosionRadius: 4
-  explosionDamage: 30
   selfDamage: 10
   explosionBlastStrength: 1000
   earlyExplosionMultiplyer: 2.5

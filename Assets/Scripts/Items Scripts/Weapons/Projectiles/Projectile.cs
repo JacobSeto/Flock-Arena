@@ -9,31 +9,33 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
 {
     [SerializeField] protected Rigidbody rb;
     [SerializeField] Collider col;
+    [SerializeField] float projectileDamage;
+    [SerializeField] float explosionDamage;
     [SerializeField] protected float speed;
     [SerializeField] float health;
+    [SerializeField] protected float projectileTime;
     [Space]
     [SerializeField] bool explodes;
     [SerializeField] GameObject explosionPrefab;
     [SerializeField] float explosionRadius;
-    [SerializeField] float explosionDamage;
     [SerializeField] float selfDamage = 10f;
     [SerializeField] float explosionBlastStrength;
     [SerializeField] float earlyExplosionMultiplyer;
-    [SerializeField] PhotonView view;
+    [SerializeField] protected PhotonView view;
 
     //prevent multiple collisions
     bool hit = false;
     bool hitExplosion = false;
-    public float projectileDamage {get; set;}
     public PlayerController playerController { get; set; } = null;
 
     GameObject explosion;
 
-    private void Start()
+    public virtual void Start()
     {
         rb.velocity = transform.forward * speed;
+        ProjectileDestroy(projectileTime);
     }
-    private void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         if (view.IsMine && !hit)
         {
@@ -120,7 +122,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
         Destroy(gameObject);
     }
 
-    public void ProjectileDestroy(float delay)
+    public virtual void ProjectileDestroy(float delay)
     {
         view.RPC(nameof(PUNProjectileDestroy), RpcTarget.All, delay);
     }

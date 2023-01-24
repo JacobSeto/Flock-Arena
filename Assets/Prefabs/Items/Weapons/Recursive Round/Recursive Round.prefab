@@ -111,9 +111,11 @@ MonoBehaviour:
   bulletMissPrefab: {fileID: 7310387583158887988, guid: a86b5b0fc02de734ea32681353ecd45d, type: 3}
   hipPosition: {fileID: 0}
   aimPosition: {fileID: 0}
-  projectileName: Recursive Projectile 1
+  projectileName: Recursive Projectile
   projectileSpawn: {fileID: 5794784312500752745}
   projectileTime: 2
+  numRecursive: 8
+  recursiveRound: Recursive Round
 --- !u!114 &4207281042635679034
 MonoBehaviour:
   m_ObjectHideFlags: 0

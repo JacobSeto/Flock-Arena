@@ -289,12 +289,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4042241079041345632}
   col: {fileID: 4042241079041345634}
+  projectileDamage: 50
+  explosionDamage: 50
   speed: 5
   health: 25
   explodes: 1
   explosionPrefab: {fileID: 7503346998604099719, guid: 224fb947625cfff42b8a1508fd5d76d2, type: 3}
   explosionRadius: 2
-  explosionDamage: 50
   selfDamage: 10
   explosionBlastStrength: 200
   earlyExplosionMultiplyer: 0.5

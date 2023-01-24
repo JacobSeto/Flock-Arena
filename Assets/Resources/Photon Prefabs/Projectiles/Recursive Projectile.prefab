@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 4042241079041345632}
   - component: {fileID: 3959131176881616914}
   - component: {fileID: 8633920270653301888}
-  - component: {fileID: 4042241079041345633}
+  - component: {fileID: -3053763531984733768}
   m_Layer: 0
-  m_Name: Recursive Projectile 1
-  m_TagString: Untagged
+  m_Name: Recursive Projectile
+  m_TagString: Recursive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4042241079041345633
+--- !u!114 &-3053763531984733768
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,18 +165,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 4042241079041345639}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c16e5175dc167440890a87aeecf3838, type: 3}
+  m_Script: {fileID: 11500000, guid: d99f46eeafe8c354cbff0a7179c3f20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4042241079041345632}
   col: {fileID: 4042241079041345634}
+  projectileDamage: 60
+  explosionDamage: 40
   speed: 18
   health: 50
+  projectileTime: 2
   explodes: 1
-  explosionPrefab: {fileID: 7503346998604099719, guid: 224fb947625cfff42b8a1508fd5d76d2, type: 3}
-  explosionRadius: 4
-  explosionDamage: 30
+  explosionPrefab: {fileID: 7503346998604099719, guid: 55a15f089497ea54482e4712c4d7eb5c, type: 3}
+  explosionRadius: 2.5
   selfDamage: 10
-  explosionBlastStrength: 1000
-  earlyExplosionMultiplyer: 2.5
+  explosionBlastStrength: 500
+  earlyExplosionMultiplyer: 1
   view: {fileID: 8633920270653301888}
+  spawnHeight: 0.5
+  recursiveAngle: 70
+  ranAngle: 25
+  ranPosition: 0.3
