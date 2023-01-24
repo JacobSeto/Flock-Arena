@@ -9,31 +9,46 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
 {
     [SerializeField] protected Rigidbody rb;
     [SerializeField] Collider col;
-    [SerializeField] float projectileDamage;
-    [SerializeField] float explosionDamage;
-    [SerializeField] protected float speed;
-    [SerializeField] float health;
-    [SerializeField] protected float projectileTime;
-    [Space]
-    [SerializeField] bool explodes;
     [SerializeField] GameObject explosionPrefab;
-    [SerializeField] float explosionRadius;
-    [SerializeField] float selfDamage = 10f;
-    [SerializeField] float explosionBlastStrength;
-    [SerializeField] float earlyExplosionMultiplyer;
     [SerializeField] protected PhotonView view;
 
+    //components set by projectile gun
+    public float speed { get; set; }
+    public float health { get; set; }
+    public float damage { get; set; }
+    public float time { get; set; }
+    public  bool explodes { get; set; }
+    public float exploDamage { get; set; }
+    public float explosionRadius { get; set; }
+    public float selfDamage { get; set; }
+    public float blastStrength { get; set; }
+    public float earlyExplosionMultiplyer { get; set; }
+    public PlayerController playerController { get; set; } = null;
     //prevent multiple collisions
     bool hit = false;
     bool hitExplosion = false;
-    public PlayerController playerController { get; set; } = null;
 
     GameObject explosion;
 
+    public void SetProjectile(float sp, float h, float d, float t, bool e, float exD, float exR, float sD, float bS, float exM, PlayerController p)
+    {
+        //sets all projectile components, accessed by projecctile gun
+        speed = sp;
+        health = h;
+        damage = d;
+        time = t;
+        explodes = e;
+        exploDamage = exD;
+        explosionRadius = exR;
+        selfDamage = sD;
+        blastStrength = bS;
+        earlyExplosionMultiplyer = exM;
+        playerController = p;
+    }
     public virtual void Start()
     {
         rb.velocity = transform.forward * speed;
-        ProjectileDestroy(projectileTime);
+        ProjectileDestroy(time);
     }
     public virtual void OnTriggerEnter(Collider other)
     {
@@ -43,21 +58,16 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
             {
                 print("take damage");
                 print(other.gameObject.name);
-                other.gameObject.GetComponentInParent<IDamageable>().TakeDamage(projectileDamage);
+                other.gameObject.GetComponentInParent<IDamageable>().TakeDamage(damage);
             }
             if (explodes)
             {
-                Explosion(explosionDamage);
+                Explosion(exploDamage);
             }   
             
             ProjectileDestroy(0f);
             hit = true;
         }
-    }
-
-    public float GetExplosionDamage()
-    {
-        return explosionDamage;
     }
 
     public void AddSpeed(float addSpeed)
@@ -77,7 +87,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
         {
             //exploding it early does 4 times damage
             if(explodes)
-                Explosion(explosionDamage * earlyExplosionMultiplyer);
+                Explosion(exploDamage * earlyExplosionMultiplyer);
             else
             {
                 Destroy(gameObject);
@@ -106,7 +116,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
                 PlayerController player = cols[i].GetComponentInParent<PlayerController>();
                 if (player.view == playerController.view)
                 {
-                    cols[i].GetComponentInParent<PlayerController>().AddPlayerForce(-transform.forward * explosionBlastStrength);
+                    cols[i].GetComponentInParent<PlayerController>().AddPlayerForce(-transform.forward * blastStrength);
                     cols[i].GetComponentInParent<IDamageable>().TakeDamage(selfDamage);
                     i += cols.Length;
                 }

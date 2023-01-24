@@ -7,9 +7,20 @@ using UnityEngine;
 
 public class ProjectileGun : Weapon
 {
-    [SerializeField] protected string projectileName;
+    [SerializeField] string projectileName;
     [SerializeField] protected Transform projectileSpawn;
-    [SerializeField] protected float projectileTime;
+    [Space]
+    [SerializeField] float projectileSpeed;
+    [SerializeField] float projectileHealth;
+    [SerializeField] float projectileDamage;
+    [SerializeField] float projectileTime;
+    [Space]
+    [SerializeField] bool explodes;
+    [SerializeField] float exploDamage;
+    [SerializeField] float explosionRadius;
+    [SerializeField] float selfDamage;
+    [SerializeField] float blastStrength;
+    [SerializeField] float earlyExplosionMultiplyer;
 
 
     public override void Awake()
@@ -26,7 +37,8 @@ public class ProjectileGun : Weapon
             return;
         GameObject projectile = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", projectileName), projectileSpawn.position, playerController.camTransform.rotation);
         Projectile projectileScript = projectile.GetComponent<Projectile>();
-        projectileScript.playerController = playerController;
+        projectileScript.SetProjectile(projectileSpeed, projectileHealth, projectileDamage, projectileTime,
+        explodes, exploDamage, explosionRadius, selfDamage, blastStrength, earlyExplosionMultiplyer,playerController);
 
     }
 

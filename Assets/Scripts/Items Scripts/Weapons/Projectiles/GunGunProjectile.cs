@@ -78,7 +78,7 @@ public class GunGunProjectile : Projectile
         }
         if (Input.GetMouseButtonDown(1))
         {
-            Explosion(GetExplosionDamage());
+            Explosion(exploDamage);
         }
         if(transform.rotation.z != 0)
         {
