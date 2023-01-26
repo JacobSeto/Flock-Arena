@@ -80,7 +80,16 @@ MonoBehaviour:
   aimPosition: {fileID: 0}
   projectileName: RPG Projectile
   projectileSpawn: {fileID: 8558530236538716810}
+  projectileSpeed: 18
+  projectileHealth: 30
+  projectileDamage: 75
   projectileTime: 7
+  explodes: 1
+  exploDamage: 25
+  explosionRadius: 4
+  selfDamage: 10
+  blastStrength: 1000
+  earlyExplosionMultiplyer: 4
 --- !u!1 &2488565769857796754
 GameObject:
   m_ObjectHideFlags: 0

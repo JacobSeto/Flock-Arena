@@ -8,15 +8,15 @@ public abstract class Weapon : Item
 {
     [SerializeField] AudioSource[] weaponAudio;
     public PhotonView view { get; set; }
-    protected bool canShoot = true;
-    protected bool canAim = true;
-    protected float nextShot;
-    protected float spread;
-    protected float ammo;  //if 0, ammo not set
-    protected float reloadTime;
-    protected bool reloading = false;
+    public bool canShoot = true;
+    public bool canAim = true;
+    public float nextShot;
+    public float spread;
+    public float ammo;  //if 0, ammo not set
+    public float reloadTime;
+    public bool reloading = false;
 
-    public float reload { get; set; } = -1;  //if -1, reload is not set
+    public float reload;
 
     public virtual void Update()
     {
@@ -33,8 +33,7 @@ public abstract class Weapon : Item
     {
         base.Awake();
         view = GetComponent<PhotonView>();
-        if(reload == -1)
-            reload = ((WeaponInfo)itemInfo).reload;
+        
     }
 
     public override void ItemNotActive()
@@ -110,7 +109,7 @@ public abstract class Weapon : Item
         if (((WeaponInfo)itemInfo).reload != 0 && !reloading && ammo != ((WeaponInfo)itemInfo).ammo)
         {
             reloading = true;
-            reloadTime = reload + Time.time;
+            reloadTime = ((WeaponInfo)itemInfo).reload + Time.time;
             UpdateAmmo();
         }
     }

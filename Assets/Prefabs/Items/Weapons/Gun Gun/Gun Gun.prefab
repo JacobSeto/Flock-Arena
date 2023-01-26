@@ -80,7 +80,19 @@ MonoBehaviour:
   aimPosition: {fileID: 0}
   projectileName: Gun Gun Projectile
   projectileSpawn: {fileID: 6366839170476275271}
+  projectileSpeed: 8
+  projectileHealth: 50
+  projectileDamage: 50
   projectileTime: 7
+  explodes: 1
+  exploDamage: 50
+  explosionRadius: 3
+  selfDamage: 15
+  blastStrength: 250
+  earlyExplosionMultiplyer: 0.5
+  gungunInfo: {fileID: 11400000, guid: 329f915923048644f868008b718d793e, type: 2}
+  boostTime: 1.5
+  boostStrength: 0
 --- !u!1 &4136868881592427159
 GameObject:
   m_ObjectHideFlags: 0

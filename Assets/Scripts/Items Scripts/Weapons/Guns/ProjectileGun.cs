@@ -7,20 +7,22 @@ using UnityEngine;
 
 public class ProjectileGun : Weapon
 {
-    [SerializeField] string projectileName;
-    [SerializeField] protected Transform projectileSpawn;
+    public string projectileName;
+    public Transform projectileSpawn;
     [Space]
-    [SerializeField] float projectileSpeed;
-    [SerializeField] float projectileHealth;
-    [SerializeField] float projectileDamage;
-    [SerializeField] float projectileTime;
+    public float projectileSpeed;
+    public float projectileHealth;
+    public float projectileDamage;
+    public float projectileTime;
     [Space]
-    [SerializeField] bool explodes;
-    [SerializeField] float exploDamage;
-    [SerializeField] float explosionRadius;
-    [SerializeField] float selfDamage;
-    [SerializeField] float blastStrength;
-    [SerializeField] float earlyExplosionMultiplyer;
+    public bool explodes;
+    public float exploDamage;
+    public float explosionRadius;
+    public float selfDamage;
+    public float blastStrength;
+    public float earlyExplosionMultiplyer;
+
+    public GameObject projectile;
 
 
     public override void Awake()
@@ -35,7 +37,7 @@ public class ProjectileGun : Weapon
         
         if (!view.IsMine)
             return;
-        GameObject projectile = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", projectileName), projectileSpawn.position, playerController.camTransform.rotation);
+        projectile = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", projectileName), projectileSpawn.position, playerController.camTransform.rotation);
         Projectile projectileScript = projectile.GetComponent<Projectile>();
         projectileScript.SetProjectile(projectileSpeed, projectileHealth, projectileDamage, projectileTime,
         explodes, exploDamage, explosionRadius, selfDamage, blastStrength, earlyExplosionMultiplyer,playerController);

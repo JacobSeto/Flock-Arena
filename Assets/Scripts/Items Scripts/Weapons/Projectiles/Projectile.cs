@@ -7,23 +7,23 @@ using System.IO;
 
 public class Projectile : MonoBehaviourPunCallbacks, IDamageable
 {
-    [SerializeField] protected Rigidbody rb;
-    [SerializeField] Collider col;
-    [SerializeField] GameObject explosionPrefab;
-    [SerializeField] protected PhotonView view;
+    public Rigidbody rb;
+    public Collider col;
+    public GameObject explosionPrefab;
+    public PhotonView view;
 
     //components set by projectile gun
-    public float speed { get; set; }
-    public float health { get; set; }
-    public float damage { get; set; }
-    public float time { get; set; }
-    public  bool explodes { get; set; }
-    public float exploDamage { get; set; }
-    public float explosionRadius { get; set; }
-    public float selfDamage { get; set; }
-    public float blastStrength { get; set; }
-    public float earlyExplosionMultiplyer { get; set; }
-    public PlayerController playerController { get; set; } = null;
+    public float speed;
+    public float health;
+    public float damage;
+    public float time;
+    public bool explodes;
+    public float exploDamage;
+    public float explosionRadius;
+    public float selfDamage;
+    public float blastStrength;
+    public float earlyExplosionMultiplyer;
+    public PlayerController playerController = null;
     //prevent multiple collisions
     bool hit = false;
     bool hitExplosion = false;

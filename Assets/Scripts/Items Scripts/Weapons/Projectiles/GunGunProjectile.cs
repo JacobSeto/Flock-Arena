@@ -7,20 +7,25 @@ using System.IO;
 
 public class GunGunProjectile : Projectile
 {
-    [SerializeField] SingleShotGun gungun;
     [SerializeField] GameObject gunCamera;
-    [SerializeField] float initialBoost;
-    [SerializeField] float boostTime;
-    private bool boostDone = false;
     [SerializeField] float vSens;
     [SerializeField] float hSens;
+
     Transform playerCamTransform;
     Camera playerCamera;
+    private bool boostDone = false;
 
-    private void Start()
+    [SerializeField] SingleShotGun gungun;
+    public float boostTime { get; set; }
+    public float boostStrength { get; set; }
+
+    //TODO: add customizaiton to gungun for upgrades
+
+    public override void Start()
     {
+        base.Start();
         boostTime += Time.time;
-        AddSpeed(initialBoost);
+        AddSpeed(boostStrength);
         if (playerController != null)
         {
             playerCamTransform = playerController.camTransform;
@@ -52,7 +57,7 @@ public class GunGunProjectile : Projectile
         if(!boostDone && Time.time > boostTime)
         {
             boostDone = true;
-            AddSpeed(-initialBoost);
+            AddSpeed(-boostStrength);
         }
     }
 

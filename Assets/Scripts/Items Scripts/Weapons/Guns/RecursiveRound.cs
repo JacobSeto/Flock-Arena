@@ -6,8 +6,19 @@ using UnityEngine;
 
 public class RecursiveRound : ProjectileGun
 {
-    [SerializeField] int numRecursive;
-    [SerializeField] string recursiveRound;
+    [Space]
+    public int numRecursive;
+    public string recursiveRoundName;
+    public float recursiveSpeed;
+    public float recursiveHealth;
+    public float recursiveDamage;
+    public float recursiveTime;
+    public float recursiveExploDamage;
+    public float recursiveRadius;
+    public float recursiveSelfDamage;
+    public float recursiveBlastStrength;
+    public float recursiveEEM;
+
     public void RecursiveUpgrades()
     {
         //Checks each recursive round upgrade and applies to gun
@@ -15,13 +26,12 @@ public class RecursiveRound : ProjectileGun
 
     public override void Shoot()
     {
-        if (!view.IsMine)
-            return;
-        GameObject projectile = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", projectileName), projectileSpawn.position, playerController.camTransform.rotation);
-        RecursiveProjectile projectileScript = projectile.GetComponent<RecursiveProjectile>();
-        projectileScript.numRecursive = numRecursive;
-        projectileScript.recursiveRound = recursiveRound;
-        projectileScript.playerController = playerController;
+        base.Shoot();
+        RecursiveProjectile recursiveScript = projectile.GetComponent<RecursiveProjectile>();
+        recursiveScript.r = gameObject.GetComponent<RecursiveRound>();
+        recursiveScript.numRecursive = numRecursive;
+        recursiveScript.recursiveRoundName = recursiveRoundName;
+        recursiveScript.playerController = playerController;
     }
 
 }

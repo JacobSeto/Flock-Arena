@@ -170,15 +170,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4042241079041345632}
   col: {fileID: 4042241079041345634}
-  projectileDamage: 70
-  explosionDamage: 30
+  explosionPrefab: {fileID: 7503346998604099719, guid: 224fb947625cfff42b8a1508fd5d76d2, type: 3}
+  view: {fileID: 8633920270653301888}
   speed: 18
   health: 50
-  projectileTime: 7
+  damage: 0
+  time: 0
   explodes: 1
-  explosionPrefab: {fileID: 7503346998604099719, guid: 224fb947625cfff42b8a1508fd5d76d2, type: 3}
+  exploDamage: 0
   explosionRadius: 4
   selfDamage: 10
-  explosionBlastStrength: 1000
+  blastStrength: 0
   earlyExplosionMultiplyer: 2.5
-  view: {fileID: 8633920270653301888}
+  playerController: {fileID: 0}

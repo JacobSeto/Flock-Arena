@@ -170,18 +170,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4042241079041345632}
   col: {fileID: 4042241079041345634}
-  projectileDamage: 25
-  explosionDamage: 15
-  speed: 6
-  health: 25
-  projectileTime: 3
-  explodes: 1
   explosionPrefab: {fileID: 7503346998604099719, guid: 55a15f089497ea54482e4712c4d7eb5c, type: 3}
-  explosionRadius: 1.25
-  selfDamage: 2
-  explosionBlastStrength: 200
-  earlyExplosionMultiplyer: 1
   view: {fileID: 8633920270653301888}
+  speed: 0
+  health: 0
+  damage: 0
+  time: 0
+  explodes: 0
+  exploDamage: 0
+  explosionRadius: 0
+  selfDamage: 0
+  blastStrength: 0
+  earlyExplosionMultiplyer: 0
+  playerController: {fileID: 0}
+  r: {fileID: 0}
+  numRecursive: 0
+  recursiveRoundName: 
   spawnHeight: 0
   recursiveAngle: 0
   ranAngle: 0

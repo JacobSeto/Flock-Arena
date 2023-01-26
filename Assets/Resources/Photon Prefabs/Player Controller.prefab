@@ -3013,9 +3013,10 @@ MonoBehaviour:
   ammoText: {fileID: 2178766611537976199}
   boostText: {fileID: 3635732133255418620}
   cameraHolder: {fileID: 1979569867318382518}
-  playerCameraRef: {fileID: 3891767197097159477}
-  camTransformRef: {fileID: 7776492824251766405}
-  itemCameraRef: {fileID: 3928351302528065674}
+  playerCamera: {fileID: 3891767197097159477}
+  camTransform: {fileID: 3911051232588704560}
+  itemCamera: {fileID: 3928351302528065674}
+  mouseSens: 300
   groundDrag: 1.5
   airDrag: 0.3
   baseWalkSpeed: 4
@@ -3024,16 +3025,21 @@ MonoBehaviour:
   airMaxSpeed: 20
   maxYVelocity: 18
   moveForceConstant: 20
+  walkSpeed: 4
+  sprintSpeed: 7
+  airSpeed: 0.5
   moveState: 0
   jumpHeight: 14
   jumpCooldown: 1.2
   healthRegen: 1
-  baseRegenTime: 0.4
+  regenTime: 0.4
   damageWaitTime: 4
-  baseHealth: 200
+  maxHealth: 200
+  canMove: 1
   boostTime: 5
   horizontalBoost: 100
   verticalBoost: 10
+  currentHealth: 200
   itemHolder: {fileID: 883647691862817334}
   items:
   - {fileID: 4294031333539345964}
@@ -3043,9 +3049,10 @@ MonoBehaviour:
   - {fileID: 3973113203257397067}
   - {fileID: 6761466729612310924}
   - {fileID: 3160515035733255140}
-  playerTransformRef: {fileID: 3734202351384468184}
-  rbRef: {fileID: 2024073888913952704}
-  viewRef: {fileID: 2239898583963388308}
+  playerTransform: {fileID: 3734202351384468184}
+  rb: {fileID: 2024073888913952704}
+  view: {fileID: 2239898583963388308}
+  isPaused: 0
 --- !u!54 &2024073888913952704
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4208,6 +4215,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3123443800533577767}
     - target: {fileID: 9071650641665276232, guid: 8c222b60d24fbc34a83cce31551117e1, type: 3}
+      propertyPath: boostStrength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9071650641665276232, guid: 8c222b60d24fbc34a83cce31551117e1, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 6245256535259582154}
@@ -4326,17 +4337,53 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6245256535259582154}
     - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
+      propertyPath: explodes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
+      propertyPath: selfDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
       propertyPath: aimPosition
       value: 
       objectReference: {fileID: 2879294345129112455}
+    - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
+      propertyPath: exploDamage
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
       propertyPath: hipPosition
       value: 
       objectReference: {fileID: 2299667647908063410}
     - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
+      propertyPath: blastStrength
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
+      propertyPath: explosionRadius
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
+      propertyPath: projectileSpeed
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 6245256535259582154}
+    - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
+      propertyPath: projectileDamage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
+      propertyPath: projectileHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
+      propertyPath: earlyExplosionMultiplyer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
 --- !u!114 &3160515035733255140 stripped

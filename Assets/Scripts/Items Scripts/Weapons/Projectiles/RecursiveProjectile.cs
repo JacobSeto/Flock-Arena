@@ -6,12 +6,13 @@ using UnityEngine;
 
 public class RecursiveProjectile : Projectile
 {
-    public int numRecursive { get; set; } = 0;
-    public string recursiveRound { get; set; }
-    [SerializeField] float spawnHeight;
-    [SerializeField] float recursiveAngle; //Between 0 and 90
-    [SerializeField] float ranAngle;
-    [SerializeField] float ranPosition;
+    public RecursiveRound r;
+    public int numRecursive = 0;
+    public string recursiveRoundName;
+    public float spawnHeight;
+    public float recursiveAngle; //Between 0 and 90
+    public float ranAngle;
+    public float ranPosition;
 
     public override void OnTriggerEnter(Collider other)
     {
@@ -28,10 +29,9 @@ public class RecursiveProjectile : Projectile
         {
             Quaternion recursiveDir = Quaternion.Euler(-recursiveAngle + Random.Range(0, ranAngle), (360 / numRecursive * i), 0f);
             Vector3 recursivePos = transform.position + new Vector3(Random.Range(-ranPosition, ranPosition), Random.Range(-ranPosition, ranPosition),Random.Range(-ranPosition, ranPosition));
-            print(recursiveDir);
-            GameObject projectile = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", recursiveRound), recursivePos + transform.up * spawnHeight, recursiveDir);
+            GameObject projectile = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", recursiveRoundName), recursivePos + transform.up * spawnHeight, recursiveDir);
             Projectile projectileScript = projectile.GetComponent<Projectile>();
-            projectileScript.playerController = playerController;
+            projectileScript.SetProjectile(r.recursiveSpeed, r.recursiveHealth, r.recursiveDamage, r.recursiveTime, true, r.recursiveExploDamage, r.recursiveRadius, r.recursiveSelfDamage, r.recursiveBlastStrength, r.recursiveEEM, playerController);
 
         }
     }

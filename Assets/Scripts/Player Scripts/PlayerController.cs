@@ -17,14 +17,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] TMP_Text ammoText;
     [SerializeField] TMP_Text boostText;
     [SerializeField] GameObject cameraHolder;
-
-    public Camera playerCamera { get; set; }
-    [SerializeField] Camera playerCameraRef;
-    public Transform camTransform { get; set; }
-    [SerializeField] Transform camTransformRef;
-    public Camera itemCamera { get; set; }
-    [SerializeField] Camera itemCameraRef;
-    public float mouseSens { get; set; }
+    [Space]
+    public Camera playerCamera;
+    public Transform camTransform;
+    public Camera itemCamera;
+    public float mouseSens;
 
     [Space]
     [Header("Player Stats")]
@@ -36,9 +33,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] float airMaxSpeed;
     [SerializeField] float maxYVelocity;
     [SerializeField] float moveForceConstant;
-    public float walkSpeed { get; set; }
-    public float sprintSpeed { get; set; }
-    public float airSpeed { get; set; }
+    public float walkSpeed;
+    public float sprintSpeed;
+    public float airSpeed;
     float speed;
     public MovementState moveState;
     public enum MovementState
@@ -47,24 +44,22 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         sprinting,
         air
     }
-    [SerializeField] float jumpHeight;
-    [SerializeField] float jumpCooldown;
-    [SerializeField] float healthRegen;
-    public float regenTime { get; set; }
-    [SerializeField] float baseRegenTime;
-    [SerializeField] float damageWaitTime;
+    public float jumpHeight;
+    public float jumpCooldown;
+    public float healthRegen;
+    public float regenTime;
+    public float damageWaitTime;
 
-    public float maxHealth { get; set; }
-    [SerializeField] float baseHealth = 200f;
+    public float maxHealth;
     float jumpCooldownTime = 0;
-    public bool canMove { get; set; } = true;
+    public bool canMove = true;
     float nextRegen;
-    [SerializeField] float boostTime;
+    public float boostTime;
     [SerializeField] float horizontalBoost;
     [SerializeField] float verticalBoost;
     float nextBoost;
     bool isBoosting = false;
-    float currentHealth;
+    public float currentHealth;
 
     [Space]
     [Header("Items")]
@@ -77,20 +72,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [Header("Player Controller")]
     float verticalLookRotation;
     bool isGrounded;
-    public Transform playerTransform { get; set; }
-    [SerializeField] Transform playerTransformRef;
+    public Transform playerTransform;
 
-    public Rigidbody rb { get; set; }
-    [SerializeField] Rigidbody rbRef;
-    public PhotonView view { get; set; }
-    [SerializeField] PhotonView viewRef;
+    public Rigidbody rb;
+    public PhotonView view;
     PlayerManager playerManager;
-    public bool isPaused { get; set; } = false;
-
-    private void Awake()
-    {
-        view = viewRef;
-    }
+    public bool isPaused = false;
 
 
     private void Start()
@@ -112,17 +99,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     }
     public void PlayerSetters()
     {
-        walkSpeed = baseWalkSpeed;
-        sprintSpeed = baseSprintSpeed;
-        airSpeed = baseAirSpeed;
-        maxHealth = baseHealth;
-        regenTime = baseRegenTime;
-        playerTransform = transform;
-        playerCamera = playerCameraRef;
-        camTransform = camTransformRef;
-        itemCamera = itemCameraRef;
-        rb = rbRef;
-        playerTransform = playerTransformRef;
         playerManager = PhotonView.Find((int)view.InstantiationData[0]).GetComponent<PlayerManager>();
         SetLoadout(playerManager.GetPlayerLoadout());
         currentHealth = maxHealth;
