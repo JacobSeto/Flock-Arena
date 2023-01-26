@@ -11,12 +11,35 @@ public abstract class Weapon : Item
     public bool canShoot = true;
     public bool canAim = true;
     public float nextShot;
-    public float spread;
-    public float ammo;  //if 0, ammo not set
     public float reloadTime;
     public bool reloading = false;
+    [HideInInspector] public float spread;
+    float maxAmmo;
+    //default value is 0, except some which 0 is valid
+    [HideInInspector] public float damage;
+    [HideInInspector] public float fireRate;
+    [HideInInspector] public float reload;
+    [HideInInspector] public float hipSpread = -1;
+    [HideInInspector] public float aimSpread = -1;
+    [HideInInspector] public float ammo;
 
-    public float reload;
+    public void SetWeapon()
+    {
+        //sets weapon stats if not already set by PlayerLoadout
+        if (damage == 0)
+            damage = ((WeaponInfo)itemInfo).damage;
+        if (fireRate == 0)
+            fireRate = ((WeaponInfo)itemInfo).fireRate;
+        if (reload == 0)
+            reload = ((WeaponInfo)itemInfo).reload;
+        if (hipSpread == -1)
+            hipSpread = ((WeaponInfo)itemInfo).hipSpread;
+        if (aimSpread == -1)
+            aimSpread = ((WeaponInfo)itemInfo).aimSpread;
+        if (ammo == 0)
+            ammo = ((WeaponInfo)itemInfo).ammo;
+        maxAmmo = ammo;
+    }
 
     public virtual void Update()
     {
@@ -32,6 +55,7 @@ public abstract class Weapon : Item
     public override void Awake()
     {
         base.Awake();
+        SetWeapon();
         view = GetComponent<PhotonView>();
         
     }
@@ -52,7 +76,7 @@ public abstract class Weapon : Item
         if (canShoot && !reloading)
         {
             Shoot();
-            nextShot = Time.time + ((WeaponInfo)itemInfo).fireRate;
+            nextShot = Time.time + fireRate;
             canShoot = false;
             if (ammo != -1)
                 ammo--;
@@ -93,23 +117,23 @@ public abstract class Weapon : Item
         transform.position = Vector3.Lerp(transform.position, hipPosition.position, ((WeaponInfo)itemInfo).hipSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, hipPosition.rotation, ((WeaponInfo)itemInfo).hipSpeed * Time.deltaTime);
         SetFieldOfView(Mathf.Lerp(playerController.playerCamera.fieldOfView, ((WeaponInfo)itemInfo).hipFOV, ((WeaponInfo)itemInfo).hipSpeed * Time.deltaTime));
-        spread = Mathf.Lerp(spread, ((WeaponInfo)itemInfo).hipSpread, ((WeaponInfo)itemInfo).hipSpeed * Time.deltaTime);
+        spread = Mathf.Lerp(spread, hipSpread, ((WeaponInfo)itemInfo).hipSpeed * Time.deltaTime);
     }
 
     public virtual void AimPosition()
     {
         transform.position = Vector3.Lerp(transform.position, aimPosition.position, ((WeaponInfo)itemInfo).aimSpeed * Time.deltaTime);
         SetFieldOfView(Mathf.Lerp(playerController.playerCamera.fieldOfView, ((WeaponInfo)itemInfo).aimFOV, ((WeaponInfo)itemInfo).aimSpeed * Time.deltaTime));
-        spread = Mathf.Lerp(spread, ((WeaponInfo)itemInfo).aimSpread, ((WeaponInfo)itemInfo).aimSpeed * Time.deltaTime);
+        spread = Mathf.Lerp(spread, aimSpread, ((WeaponInfo)itemInfo).aimSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, aimPosition.rotation, ((WeaponInfo)itemInfo).aimSpeed * Time.deltaTime);
     }
 
     public override void Reload()
     {
-        if (((WeaponInfo)itemInfo).reload != 0 && !reloading && ammo != ((WeaponInfo)itemInfo).ammo)
+        if (ammo != -1 && reload != 0 && !reloading && ammo != maxAmmo)
         {
             reloading = true;
-            reloadTime = ((WeaponInfo)itemInfo).reload + Time.time;
+            reloadTime = reload + Time.time;
             UpdateAmmo();
         }
     }
@@ -134,11 +158,6 @@ public abstract class Weapon : Item
         {
             playerController.SetAmmoText(ammo.ToString(), ((WeaponInfo)itemInfo).ammo.ToString(), reloading);
         }
-    }
-
-    public virtual float GetDamage()
-    {
-        return ((WeaponInfo)itemInfo).damage;
     }
 
     private void SetFieldOfView(float fov)

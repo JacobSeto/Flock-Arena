@@ -9,14 +9,6 @@ public class MultiShotGun : Weapon
     [SerializeField] int numBullets;
     [SerializeField] float spreadCo;
 
-
-    public override void Awake()
-    {
-        base.Awake();
-        spread = ((WeaponInfo)itemInfo).hipSpread;
-        ammo = ((WeaponInfo)itemInfo).ammo;
-    }
-
     public override void Shoot()
     {
         for (int i = 0; i < numBullets; i++)

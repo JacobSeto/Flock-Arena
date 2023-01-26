@@ -13,14 +13,14 @@ public class WeaponInfo : ItemInfo
     //if ammo is -1, unlimited ammo
     public float ammo;
 
-    //if reload is 0, does not reload
+    //if reload is -1, does not reload
     public float reload;
 
     public bool isAutoFire;  //true if auto, false otherwise
 
     public float hipSpread; //0 no spread
 
-    public float aimSpread; // no spread
+    public float aimSpread; //0 no spread
 
     public float aimSpeed = 5.25f; //speed to move gun into aim
 

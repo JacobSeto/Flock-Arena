@@ -5,10 +5,10 @@ using UnityEngine;
 public abstract class Item : MonoBehaviour
 {
     //true if player holds the item in inventory indefinitely.  False if temporary item that is limited use.
-    [SerializeField] bool InInventory;
+    public bool InInventory;
     public ItemInfo itemInfo;
     public GameObject itemGameObject;
-    public PlayerController playerController;
+    [HideInInspector] public PlayerController playerController;
 
 
     public virtual void Awake()
