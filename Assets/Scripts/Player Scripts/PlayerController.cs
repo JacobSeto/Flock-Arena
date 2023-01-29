@@ -27,15 +27,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [Header("Player Stats")]
     [SerializeField] float groundDrag;
     [SerializeField] float airDrag;
-    [SerializeField] float baseWalkSpeed;
-    [SerializeField] float baseSprintSpeed;
-    [SerializeField] float baseAirSpeed;
     [SerializeField] float airMaxSpeed;
     [SerializeField] float maxYVelocity;
     [SerializeField] float moveForceConstant;
     public float walkSpeed;
     public float sprintSpeed;
     public float airSpeed;
+    [HideInInspector] public float airTime;  //num seconds of airtime, decrements over time
     float speed;
     public MovementState moveState;
     public enum MovementState
@@ -45,16 +43,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         air
     }
     public float jumpHeight;
-    public float jumpCooldown;
     public float healthRegen;
     public float regenTime;
     public float damageWaitTime;
 
     public float maxHealth;
-    float jumpCooldownTime = 0;
-    public bool canMove = true;
+    [HideInInspector] public bool canMove = true;
     float nextRegen;
-    public float boostTime;
+    public float boostCooldown;
+    public float boostAirTime;
     [SerializeField] float horizontalBoost;
     [SerializeField] float verticalBoost;
     float nextBoost;
@@ -140,6 +137,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         }
         Inputs();
         UpdateMoveState();
+        UpdateAirTime();
 
         if (Time.time > nextRegen && currentHealth != maxHealth)
         {
@@ -204,22 +202,22 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     private void UpdateMoveState()
     {
         //Mode Sprinting
-        if(isGrounded && Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.Mouse0) && !Input.GetKey(KeyCode.Mouse1))
-        {
-            moveState = MovementState.sprinting;
-            speed = sprintSpeed;
-        }
-        else if (isGrounded)
-        {
-            moveState = MovementState.walking;
-            speed = walkSpeed;
-        }
-        else
+        if(airTime != 0)
         {
             moveState = MovementState.air;
             speed = airSpeed;
         }
-        //print(moveState);
+        else if(Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.Mouse0) && !Input.GetKey(KeyCode.Mouse1))
+        {
+            moveState = MovementState.sprinting;
+            speed = sprintSpeed;
+        }
+        else
+        {
+            moveState = MovementState.walking;
+            speed = walkSpeed;
+        }
+        print(moveState);
     }
 
     private void Move()
@@ -235,12 +233,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         else
             rb.drag = airDrag;
         Vector3 flatVect = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        if(moveState == MovementState.air && flatVect.magnitude > airMaxSpeed)
+        if(moveState == MovementState.air)
         {
-            Vector3 limitVect = flatVect.normalized * airMaxSpeed;
-            rb.velocity = new Vector3(limitVect.x, rb.velocity.y, limitVect.z);
+            if(flatVect.magnitude > airMaxSpeed)
+            {
+                Vector3 limitVect = flatVect.normalized * airMaxSpeed;
+                rb.velocity = new Vector3(limitVect.x, rb.velocity.y, limitVect.z);
+            }
         }
-        else if (moveState != MovementState.air && flatVect.magnitude > speed)
+        else if (flatVect.magnitude > speed)
         {
             Vector3 limitVect = flatVect.normalized * speed;
             rb.velocity = new Vector3(limitVect.x, rb.velocity.y, limitVect.z);
@@ -249,13 +250,25 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             rb.velocity = new Vector3(rb.velocity.x, maxYVelocity, rb.velocity.z);
     }
 
+    public void UpdateAirTime()
+    {
+        //decrements airTime
+        if (airTime == 0)
+            return;
+        airTime -= Time.deltaTime;
+        if(airTime <= 0 || isGrounded)
+        {
+            airTime = 0;
+        }
+
+    }
+
     public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && jumpCooldownTime <= Time.time)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             rb.AddForce(playerTransform.up * jumpHeight, ForceMode.Impulse);
-            jumpCooldownTime = Time.time + jumpCooldown;
         }
     }
 
@@ -344,12 +357,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             boostText.text = "E";
             if (Input.GetKeyDown(KeyCode.E))
             {
-                isBoosting = true;
+                airTime += boostAirTime;
                 rb.AddForce(cameraHolder.transform.forward * horizontalBoost + playerTransform.up * verticalBoost, ForceMode.Impulse);
-                nextBoost = Time.time + boostTime;
+                nextBoost = Time.time + boostCooldown;
             }
-            if (isBoosting && nextBoost - boostTime + .5f < Time.time)
-                isBoosting = false;
         }
         else
         {

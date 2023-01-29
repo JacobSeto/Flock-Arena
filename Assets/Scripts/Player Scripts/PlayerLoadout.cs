@@ -9,6 +9,8 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
 {
     [SerializeField] Toggle[] weaponToggles;
     public Skill[] skills;
+    public int maxGunUpgrades;
+    public int numGunUpgrades;
     [Space]
     public Dictionary<string,Material> materialDictionary = new Dictionary<string, Material>();
     [SerializeField] Material[] materials;

@@ -3019,24 +3019,22 @@ MonoBehaviour:
   mouseSens: 300
   groundDrag: 1.5
   airDrag: 0.3
-  baseWalkSpeed: 4
-  baseSprintSpeed: 7
-  baseAirSpeed: 1
   airMaxSpeed: 20
   maxYVelocity: 18
   moveForceConstant: 20
   walkSpeed: 4
   sprintSpeed: 7
   airSpeed: 0.5
+  airTime: 0
   moveState: 0
   jumpHeight: 14
-  jumpCooldown: 1.2
   healthRegen: 1
   regenTime: 0.4
   damageWaitTime: 4
   maxHealth: 200
   canMove: 1
-  boostTime: 5
+  boostCooldown: 5
+  boostAirTime: 3
   horizontalBoost: 100
   verticalBoost: 10
   currentHealth: 200

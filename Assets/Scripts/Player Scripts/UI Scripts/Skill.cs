@@ -6,6 +6,7 @@ using TMPro;
 
 public class Skill : MonoBehaviour
 {
+    [SerializeField] bool weaponSkill;
     [SerializeField] SkillInfo skillInfo;
     [SerializeField] Toggle toggle;
     [SerializeField] TMP_Text skillText;
@@ -18,7 +19,20 @@ public class Skill : MonoBehaviour
     public void CheckInteractable()
     {
         if (skillInfo.cost <= playerLoadout.GetSkillPoints() && playerLoadout.GetSkillTier(skillInfo.path) + 1 >= skillInfo.tier && !toggle.isOn)
-            toggle.interactable = true;
+        {
+            if (weaponSkill)
+            {
+                if (playerLoadout.maxGunUpgrades != 0)
+                {
+                    toggle.interactable = true;
+                    playerLoadout.maxGunUpgrades -= 1;
+                }
+                else
+                    toggle.interactable = false;
+            }
+            else
+                toggle.interactable = true;
+        }
         else
             toggle.interactable = false;
     }
