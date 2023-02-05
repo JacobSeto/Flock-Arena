@@ -31,7 +31,7 @@ public class RecursiveProjectile : Projectile
             Vector3 recursivePos = transform.position + new Vector3(Random.Range(-ranPosition, ranPosition), Random.Range(-ranPosition, ranPosition),Random.Range(-ranPosition, ranPosition));
             GameObject projectile = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", recursiveRoundName), recursivePos + transform.up * spawnHeight, recursiveDir);
             Projectile projectileScript = projectile.GetComponent<Projectile>();
-            projectileScript.SetProjectile(r.recursiveSpeed, r.recursiveHealth, r.recursiveDamage, r.recursiveTime, true, r.recursiveExploDamage, r.recursiveRadius, r.recursiveSelfDamage, r.recursiveBlastStrength, r.recursiveEEM, playerController);
+            projectileScript.SetProjectile(r.recursiveSpeed, r.recursiveHealth, r.recursiveDamage, r.recursiveTime, true, r.recursiveExploDamage, r.recursiveRadius, r.recursiveSelfDamage, r.recursiveBlastStrength, r.recursiveBlastAirTime,r.recursiveEEM, playerController);
 
         }
     }

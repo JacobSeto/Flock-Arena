@@ -10,15 +10,18 @@ public abstract class Weapon : Item
     public PhotonView view { get; set; }
     public bool canShoot = true;
     public bool canAim = true;
-    public float nextShot;
-    public float reloadTime;
-    public bool reloading = false;
+    [HideInInspector] public float nextShot;
+    [HideInInspector] public bool reloading = false;
     [HideInInspector] public float spread;
+    float reloadTime;
+    float specialTime;
+    bool specialActive;
     float maxAmmo;
     //default value is 0, except some which 0 is valid
     [HideInInspector] public float damage;
     [HideInInspector] public float fireRate;
     [HideInInspector] public float reload;
+    [HideInInspector] public float specialCooldown;
     [HideInInspector] public float hipSpread = -1;
     [HideInInspector] public float aimSpread = -1;
     [HideInInspector] public float ammo;
@@ -32,6 +35,8 @@ public abstract class Weapon : Item
             fireRate = ((WeaponInfo)itemInfo).fireRate;
         if (reload == 0)
             reload = ((WeaponInfo)itemInfo).reload;
+        if (specialCooldown == 0)
+            specialCooldown = ((WeaponInfo)itemInfo).specialCooldown;
         if (hipSpread == -1)
             hipSpread = ((WeaponInfo)itemInfo).hipSpread;
         if (aimSpread == -1)
@@ -84,7 +89,26 @@ public abstract class Weapon : Item
         }
     }
 
-    public abstract void Shoot();
+    public virtual void Shoot()
+    {
+        //play weapon audio
+        //weaponAudio[UnityEngine.Random.Range(0, weaponAudio.Length - 1)].Play();
+    }
+    public virtual void Special() { }
+
+    public virtual void CheckSpecial()
+    {
+        if (Time.time >= specialTime)
+        {
+            specialActive = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Q) && specialActive)
+        {
+            Special();
+            specialActive = false;
+            specialTime = Time.time + specialCooldown;
+        }
+    }
 
     public virtual void CheckUse()
     {

@@ -20,9 +20,10 @@ public class ProjectileGun : Weapon
     public float explosionRadius;
     public float selfDamage;
     public float blastStrength;
+    public float blastAirTime;
     public float earlyExplosionMultiplyer;
 
-    public GameObject projectile;
+    [HideInInspector] public GameObject projectile;
 
 
     public override void Awake()
@@ -34,13 +35,13 @@ public class ProjectileGun : Weapon
 
     public override void Shoot()
     {
-        
+        base.Shoot();
         if (!view.IsMine)
             return;
         projectile = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", projectileName), projectileSpawn.position, playerController.camTransform.rotation);
         Projectile projectileScript = projectile.GetComponent<Projectile>();
         projectileScript.SetProjectile(projectileSpeed, projectileHealth, projectileDamage, projectileTime,
-        explodes, exploDamage, explosionRadius, selfDamage, blastStrength, earlyExplosionMultiplyer,playerController);
+        explodes, exploDamage, explosionRadius, selfDamage, blastStrength, blastAirTime,earlyExplosionMultiplyer,playerController);
 
     }
 

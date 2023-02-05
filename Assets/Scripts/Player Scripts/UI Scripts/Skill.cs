@@ -6,7 +6,6 @@ using TMPro;
 
 public class Skill : MonoBehaviour
 {
-    [SerializeField] bool weaponSkill;
     [SerializeField] SkillInfo skillInfo;
     [SerializeField] Toggle toggle;
     [SerializeField] TMP_Text skillText;
@@ -20,7 +19,7 @@ public class Skill : MonoBehaviour
     {
         if (skillInfo.cost <= playerLoadout.GetSkillPoints() && playerLoadout.GetSkillTier(skillInfo.path) + 1 >= skillInfo.tier && !toggle.isOn)
         {
-            if (weaponSkill)
+            if (skillInfo.isWeaponSkill)
             {
                 if (playerLoadout.maxGunUpgrades != 0)
                 {

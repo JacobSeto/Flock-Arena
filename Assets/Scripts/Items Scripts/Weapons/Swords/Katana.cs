@@ -147,6 +147,7 @@ public class Katana : Weapon
 
     public override void Shoot()
     {
+        base.Shoot();
         Swing();
     }
 
@@ -239,6 +240,11 @@ public class Katana : Weapon
                 swingCollider.SetActive(false);
             }
         }
+    }
+
+    public override void Special()
+    {
+        //Katana Special:  Shoots a blade beam
     }
     private void OnDestroy()
     {

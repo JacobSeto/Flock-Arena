@@ -22,6 +22,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     public float explosionRadius;
     public float selfDamage;
     public float blastStrength;
+    public float blastAirTime;
     public float earlyExplosionMultiplyer;
     public PlayerController playerController = null;
     //prevent multiple collisions
@@ -30,7 +31,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
 
     GameObject explosion;
 
-    public void SetProjectile(float sp, float h, float d, float t, bool e, float exD, float exR, float sD, float bS, float exM, PlayerController p)
+    public void SetProjectile(float sp, float h, float d, float t, bool e, float exD, float exR, float sD, float bS, float bA, float exM, PlayerController p)
     {
         //sets all projectile components, accessed by projecctile gun
         speed = sp;
@@ -42,13 +43,15 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
         explosionRadius = exR;
         selfDamage = sD;
         blastStrength = bS;
+        blastAirTime = bA;
         earlyExplosionMultiplyer = exM;
         playerController = p;
     }
     public virtual void Start()
     {
         rb.velocity = transform.forward * speed;
-        ProjectileDestroy(time);
+        print(time);
+        Destroy(gameObject, time);
     }
     public virtual void OnTriggerEnter(Collider other)
     {
@@ -56,8 +59,6 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
         {
             if(other.gameObject.GetComponentInParent<IDamageable>() != null)
             {
-                print("take damage");
-                print(other.gameObject.name);
                 other.gameObject.GetComponentInParent<IDamageable>().TakeDamage(damage);
             }
             if (explodes)
@@ -65,7 +66,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
                 Explosion(exploDamage);
             }   
             
-            ProjectileDestroy(0f);
+            Destroy(gameObject);
             hit = true;
         }
     }
@@ -116,6 +117,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
                 PlayerController player = cols[i].GetComponentInParent<PlayerController>();
                 if (player.view == playerController.view)
                 {
+                    cols[i].GetComponentInParent<PlayerController>().airTime += blastAirTime;
                     cols[i].GetComponentInParent<PlayerController>().AddPlayerForce(-transform.forward * blastStrength);
                     cols[i].GetComponentInParent<IDamageable>().TakeDamage(selfDamage);
                     i += cols.Length;
@@ -130,17 +132,6 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
             
         }
         Destroy(gameObject);
-    }
-
-    public virtual void ProjectileDestroy(float delay)
-    {
-        view.RPC(nameof(PUNProjectileDestroy), RpcTarget.All, delay);
-    }
-
-    [PunRPC]
-    public void PUNProjectileDestroy(float delay)
-    {
-        Destroy(gameObject, delay);
     }
 
 }

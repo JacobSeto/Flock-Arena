@@ -134,6 +134,7 @@ MonoBehaviour:
   explosionRadius: 2.75
   selfDamage: 10
   blastStrength: 800
+  blastAirTime: 1.5
   earlyExplosionMultiplyer: 1
   projectile: {fileID: 0}
   numRecursive: 8
@@ -146,6 +147,7 @@ MonoBehaviour:
   recursiveRadius: 0.8
   recursiveSelfDamage: 10
   recursiveBlastStrength: 250
+  recursiveBlastAirTime: 0.75
   recursiveEEM: 1
 --- !u!114 &4207281042635679034
 MonoBehaviour:

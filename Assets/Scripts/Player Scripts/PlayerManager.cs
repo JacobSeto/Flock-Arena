@@ -10,14 +10,15 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    PhotonView view;
+    public PhotonView view;
     GameObject player;
     PlayerController playerController;
-    [SerializeField] PlayerLoadout playerLoadout;
+    public PlayerLoadout playerLoadout;
     [SerializeField] GameObject playerLoadoutUI;
     [SerializeField] GameObject playerLoadoutCamera;
     [SerializeField] Transform cameraHolder;
     GameObject loadoutCam;
+
 
     [SerializeField] GameObject pauseMenu;
     [SerializeField] Slider mouseSlider;
@@ -27,6 +28,8 @@ public class PlayerManager : MonoBehaviour
     int kills;
     int deaths;
 
+    [HideInInspector] public bool isPlayer;
+
     private void Awake()
     {
         view = GetComponent<PhotonView>();
@@ -34,6 +37,11 @@ public class PlayerManager : MonoBehaviour
         if (view.IsMine)
         {
             mouseSlider.value = PlayerPrefs.GetFloat("Mouse Sensitivity", 300f);
+            isPlayer = true;
+        }
+        else
+        {
+            isPlayer = false;
         }
     }
 
@@ -69,11 +77,6 @@ public class PlayerManager : MonoBehaviour
             }
             pauseMenu.SetActive(isPaused);
         }
-    }
-
-    public PlayerLoadout GetPlayerLoadout()
-    {
-        return playerLoadout;
     }
 
 

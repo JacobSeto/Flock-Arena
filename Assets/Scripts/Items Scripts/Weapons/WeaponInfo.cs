@@ -16,6 +16,8 @@ public class WeaponInfo : ItemInfo
     //if reload is -1, does not reload
     public float reload;
 
+    public float specialCooldown;
+
     public bool isAutoFire;  //true if auto, false otherwise
 
     public float hipSpread; //0 no spread

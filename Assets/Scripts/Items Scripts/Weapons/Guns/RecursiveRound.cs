@@ -17,6 +17,7 @@ public class RecursiveRound : ProjectileGun
     public float recursiveRadius;
     public float recursiveSelfDamage;
     public float recursiveBlastStrength;
+    public float recursiveBlastAirTime;
     public float recursiveEEM;
 
     public void RecursiveUpgrades()

@@ -9,4 +9,10 @@ public class Rifle : SingleShotGun
         //Checks each rifle upgrade and applies to gun
     }
 
+    public override void Special()
+    {
+        //Rifle Special: Throw rifle like a boomerang, shoots while
+        // spinning.  When hit object, return
+    }
+
 }

@@ -8,6 +8,9 @@ using TMPro;
 public class PlayerLoadout : MonoBehaviourPunCallbacks
 {
     [SerializeField] Toggle[] weaponToggles;
+    [SerializeField] TMP_Text[] orderText;
+    public int[] weaponsSelected;  //indexes initially selected
+    int previousSelected = 0;
     public Skill[] skills;
     public int maxGunUpgrades;
     public int numGunUpgrades;
@@ -39,6 +42,9 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
     [SerializeField] int medkit1;
     [SerializeField] int grenade1;
 
+    [Space]
+    public GameObject SpawnButton;
+    public TMP_Text StartCountdown;
 
     private void Awake()
     {
@@ -155,6 +161,7 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
 
     public void UpdateSkillTree()
     {
+        print("check");
         //sets toggles interactable if conditions are met
         foreach (Skill skill in skills)
             skill.CheckInteractable();
@@ -219,7 +226,7 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
             case "Revolver":
                 Revolver revolver = weapon.gameObject.GetComponent<Revolver>();
                 if (skills[36].gameObject.GetComponent<Toggle>().isOn)
-                    revolver.fasterFire = true;
+                    revolver.quickHands = true;
                 revolver.RevolverUpgrades();
                 break;
 
@@ -233,18 +240,22 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         }
     }
 
-    public int GetWeaponToggleIndex()
+    public void UpdateWeaponToggles(int index)
     {
-        //Make sure that the weapon toggle is the same order as the player controller child gameObjects under the Item Holder GameObject
-        int index = 0;
-        foreach(Toggle weaponToggle in weaponToggles)
+        //if selected, update
+        print("update weapon toggles");
+        if (weaponToggles[index].isOn && weaponToggles[index].gameObject.activeInHierarchy)
         {
-            if(weaponToggle.isOn)
-                return index;
-            index++;
-        }
-        Debug.Log("Missing Toggle");
-        return 0;
+            weaponsSelected[0] = weaponsSelected[1];
+            weaponsSelected[1] = index;
+            weaponToggles[previousSelected].isOn = false;
+            //set order text
+            orderText[previousSelected].text = "";
+            orderText[weaponsSelected[0]].text = "1";
+            orderText[weaponsSelected[1]].text = "2";
+
+            previousSelected = weaponsSelected[0];
+        }       
     }
 
     public void RoundSkillIncrease()

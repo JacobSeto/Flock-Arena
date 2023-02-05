@@ -9,4 +9,10 @@ public class Shotgun : MultiShotGun
     {
         //Checks each shotgun upgrade and applies to gun
     }
+
+    public override void Special()
+    {
+        //Shotgun Special:  Shotgun shoots projectiles that
+        //apply knockback to enemies and launches player
+    }
 }

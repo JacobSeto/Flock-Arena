@@ -8,4 +8,9 @@ public class RPG : ProjectileGun
     {
         //Checks each RPG upgrade and applies to gun
     }
+
+    public override void Special()
+    {
+        //RPG Special:  Mark an area that is hit by a barrage of missles
+    }
 }

@@ -11,6 +11,7 @@ public class MultiShotGun : Weapon
 
     public override void Shoot()
     {
+        base.Shoot();
         for (int i = 0; i < numBullets; i++)
         {
             Ray ray = playerController.playerCamera.ViewportPointToRay(new Vector3(.5f, .5f));  //casts ray from the center of the screen

@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] float horizontalBoost;
     [SerializeField] float verticalBoost;
     float nextBoost;
-    bool isBoosting = false;
     public float currentHealth;
 
     [Space]
@@ -92,12 +91,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             Destroy(rb);
             Destroy(UI);
         }
-        EquipItem(itemIndex);
+        EquipItem(0);
     }
     public void PlayerSetters()
     {
         playerManager = PhotonView.Find((int)view.InstantiationData[0]).GetComponent<PlayerManager>();
-        SetLoadout(playerManager.GetPlayerLoadout());
+        SetLoadout(playerManager.playerLoadout);
         currentHealth = maxHealth;
         healthText.text = currentHealth.ToString("000");
     }
@@ -108,24 +107,24 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
        
         //set skill tree skills
         playerLoadout.SkillTree(gameObject.GetComponent<PlayerController>());
-        //set weapon upgrades
-        playerLoadout.WeaponUpgrades(items[0]);
         //set player weapon by destroying all other weapons in itemholder
-        view.RPC(nameof(RPC_SetWeapon), RpcTarget.All, playerLoadout.GetWeaponToggleIndex());
+        view.RPC(nameof(RPC_SetWeapon), RpcTarget.All, playerLoadout.weaponsSelected);
+        //set weapon upgrades
+        foreach(Item weaponItem in items)
+        {
+            playerLoadout.WeaponUpgrades(weaponItem);
+        }
         //set player weapon skills
 
         //set item refrences
     }
     [PunRPC]
-    public void RPC_SetWeapon(int index)
+    public void RPC_SetWeapon(int[] weaponsSelected)
     {
-        for (int i = 0; i < index; i++)
+        //adds weapons selected from itemholder to items List
+        foreach(int weaponIndex in weaponsSelected)
         {
-            items.Remove(items[0]);
-        }
-        while (items.Count > 1)
-        {
-            items.Remove(items[1]);
+            items.Add(itemHolder.GetChild(weaponIndex).gameObject.GetComponent<Item>());
         }
     }
 
@@ -324,6 +323,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             return;
 
         itemIndex = _index;
+        print(items.Count);
         items[itemIndex].itemGameObject.SetActive(true);
         items[itemIndex].UpdateAmmo();
 

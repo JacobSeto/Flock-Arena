@@ -16,8 +16,8 @@ public class GunGunProjectile : Projectile
     private bool boostDone = false;
 
     [SerializeField] SingleShotGun gungun;
-    public float boostTime { get; set; }
-    public float boostStrength { get; set; }
+    public float boostTime;
+    public float boostStrength;
 
     //TODO: add customizaiton to gungun for upgrades
 

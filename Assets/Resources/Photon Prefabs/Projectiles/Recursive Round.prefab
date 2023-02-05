@@ -181,6 +181,7 @@ MonoBehaviour:
   explosionRadius: 0
   selfDamage: 0
   blastStrength: 0
+  blastAirTime: 0
   earlyExplosionMultiplyer: 0
   playerController: {fileID: 0}
   r: {fileID: 0}

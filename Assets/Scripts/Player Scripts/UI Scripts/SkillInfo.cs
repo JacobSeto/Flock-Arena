@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkillInfo : ScriptableObject
 {
     public string skillName;
+    public bool isWeaponSkill;
     public int cost;
     public int tier;
     public string path; //"tank","support","mobility", "utility"
