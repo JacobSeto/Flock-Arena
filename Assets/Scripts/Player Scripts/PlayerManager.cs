@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     GameObject player;
     PlayerController playerController;
     public PlayerLoadout playerLoadout;
-    [SerializeField] GameObject playerLoadoutUI;
+    public GameObject playerLoadoutUI;
     [SerializeField] GameObject playerLoadoutCamera;
     [SerializeField] Transform cameraHolder;
     GameObject loadoutCam;
@@ -22,9 +22,8 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] GameObject pauseMenu;
     [SerializeField] Slider mouseSlider;
-    bool isPaused = false;
     bool inGame = false;
-
+    bool isPaused = false;
     int kills;
     int deaths;
 
@@ -65,14 +64,18 @@ public class PlayerManager : MonoBehaviour
             isPaused = !isPaused;
             if (inGame)
             {
-                playerController.canMove = !isPaused;
-                if (isPaused)
+                playerController.isPaused = !playerController.isPaused;
+                if (playerController.isPaused)
                 {
                     Cursor.lockState = CursorLockMode.None;
+                    playerController.canMove = false;
+                    playerController.playerUI.GetComponent<CanvasGroup>().alpha = .25f;
                 }
                 else
                 {
                     Cursor.lockState = CursorLockMode.Locked;
+                    playerController.canMove = true;
+                    playerController.playerUI.GetComponent<CanvasGroup>().alpha = 1f;
                 }
             }
             pauseMenu.SetActive(isPaused);

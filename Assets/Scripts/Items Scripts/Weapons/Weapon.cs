@@ -124,7 +124,7 @@ public abstract class Weapon : Item
 
     public virtual void Aim()
     {
-        if (!canAim)
+        if (!canAim || !playerController.canMove)
             return;
         if (Input.GetKey(KeyCode.Mouse1))
         {

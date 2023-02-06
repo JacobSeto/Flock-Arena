@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 {
     [Header("UI")]
     [SerializeField] GameObject cameras;
-    [SerializeField] GameObject UI;
+    public GameObject playerUI;
     [SerializeField] Image healthbarImage;
     [SerializeField] TMP_Text healthText;
     [SerializeField] TMP_Text ammoText;
@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     public float maxHealth;
     [HideInInspector] public bool canMove = true;
+    [HideInInspector] public bool isPaused = false;
     float nextRegen;
     public float boostCooldown;
     public float boostAirTime;
@@ -73,7 +74,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     public Rigidbody rb;
     public PhotonView view;
     PlayerManager playerManager;
-    public bool isPaused = false;
 
 
     private void Start()
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         {
             Destroy(cameras);
             Destroy(rb);
-            Destroy(UI);
+            Destroy(playerUI);
         }
         EquipItem(0);
     }
@@ -305,7 +305,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                 break;
             }
         }
-
+        if (!canMove)
+            return;
         if (Input.GetMouseButtonDown(0))
         {
             items[itemIndex].Use();

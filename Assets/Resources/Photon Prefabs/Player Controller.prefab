@@ -2166,6 +2166,7 @@ GameObject:
   - component: {fileID: 5894914050657683058}
   - component: {fileID: 4151330843842598185}
   - component: {fileID: 9213855970316624950}
+  - component: {fileID: 8800269106703194639}
   m_Layer: 0
   m_Name: Player UI
   m_TagString: Untagged
@@ -2271,6 +2272,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menus: []
+--- !u!225 &8800269106703194639
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817749375914883497}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5838436936422797055
 GameObject:
   m_ObjectHideFlags: 0
@@ -3007,7 +3020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameras: {fileID: 461850120584271468}
-  UI: {fileID: 5817749375914883497}
+  playerUI: {fileID: 5817749375914883497}
   healthbarImage: {fileID: 6074212460841551209}
   healthText: {fileID: 7574581230648399770}
   ammoText: {fileID: 2178766611537976199}
@@ -3033,6 +3046,7 @@ MonoBehaviour:
   damageWaitTime: 4
   maxHealth: 200
   canMove: 1
+  isPaused: 0
   boostCooldown: 5
   boostAirTime: 3
   horizontalBoost: 100
@@ -3043,7 +3057,6 @@ MonoBehaviour:
   playerTransform: {fileID: 3734202351384468184}
   rb: {fileID: 2024073888913952704}
   view: {fileID: 2239898583963388308}
-  isPaused: 0
 --- !u!54 &2024073888913952704
 Rigidbody:
   m_ObjectHideFlags: 0
