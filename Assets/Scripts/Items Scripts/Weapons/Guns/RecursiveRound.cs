@@ -32,7 +32,6 @@ public class RecursiveRound : ProjectileGun
         recursiveScript.r = gameObject.GetComponent<RecursiveRound>();
         recursiveScript.numRecursive = numRecursive;
         recursiveScript.recursiveRoundName = recursiveRoundName;
-        recursiveScript.playerController = playerController;
     }
 
 }

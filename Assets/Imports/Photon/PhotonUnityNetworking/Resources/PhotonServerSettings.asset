@@ -66,6 +66,9 @@ MonoBehaviour:
   - RPC_ProjectileSpawn
   - RPC_UpdateLastSpawnIndex
   - RPC_UpdateStartCounter
+  - RPC_DestoryProjectile
+  - RPC_Explosion
+  - RPC_SetProjectile
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

@@ -216,7 +216,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             moveState = MovementState.walking;
             speed = walkSpeed;
         }
-        print(moveState);
     }
 
     private void Move()

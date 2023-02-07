@@ -36,9 +36,11 @@ public class RecursiveProjectile : Projectile
         }
     }
 
+
     private void OnDestroy()
     {
         if (view.IsMine)
             Recursive();
     }
+
 }

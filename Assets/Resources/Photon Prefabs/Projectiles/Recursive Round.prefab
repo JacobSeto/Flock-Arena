@@ -178,7 +178,7 @@ MonoBehaviour:
   time: 0
   explodes: 0
   exploDamage: 0
-  explosionRadius: 0
+  explosionRadius: 4
   selfDamage: 0
   blastStrength: 0
   blastAirTime: 0
