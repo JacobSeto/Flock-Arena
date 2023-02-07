@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.IO;
 
-public class Projectile : MonoBehaviourPunCallbacks, IDamageable
+public class Projectile : MonoBehaviourPunCallbacks, IDamageable                                                                                                                
 {
     public Rigidbody rb;
     public Collider col;
@@ -13,18 +13,18 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     public PhotonView view;
 
     //components set by projectile gun
-    public float speed;
-    public float health;
-    public float damage;
-    public float time;
-    public bool explodes;
-    public float exploDamage;
-    public float explosionRadius;
-    public float selfDamage;
-    public float blastStrength;
-    public float blastAirTime;
-    public float earlyExplosionMultiplyer;
-    public PlayerController playerController = null;
+    [HideInInspector] public float speed;
+    [HideInInspector] public float health;
+    [HideInInspector] public float damage;
+    [HideInInspector] public float time;
+    [HideInInspector] public bool explodes;
+    [HideInInspector] public float exploDamage;
+    [HideInInspector] public float explosionRadius;
+    [HideInInspector] public float selfDamage;
+    [HideInInspector] public float blastStrength;
+    [HideInInspector] public float blastAirTime;
+    [HideInInspector] public float earlyExplosionMultiplyer;
+    [HideInInspector] public PlayerController playerController = null;
     //prevent multiple collisions
     bool hit = false;
     bool hitExplosion = false;

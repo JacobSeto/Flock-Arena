@@ -17,6 +17,7 @@ MonoBehaviour:
   fireRate: 0.2
   ammo: 6
   reload: 1.5
+  specialCooldown: 5
   isAutoFire: 0
   hipSpread: 0.025
   aimSpread: 0.007

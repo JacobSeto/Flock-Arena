@@ -53,6 +53,7 @@ public abstract class Weapon : Item
             return;
         }
         CheckUse();
+        CheckSpecial();
         CheckReload();
         Aim();
     }

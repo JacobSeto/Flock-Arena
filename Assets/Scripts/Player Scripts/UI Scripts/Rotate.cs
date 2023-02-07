@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
-    [SerializeField] float rotationSpeed;
-    private void Update()
+    //used to rotate GameObjects
+
+    [SerializeField] float rotationSpeedX;
+    [SerializeField] float rotationSpeedY;
+    [SerializeField] float rotationSpeedZ;
+    private void FixedUpdate()
     {
-        transform.Rotate(0, rotationSpeed, 0);
+        transform.Rotate(rotationSpeedX, rotationSpeedY, rotationSpeedZ);
     }
 }

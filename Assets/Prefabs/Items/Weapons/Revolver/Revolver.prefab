@@ -91,6 +91,13 @@ MonoBehaviour:
   bulletMissPrefab: {fileID: 7310387583158887988, guid: a86b5b0fc02de734ea32681353ecd45d, type: 3}
   hipPosition: {fileID: 0}
   aimPosition: {fileID: 0}
+  coinName: Coin Projectile
+  coinSpawn: {fileID: 2965364154634681250}
+  coinSpeed: 0
+  coinHealth: 0
+  coinDamage: 0
+  coinTime: 0
+  coin: {fileID: 0}
   quickHandReloadTime: 0
   quickHands: 0
 --- !u!1 &8310793437338954324
@@ -116,7 +123,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8310793437338954324}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
