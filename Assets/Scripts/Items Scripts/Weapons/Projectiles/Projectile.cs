@@ -26,12 +26,12 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     [HideInInspector] public float earlyExplosionMultiplyer;
     [HideInInspector] public PlayerController playerController = null;
     //prevent multiple collisions
-    bool hit = false;
+    public bool hit = false;
     bool hitExplosion = false;
 
     GameObject explosion;
 
-    public virtual void SetProjectile(float sp, float h, float d, float t, bool e, float exD, float exR, float sD, float bS, float bA, float exM, PlayerController p)
+    public virtual void SetProjectile(float sp, float h, float d, float t, bool e, float exD = 0, float exR = 0, float sD = 0, float bS = 0, float bA = 0, float exM = 0, PlayerController p = null)
     {
         //sets all projectile components, accessed by projecctile gun
         //some setters are only handled by this projectile, others must be
@@ -92,15 +92,16 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
 
     public void AddSpeed(float addSpeed)
     {
-        speed += addSpeed;
+        if(view.IsMine)
+            speed += addSpeed;
     }
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         view.RPC(nameof(RPC_TakeDamage), RpcTarget.All, damage);
     }
 
     [PunRPC]
-    public void RPC_TakeDamage(float damage)
+    public virtual void RPC_TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)

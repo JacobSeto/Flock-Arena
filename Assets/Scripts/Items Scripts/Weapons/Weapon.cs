@@ -7,9 +7,17 @@ using Photon.Pun;
 public abstract class Weapon : Item
 {
     [SerializeField] AudioSource[] weaponAudio;
-    public PhotonView view { get; set; }
-    public bool canShoot = true;
+
+    //Adds shake effect when weapons are used
+    [SerializeField] float moveX;
+    [SerializeField] float moveY;
+    [SerializeField] float moveZ;
+    [SerializeField] float rotateX;
+    [SerializeField] float rotateY;
+    [SerializeField] float rotateZ;
+
     public bool canAim = true;
+    [HideInInspector] public bool canShoot = true;
     [HideInInspector] public float nextShot;
     [HideInInspector] public bool reloading = false;
     [HideInInspector] public float spread;
@@ -94,6 +102,8 @@ public abstract class Weapon : Item
     {
         //play weapon audio
         //weaponAudio[UnityEngine.Random.Range(0, weaponAudio.Length - 1)].Play();
+        transform.position += new Vector3(UnityEngine.Random.Range(-moveX, moveX), UnityEngine.Random.Range(-moveY, moveY), UnityEngine.Random.Range(-moveZ, moveZ));
+        transform.Rotate(rotateX, rotateY, rotateZ);
     }
     public virtual void Special() { }
 

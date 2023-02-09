@@ -70,13 +70,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44db4934873fd4841a34070f7b39ea64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  view: {fileID: 3716262610679287017}
   InInventory: 1
   itemInfo: {fileID: 11400000, guid: 02f22b9a1c9049047807ffd669f622b1, type: 2}
   itemGameObject: {fileID: 2312333169134531883}
   playerController: {fileID: 0}
   weaponAudio: []
-  canShoot: 1
+  moveX: 0
+  moveY: 0
+  moveZ: 0
+  rotateX: 0
+  rotateY: 0
+  rotateZ: 0
   canAim: 1
+  canShoot: 1
   nextShot: 0
   reloading: 0
   spread: 0

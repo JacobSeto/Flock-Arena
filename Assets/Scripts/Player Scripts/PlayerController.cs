@@ -17,11 +17,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] TMP_Text ammoText;
     [SerializeField] TMP_Text boostText;
     [SerializeField] GameObject cameraHolder;
+    [SerializeField] CanvasGroup hitUI;
     [Space]
     public Camera playerCamera;
     public Transform camTransform;
     public Camera itemCamera;
     public float mouseSens;
+    [SerializeField] float hitRecoverySpeed;  //how fast it takes for hitUI to become transparent again
 
     [Space]
     [Header("Player Stats")]
@@ -56,7 +58,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] float horizontalBoost;
     [SerializeField] float verticalBoost;
     float nextBoost;
-    public float currentHealth;
+    [HideInInspector] public float currentHealth;
 
     [Space]
     [Header("Items")]
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     public Rigidbody rb;
     public PhotonView view;
-    PlayerManager playerManager;
+    public PlayerManager playerManager;
 
 
     private void Start()
@@ -137,6 +139,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         Inputs();
         UpdateMoveState();
         UpdateAirTime();
+        UpdateHitAlpha();
 
         if (Time.time > nextRegen && currentHealth != maxHealth)
         {
@@ -400,6 +403,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     {
         currentHealth -= damage;
 
+        hitUI.alpha += damage/maxHealth;
         healthbarImage.fillAmount = currentHealth / maxHealth;
 
         healthText.text = currentHealth.ToString("000");
@@ -410,6 +414,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             Die();
             PlayerManager.Find(info.Sender).GetKill();
         }
+    }
+
+    public void UpdateHitAlpha()
+    {
+        //Lerp alpha of hitUI to transition back to 0 alpha
+        if(hitUI.alpha != 0)
+            hitUI.alpha = Mathf.Lerp(hitUI.alpha, 0f, hitRecoverySpeed * Time.deltaTime);
     }
 
     public void Heal(float heal)

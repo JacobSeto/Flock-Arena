@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a62415683538946834f70d87592d9c, type: 3}
   m_Name: Gun Gun Gun
   m_EditorClassIdentifier: 
-  itemName: Gun Gun Gun
-  damage: 15
-  fireRate: 0.1
+  itemName: 'Projectile Gun Gun '
+  damage: 10
+  fireRate: 0.15
   ammo: -1
   reload: 0
+  specialCooldown: 0
   isAutoFire: 1
-  hipSpread: 0
+  hipSpread: 0.03
   aimSpread: 0
   aimSpeed: 3.5
   hipSpeed: 3.5

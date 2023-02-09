@@ -70,13 +70,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e0d8457aceffd347b81f386dd575617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  view: {fileID: 1222877730162636797}
   InInventory: 1
   itemInfo: {fileID: 11400000, guid: 55086f7673a65b140a857b9a8d1a801f, type: 2}
   itemGameObject: {fileID: 4993796733056849387}
   playerController: {fileID: 0}
   weaponAudio: []
-  canShoot: 1
+  moveX: 0
+  moveY: 0
+  moveZ: 0
+  rotateX: 0
+  rotateY: 0
+  rotateZ: 0
   canAim: 1
+  canShoot: 1
   nextShot: 0
   reloading: 0
   spread: 0
@@ -97,6 +104,7 @@ MonoBehaviour:
   coinHealth: 0
   coinDamage: 0
   coinTime: 0
+  coinRangeRadius: 0
   coin: {fileID: 0}
   quickHandReloadTime: 0
   quickHands: 0

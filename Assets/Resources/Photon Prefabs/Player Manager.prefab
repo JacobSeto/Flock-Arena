@@ -1413,6 +1413,7 @@ MonoBehaviour:
   cameraHolder: {fileID: 3124004717154589148}
   pauseMenu: {fileID: 3866915259901345233}
   mouseSlider: {fileID: 97771515027724406}
+  inGame: 0
   isPlayer: 0
 --- !u!114 &8818609636147665015
 MonoBehaviour:

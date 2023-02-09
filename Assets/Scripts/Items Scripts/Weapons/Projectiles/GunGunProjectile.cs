@@ -13,6 +13,7 @@ public class GunGunProjectile : Projectile
 
     Transform playerCamTransform;
     Camera playerCamera;
+    PlayerManager playerManager;
     private bool boostDone = false;
 
     [SerializeField] SingleShotGun gungun;
@@ -26,12 +27,13 @@ public class GunGunProjectile : Projectile
         base.Start();
         boostTime += Time.time;
         AddSpeed(boostStrength);
-        if (playerController != null)
+        if (view.IsMine)
         {
             playerCamTransform = playerController.camTransform;
             playerCamera = playerController.playerCamera;
             playerController.PlayerCamerasActive(false);
             gungun.playerController = playerController;
+            playerManager = playerController.playerManager;
             playerController.camTransform = gunCamera.transform;
             playerController.playerCamera = gunCamera.GetComponent<Camera>();
             gungun.UpdateAmmo();
@@ -44,14 +46,15 @@ public class GunGunProjectile : Projectile
     }
     private void FixedUpdate()
     {
-        rb.velocity = transform.forward * speed;
+        if(view.IsMine)
+            rb.velocity = transform.forward * speed;
     }
 
     private void Update()
     {
-        if (playerController != null)
+        if (view.IsMine)
         {
-            GunGunLook();
+            GunGunControl();
         }
 
         if(!boostDone && Time.time > boostTime)
@@ -61,9 +64,14 @@ public class GunGunProjectile : Projectile
         }
     }
 
-    public void GunGunLook()
+    public void GunGunControl()
     {
-        if (playerController.isPaused)
+        if (!playerManager.inGame)
+        {
+            PhotonNetwork.Destroy(gameObject);
+            return;
+        }
+        if (!playerManager.isPlayer || playerController.isPaused)
             return;
         if (Input.GetKey(KeyCode.S))
         {

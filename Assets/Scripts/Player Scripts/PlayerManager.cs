@@ -22,7 +22,7 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] GameObject pauseMenu;
     [SerializeField] Slider mouseSlider;
-    bool inGame = false;
+    public bool inGame = false;
     bool isPaused = false;
     int kills;
     int deaths;
@@ -69,7 +69,7 @@ public class PlayerManager : MonoBehaviour
                 {
                     Cursor.lockState = CursorLockMode.None;
                     playerController.canMove = false;
-                    playerController.playerUI.GetComponent<CanvasGroup>().alpha = .25f;
+                    playerController.playerUI.GetComponent<CanvasGroup>().alpha = .2f;
                 }
                 else
                 {

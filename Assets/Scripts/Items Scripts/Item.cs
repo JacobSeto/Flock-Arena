@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public abstract class Item : MonoBehaviour
+public abstract class Item : MonoBehaviourPunCallbacks
 {
     //true if player holds the item in inventory indefinitely.  False if temporary item that is limited use.
+    public PhotonView view;
     public bool InInventory;
     public ItemInfo itemInfo;
     public GameObject itemGameObject;
