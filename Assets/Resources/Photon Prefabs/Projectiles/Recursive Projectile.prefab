@@ -184,10 +184,11 @@ MonoBehaviour:
   blastAirTime: 0
   earlyExplosionMultiplyer: 0
   playerController: {fileID: 0}
+  hit: 0
   r: {fileID: 0}
   numRecursive: 0
   recursiveRoundName: 
-  spawnHeight: 0.4
+  spawnHeight: 0.5
   recursiveAngle: 70
   ranAngle: 25
-  ranPosition: 0.3
+  ranPosition: 0.4

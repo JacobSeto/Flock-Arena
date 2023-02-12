@@ -11,8 +11,8 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     public PhotonView view;
-    GameObject player;
-    PlayerController playerController;
+    public GameObject player;
+    public PlayerController playerController;
     public PlayerLoadout playerLoadout;
     public GameObject playerLoadoutUI;
     [SerializeField] GameObject playerLoadoutCamera;
@@ -69,13 +69,13 @@ public class PlayerManager : MonoBehaviour
                 {
                     Cursor.lockState = CursorLockMode.None;
                     playerController.canMove = false;
-                    playerController.playerUI.GetComponent<CanvasGroup>().alpha = .2f;
+                    playerController.playerUI.SetActive(false);
                 }
                 else
                 {
                     Cursor.lockState = CursorLockMode.Locked;
                     playerController.canMove = true;
-                    playerController.playerUI.GetComponent<CanvasGroup>().alpha = 1f;
+                    playerController.playerUI.SetActive(true);
                 }
             }
             pauseMenu.SetActive(isPaused);

@@ -1407,6 +1407,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: {fileID: 0}
+  player: {fileID: 0}
+  playerController: {fileID: 0}
   playerLoadout: {fileID: 8818609636147665015}
   playerLoadoutUI: {fileID: 1569207719680468474}
   playerLoadoutCamera: {fileID: 3163805052978847328, guid: 1cd7912ae8feb1d41af1649457b822be, type: 3}
@@ -1603,12 +1605,12 @@ MonoBehaviour:
   - {fileID: 8879555056528899132}
   - {fileID: 1311261600712079224}
   - {fileID: 3586163891157541883}
-  maxGunUpgrades: 0
-  numGunUpgrades: 1
+  maxGunUpgrades: 6
+  numGunUpgrades: 0
   materials:
   - {fileID: 2100000, guid: df2cac050c77ae746997581f7c66b14d, type: 2}
   - {fileID: 2100000, guid: db6e25d563bdd3d43811ce387c20c5a0, type: 2}
-  maxSkillPoints: 3
+  maxSkillPoints: 20
   roundSkillPointIncrease: 3
   skillPointsText: {fileID: 3228326355770597253}
   vital1: 25
@@ -1619,6 +1621,18 @@ MonoBehaviour:
   swift2: 1.1
   medkit1: 0
   grenade1: 0
+  heavyChange: 75
+  moneyHandsCooldown: 4
+  silverDollarDamage: 1.5
+  titaniumHealth: 100
+  quickHandReloadTime: 1.5
+  quickDrawTime: 8
+  explosiveRound: 15
+  revautoFirerate: 0.25
+  largerMagazines: 1.5
+  numFrag: 10
+  oiledBulletsDamageBonus: 75
+  recursiveCoinRadiusBonus: 2
   SpawnButton: {fileID: 8838079433137896918}
   StartCountdown: {fileID: 5253588683700796750}
 --- !u!1 &2712104579498965602
@@ -12117,10 +12131,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900473929212858672}
     m_Modifications:
+    - target: {fileID: 887050085033809651, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: m_Name
+      value: Heavy Change
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342960874005667178, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: m_Name
+      value: Money Hands
+      objectReference: {fileID: 0}
+    - target: {fileID: 2010561485572032549, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: m_Name
+      value: Silver Dollar
+      objectReference: {fileID: 0}
     - target: {fileID: 2219161074392175819, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: playerLoadout
       value: 
       objectReference: {fileID: 8818609636147665015}
+    - target: {fileID: 2266429078826745172, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: m_Name
+      value: Titanium Plating
+      objectReference: {fileID: 0}
     - target: {fileID: 2471374183572980297, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: skillInfo
       value: 
@@ -12258,13 +12288,25 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8034928627299201860, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: skillInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: d77b7099b5a5f8c4f82478005d4107d1, type: 2}
+    - target: {fileID: 8034928627299201860, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: playerLoadout
       value: 
       objectReference: {fileID: 8818609636147665015}
     - target: {fileID: 8173335764952266973, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: skillInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: a5ae91849aa9d2b42ae3e4528a68f82e, type: 2}
+    - target: {fileID: 8173335764952266973, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: playerLoadout
       value: 
       objectReference: {fileID: 8818609636147665015}
+    - target: {fileID: 8658259732944448914, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: skillInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 24f16ea3ce9b0f640958b0f5105abfee, type: 2}
     - target: {fileID: 8658259732944448914, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: playerLoadout
       value: 
@@ -12273,6 +12315,10 @@ PrefabInstance:
       propertyPath: playerLoadout
       value: 
       objectReference: {fileID: 8818609636147665015}
+    - target: {fileID: 8988440914103359715, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: skillInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 36f94655bf4d19b49bd2bd8b46348da4, type: 2}
     - target: {fileID: 8988440914103359715, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: playerLoadout
       value: 

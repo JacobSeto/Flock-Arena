@@ -15,9 +15,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] Image healthbarImage;
     [SerializeField] TMP_Text healthText;
     [SerializeField] TMP_Text ammoText;
+    public TMP_Text specialText;
     [SerializeField] TMP_Text boostText;
     [SerializeField] GameObject cameraHolder;
     [SerializeField] CanvasGroup hitUI;
+    [SerializeField] Transform damageDisplay;
+    [SerializeField] GameObject damageDisplayPrefab;
     [Space]
     public Camera playerCamera;
     public Transform camTransform;
@@ -209,7 +212,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             moveState = MovementState.air;
             speed = airSpeed;
         }
-        else if(Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.Mouse0) && !Input.GetKey(KeyCode.Mouse1))
+        else if(Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.Mouse1))
         {
             moveState = MovementState.sprinting;
             speed = sprintSpeed;
@@ -326,9 +329,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             return;
 
         itemIndex = _index;
-        print(items.Count);
         items[itemIndex].itemGameObject.SetActive(true);
-        items[itemIndex].UpdateAmmo();
 
         if (previousItemIndex != -1)
         {
@@ -396,6 +397,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     public void TakeDamage(float damage)
     {
         view.RPC(nameof(RPC_TakeDamage),view.Owner, damage);
+        view.RPC(nameof(RPC_DisplayDamage), RpcTarget.All, damage);
     }
 
     [PunRPC]
@@ -414,6 +416,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             Die();
             PlayerManager.Find(info.Sender).GetKill();
         }
+    }
+
+    [PunRPC]
+    void RPC_DisplayDamage(float damage)
+    {
+        //display damage on other players' screens
+        GameObject damageGameObject = Instantiate(damageDisplayPrefab, damageDisplay.position, damageDisplay.rotation, damageDisplay);
+        damageGameObject.GetComponentInChildren<TMP_Text>().text = damage.ToString();
+        Destroy(damageGameObject, 1);
     }
 
     public void UpdateHitAlpha()

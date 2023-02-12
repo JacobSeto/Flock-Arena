@@ -69,6 +69,7 @@ MonoBehaviour:
   - RPC_DestoryProjectile
   - RPC_Explosion
   - RPC_SetProjectile
+  - RPC_DisplayDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

@@ -10,7 +10,9 @@ public class ProjectileGun : Weapon
     public string projectileName;
     public Transform projectileSpawn;
     [Space]
-    public float projectileSpeed;
+    public float hipProjectileSpeed;
+    public float aimProjectileSpeed;
+    float projectileSpeed;
     public float projectileHealth;
     public float projectileDamage;
     public float projectileTime;
@@ -38,11 +40,34 @@ public class ProjectileGun : Weapon
         base.Shoot();
         if (!view.IsMine)
             return;
-        projectile = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", projectileName), projectileSpawn.position, playerController.camTransform.rotation);
+        projectile = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", projectileName), projectileSpawn.position, projectileSpawn.rotation);
         Projectile projectileScript = projectile.GetComponent<Projectile>();
         projectileScript.SetProjectile(projectileSpeed, projectileHealth, projectileDamage, projectileTime,
         explodes, exploDamage, explosionRadius, selfDamage, blastStrength, blastAirTime,earlyExplosionMultiplyer,playerController);
 
+    }
+
+    public override void Aim()
+    {
+        base.Aim();
+        //The longer you aim, the faster your next projectile will become
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            IncreaseProjectileSpeed();
+        }
+        else
+        {
+            DecreaseProjectileSpeed();
+        }
+    }
+    void IncreaseProjectileSpeed()
+    {
+        projectileSpeed = Mathf.Lerp(projectileSpeed, aimProjectileSpeed, ((WeaponInfo)itemInfo).aimSpeed * Time.deltaTime);
+    }
+
+    void DecreaseProjectileSpeed()
+    {
+        projectileSpeed = Mathf.Lerp(projectileSpeed, hipProjectileSpeed, ((WeaponInfo)itemInfo).hipSpeed * Time.deltaTime);
     }
 
 

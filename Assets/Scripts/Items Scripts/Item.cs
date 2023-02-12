@@ -27,7 +27,7 @@ public abstract class Item : MonoBehaviourPunCallbacks
 
     public abstract void Reload();
 
-    public abstract void UpdateAmmo();
+    public abstract void UpdateItemUI();
 
     public void ItemOwnership()
     {

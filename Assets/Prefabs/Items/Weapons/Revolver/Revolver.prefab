@@ -106,7 +106,7 @@ MonoBehaviour:
   coinTime: 0
   coinRangeRadius: 0
   coin: {fileID: 0}
-  quickHandReloadTime: 0
+  quickHandReloadTime: 1.5
   quickHands: 0
 --- !u!1 &8310793437338954324
 GameObject:

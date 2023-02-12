@@ -14,31 +14,21 @@ public class Revolver : SingleShotGun
     public float coinDamage;
     public float coinTime;
     public float coinRangeRadius;  //The range of the coin can deflect the bullet
+    public float deflectDamage;
     [HideInInspector] public GameObject coin;
 
-    [Header("Upgrades")]
-    [SerializeField] float quickHandReloadTime;
-    [HideInInspector] public bool quickHands = false;
 
-    public void RevolverUpgrades()
-    {
-        //Checks each revolver upgrade and applies to gun
-        if (quickHands)
-        {
-            reload = quickHandReloadTime;
-        }
-    }
 
     public override void Special()
     {
         //Revolver Special: Shoot a coin projectile.  When shot,
         //shoot at enemies in range
-        coin = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", coinName), coinSpawn.position, playerController.camTransform.rotation);
+        coin = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", coinName), coinSpawn.position, coinSpawn.rotation);
         CoinProjectile coinScript = coin.GetComponent<CoinProjectile>();
         coinScript.SetProjectile(coinSpeed, coinHealth, coinDamage, coinTime,
         false, 0, 0, 0,0, 0, 0, playerController);
         coinScript.coinRangeRadius = coinRangeRadius;
-        coinScript.deflectDamage = damage;
+        coinScript.deflectDamage = deflectDamage;
     }
 
 

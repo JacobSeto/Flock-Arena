@@ -90,14 +90,14 @@ public class Katana : Weapon
             canShoot = false;
             if (ammo != -1)
                 ammo--;
-            UpdateAmmo();
+            UpdateItemUI();
         }
 
     }
 
     public override void Aim()
     {
-        if (slashCoolDown > Time.time)
+        if (slashCoolDown > Time.time && !swinging)
             HipPosition();
         else
             base.Aim();
@@ -113,6 +113,7 @@ public class Katana : Weapon
             lastSlashDistance = slashDistance;
             lastSlashDamage = slashDamage;
             Invoke(nameof(Slash), slashDelay);
+            slashing = false;
             slashCoolDown = Time.time + slashCoolDownTime;
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -165,24 +166,6 @@ public class Katana : Weapon
             slashTeleport = playerController.playerTransform.position + playerController.camTransform.forward * lastSlashDistance;
         }
         playerController.playerTransform.position = slashTeleport;
-        slashing = false;
-        //view.RPC(nameof(RPC_Slash), RpcTarget.All);
-    }
-    [PunRPC]
-    public void RPC_Slash()
-    {
-        Ray slashRay = playerController.playerCamera.ViewportPointToRay(new Vector3(.5f, .5f));
-        slashRay.origin = playerController.camTransform.position;
-        if (Physics.Raycast(slashRay, out RaycastHit hit, lastSlashDistance))
-        {
-            hit.collider.gameObject.GetComponentInParent<IDamageable>()?.TakeDamage(lastSlashDamage);
-            slashTeleport = hit.point + playerController.playerTransform.up / 2 - playerController.playerTransform.forward;
-        }
-        else
-        {
-            slashTeleport = playerController.playerTransform.position + playerController.camTransform.forward * lastSlashDistance;
-        }
-        playerController.playerTransform.position = slashTeleport;
     }
 
     public void CreateSlashLine()
@@ -217,9 +200,15 @@ public class Katana : Weapon
         swingleft = !swingleft;
         swingCollider.SetActive(true);
         if (swingleft)
+        {
             transform.rotation = swing1Start.rotation;
+            transform.position = swing1Start.position;
+        }
         else
+        {
             transform.rotation = swing2Start.rotation;
+            transform.position = swing2Start.position;
+        }
     }
 
     public void Swinging()

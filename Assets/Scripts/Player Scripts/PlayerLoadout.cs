@@ -42,6 +42,32 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
     [SerializeField] int medkit1;
     [SerializeField] int grenade1;
 
+    //Revolver
+    [Header("Revolver Path 1")]
+    [SerializeField] float heavyChange;  //increase damage of coin hitting players directly
+    [SerializeField] float moneyHandsCooldown;  //shorter coin cooldown
+    [SerializeField] float silverDollarDamage;  //coin does more damage
+    [SerializeField] int titaniumHealth;  //increase health of coin to be shot multiple times
+
+    [Header("Revolver Path 2")]
+    [SerializeField] float quickHandReloadTime; //faster reload time
+    [SerializeField] float quickDrawTime;  // aim-in much faster
+    [SerializeField] float explosiveRoundDamage;  //damage for the explosive round
+    [SerializeField] float explosiveRoundRadius;  //size of explosive round explosion
+    [SerializeField] float revautoFirerate; //revauto:  auto fire enabled and faster firerate
+
+
+    [Header("Revolver Path 3")]
+    [SerializeField] float largerMagazines;  //increase the ammo capacity of both revolver and rifle.  multiply ammo
+    [SerializeField] int numFrag;  //when shotgun shoots coin, the coin fragments and shoots multiple projectiles
+    [SerializeField] float oiledBulletsDamageBonus;  //RPG projectiles shot by revolver do extra explosion damage
+    [SerializeField] float recursiveCoinRadiusBonus; //When coin hits recursive round (not projectile), increase explosion radius
+
+
+
+
+
+
     [Space]
     public GameObject SpawnButton;
     public TMP_Text StartCountdown;
@@ -135,6 +161,7 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         skillPoints = maxSkillPoints;
         foreach (Skill skill in skills)
             skill.GetComponent<Toggle>().isOn = false;
+        numGunUpgrades = 0;
         SetSkillTierDictionary();
         UpdateSkillTree();
     }
@@ -225,11 +252,15 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         {
             case "Revolver":
                 Revolver revolver = weapon.gameObject.GetComponent<Revolver>();
-                if (skills[36].gameObject.GetComponent<Toggle>().isOn)
-                    revolver.quickHands = true;
-                revolver.RevolverUpgrades();
-                break;
-
+                if (skills[32].gameObject.GetComponent<Toggle>().isOn)
+                    revolver.coinDamage += heavyChange;
+                if (skills[33].gameObject.GetComponent<Toggle>().isOn)
+                    revolver.specialCooldown = moneyHandsCooldown;
+                if (skills[34].gameObject.GetComponent<Toggle>().isOn)
+                    revolver.deflectDamage *= silverDollarDamage;
+                if (skills[35].gameObject.GetComponent<Toggle>().isOn)
+                    revolver.coinHealth = titaniumHealth;
+                    break;
             case "Rifle":
                 Debug.Log("rifle");
                 break;

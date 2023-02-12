@@ -303,6 +303,7 @@ MonoBehaviour:
   blastAirTime: 0
   earlyExplosionMultiplyer: 0
   playerController: {fileID: 0}
+  hit: 0
   gunCamera: {fileID: 665303885764832988}
   vSens: 0.2
   hSens: 0.9
@@ -321,13 +322,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0623a0db3c12a543b128b5cd6f25b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  view: {fileID: 0}
   InInventory: 0
   itemInfo: {fileID: 11400000, guid: 329f915923048644f868008b718d793e, type: 2}
   itemGameObject: {fileID: 4042241079041345639}
   playerController: {fileID: 0}
   weaponAudio: []
-  canShoot: 1
+  moveX: 0
+  moveY: 0
+  moveZ: 0
+  rotateX: 0
+  rotateY: 0
+  rotateZ: 0
   canAim: 1
+  canShoot: 1
   nextShot: 0
   reloading: 0
   spread: 0

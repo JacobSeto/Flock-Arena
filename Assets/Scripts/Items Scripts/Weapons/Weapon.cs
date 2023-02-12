@@ -63,6 +63,10 @@ public abstract class Weapon : Item
         CheckUse();
         CheckSpecial();
         CheckReload();
+        UpdateItemUI();
+    }
+    public virtual void FixedUpdate()
+    {
         Aim();
     }
 
@@ -94,7 +98,6 @@ public abstract class Weapon : Item
             canShoot = false;
             if (ammo != -1)
                 ammo--;
-            UpdateAmmo();
         }
     }
 
@@ -109,15 +112,19 @@ public abstract class Weapon : Item
 
     public virtual void CheckSpecial()
     {
-        if (Time.time >= specialTime)
+        if (!specialActive && specialTime <= 0)
         {
             specialActive = true;
+        }
+        else
+        {
+            specialTime -= Time.deltaTime;
         }
         if (Input.GetKeyDown(KeyCode.Q) && specialActive)
         {
             Special();
             specialActive = false;
-            specialTime = Time.time + specialCooldown;
+            specialTime = specialCooldown;
         }
     }
 
@@ -169,7 +176,7 @@ public abstract class Weapon : Item
         {
             reloading = true;
             reloadTime = reload + Time.time;
-            UpdateAmmo();
+            UpdateItemUI();
         }
     }
 
@@ -179,12 +186,12 @@ public abstract class Weapon : Item
         {
             ammo = ((WeaponInfo)itemInfo).ammo;
             reloading = false;
-            UpdateAmmo();
         }
     }
 
-    public override void UpdateAmmo()
+    public override void UpdateItemUI()
     {
+        //ammo
         if (reloading)
         {
             playerController.SetAmmoText("", "", reloading);
@@ -192,6 +199,15 @@ public abstract class Weapon : Item
         else
         {
             playerController.SetAmmoText(ammo.ToString(), ((WeaponInfo)itemInfo).ammo.ToString(), reloading);
+        }
+        //weapon ability
+        if (specialActive)
+        {
+            playerController.specialText.text = "Q";
+        }
+        else
+        {
+            playerController.specialText.text = (Mathf.CeilToInt(specialTime)).ToString();
         }
     }
 

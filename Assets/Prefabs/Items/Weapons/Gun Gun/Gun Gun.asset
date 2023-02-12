@@ -16,12 +16,12 @@ MonoBehaviour:
   damage: 50
   fireRate: 0
   ammo: 1
-  reload: 2
+  reload: 1
   specialCooldown: 0
   isAutoFire: 0
-  hipSpread: 0.1
+  hipSpread: 0
   aimSpread: 0
-  aimSpeed: 5.25
+  aimSpeed: 2
   hipSpeed: 6
   hipFOV: 60
   aimFOV: 30

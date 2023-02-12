@@ -21,10 +21,9 @@ public class Skill : MonoBehaviour
         {
             if (skillInfo.isWeaponSkill)
             {
-                if (playerLoadout.maxGunUpgrades != 0)
+                if (playerLoadout.numGunUpgrades != playerLoadout.maxGunUpgrades)
                 {
-                    toggle.interactable = true;
-                    playerLoadout.maxGunUpgrades -= 1;
+                    toggle.interactable = true;               
                 }
                 else
                     toggle.interactable = false;
@@ -43,6 +42,8 @@ public class Skill : MonoBehaviour
         playerLoadout.SpendSkillPoints(skillInfo.cost);
         if (playerLoadout.GetSkillTier(skillInfo.path) < skillInfo.tier)
             playerLoadout.SetSkillTier(skillInfo.path, skillInfo.tier);
+        if (skillInfo.isWeaponSkill)
+            playerLoadout.numGunUpgrades++;
         toggle.interactable = false;
         playerLoadout.UpdateSkillTree();
     }

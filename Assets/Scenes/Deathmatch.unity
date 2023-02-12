@@ -3100,6 +3100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10849b37b6d059548a08339aa4447c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTestPlayer: 1
   gameHUD: {fileID: 2009234843}
   roundText: {fileID: 1931603336}
   gameTimeText: {fileID: 1609767081}

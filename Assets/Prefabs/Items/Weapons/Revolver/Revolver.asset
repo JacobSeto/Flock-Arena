@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Revolver
   damage: 60
-  fireRate: 0.2
+  fireRate: 0.3
   ammo: 6
-  reload: 1.5
-  specialCooldown: 5
+  reload: 2.5
+  specialCooldown: 6
   isAutoFire: 0
-  hipSpread: 0.025
+  hipSpread: 0.05
   aimSpread: 0.007
   aimSpeed: 5.25
   hipSpeed: 6

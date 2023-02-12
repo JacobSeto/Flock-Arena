@@ -36,7 +36,7 @@ public class GunGunProjectile : Projectile
             playerManager = playerController.playerManager;
             playerController.camTransform = gunCamera.transform;
             playerController.playerCamera = gunCamera.GetComponent<Camera>();
-            gungun.UpdateAmmo();
+            gungun.UpdateItemUI();
             playerController.canMove = false;
         }
         else
