@@ -1627,7 +1627,8 @@ MonoBehaviour:
   titaniumHealth: 100
   quickHandReloadTime: 1.5
   quickDrawTime: 8
-  explosiveRound: 15
+  explosiveRoundDamage: 0
+  explosiveRoundRadius: 0
   revautoFirerate: 0.25
   largerMagazines: 1.5
   numFrag: 10
