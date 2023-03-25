@@ -4897,7 +4897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
       propertyPath: boomerTime
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
       propertyPath: aimPosition
@@ -4909,15 +4909,19 @@ PrefabInstance:
       objectReference: {fileID: 2298337894400403276}
     - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
       propertyPath: boomerSpeed
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
       propertyPath: hipPosition
       value: 
       objectReference: {fileID: 5872896321627805152}
     - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
+      propertyPath: boomerBounce
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
       propertyPath: boomerDamage
-      value: 100
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
       propertyPath: boomerHealth
@@ -4927,6 +4931,10 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 6245256535259582154}
+    - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
+      propertyPath: bounceBonusDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2480620727992291683, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
       propertyPath: cam
       value: 

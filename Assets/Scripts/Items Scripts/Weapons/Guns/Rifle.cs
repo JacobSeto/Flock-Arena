@@ -13,6 +13,8 @@ public class Rifle : SingleShotGun
     public float boomerHealth;
     public float boomerDamage;
     public float boomerTime;
+    public int boomerBounce;  //num times rifle bounces before despawns
+    public float bounceBonusDamage;  //damage increase everytime rifle bounces
     [HideInInspector] public GameObject boomerang;
 
     public void RevolverUpgrades()
@@ -30,6 +32,8 @@ public class Rifle : SingleShotGun
         boomerScript.SetProjectile(boomerSpeed, boomerHealth, boomerDamage, boomerTime,
         false, 0, 0, 0, 0, 0, 0, playerController);
         boomerScript.rifle = this;
+        boomerScript.numBounce = boomerBounce;
+        boomerScript.bounceBonus = bounceBonusDamage;
         RifleActive(false);
         
     }
