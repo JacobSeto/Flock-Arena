@@ -30,7 +30,6 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     bool hitExplosion = false;
 
     GameObject explosion;
-
     public virtual void SetProjectile(float sp, float h, float d, float t, bool e, float exD = 0, float exR = 0, float sD = 0, float bS = 0, float bA = 0, float exM = 0, PlayerController p = null)
     {
         //sets all projectile components, accessed by projecctile gun

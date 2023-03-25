@@ -21,16 +21,21 @@ public class SingleShotGun : Weapon
         ray.origin = playerController.camTransform.position;
         if(Physics.Raycast(ray, out RaycastHit hit))
         {
-            //item info class does not have the damage info,so cast iteminfo class to weaponinfo class to access damage variable
-            hit.collider.gameObject.GetComponentInParent<IDamageable>()?.TakeDamage(((WeaponInfo)itemInfo).damage);
-            bool isPlayer = false;
-            if (hit.collider.gameObject.name == "Player Controller(Clone)")
-            {
-                isPlayer = true;
-            }
-            view.RPC(nameof(RPC_Shoot), RpcTarget.All, hit.point, hit.normal, isPlayer);
+            BulletHit(hit);
         }
         //weapon fire sound
+    }
+
+    public virtual void BulletHit(RaycastHit hit)
+    {
+        //item info class does not have the damage info,so cast iteminfo class to weaponinfo class to access damage variable
+        hit.collider.gameObject.GetComponentInParent<IDamageable>()?.TakeDamage(((WeaponInfo)itemInfo).damage);
+        bool isPlayer = false;
+        if (hit.collider.gameObject.name == "Player Controller(Clone)")
+        {
+            isPlayer = true;
+        }
+        view.RPC(nameof(RPC_Shoot), RpcTarget.All, hit.point, hit.normal, isPlayer);
     }
 
     [PunRPC]

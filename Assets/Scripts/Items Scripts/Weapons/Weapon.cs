@@ -32,7 +32,9 @@ public abstract class Weapon : Item
     [HideInInspector] public float specialCooldown;
     [HideInInspector] public float hipSpread = -1;
     [HideInInspector] public float aimSpread = -1;
+    [HideInInspector] public float aimSpeed = -1;
     [HideInInspector] public float ammo;
+    [HideInInspector] public bool isAutoFire;
 
     public void SetWeapon()
     {
@@ -49,6 +51,10 @@ public abstract class Weapon : Item
             hipSpread = ((WeaponInfo)itemInfo).hipSpread;
         if (aimSpread == -1)
             aimSpread = ((WeaponInfo)itemInfo).aimSpread;
+        if (aimSpeed == -1)
+            aimSpeed = ((WeaponInfo)itemInfo).aimSpeed;
+        if (isAutoFire == false)
+            isAutoFire = ((WeaponInfo)itemInfo).isAutoFire;
         if (ammo == 0)
             ammo = ((WeaponInfo)itemInfo).ammo;
         maxAmmo = ammo;
@@ -67,6 +73,10 @@ public abstract class Weapon : Item
     }
     public virtual void FixedUpdate()
     {
+        if (!view.IsMine)
+        {
+            return;
+        }
         Aim();
     }
 
@@ -134,7 +144,7 @@ public abstract class Weapon : Item
         {
             canShoot = true;
         }
-        if (((WeaponInfo)itemInfo).isAutoFire && Input.GetMouseButton(0))
+        if (isAutoFire && Input.GetMouseButton(0))
         {
             Use();
         }
@@ -164,10 +174,10 @@ public abstract class Weapon : Item
 
     public virtual void AimPosition()
     {
-        transform.position = Vector3.Lerp(transform.position, aimPosition.position, ((WeaponInfo)itemInfo).aimSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, aimPosition.position, aimSpeed * Time.deltaTime);
         SetFieldOfView(Mathf.Lerp(playerController.playerCamera.fieldOfView, ((WeaponInfo)itemInfo).aimFOV, ((WeaponInfo)itemInfo).aimSpeed * Time.deltaTime));
-        spread = Mathf.Lerp(spread, aimSpread, ((WeaponInfo)itemInfo).aimSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Lerp(transform.rotation, aimPosition.rotation, ((WeaponInfo)itemInfo).aimSpeed * Time.deltaTime);
+        spread = Mathf.Lerp(spread, aimSpread, aimSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, aimPosition.rotation, aimSpeed * Time.deltaTime);
     }
 
     public override void Reload()
@@ -184,7 +194,7 @@ public abstract class Weapon : Item
     {
         if (reloading && Time.time >= reloadTime)
         {
-            ammo = ((WeaponInfo)itemInfo).ammo;
+            ammo = maxAmmo;
             reloading = false;
         }
     }

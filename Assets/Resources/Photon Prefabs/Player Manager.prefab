@@ -1625,10 +1625,8 @@ MonoBehaviour:
   moneyHandsCooldown: 4
   silverDollarDamage: 1.5
   titaniumHealth: 100
-  quickHandReloadTime: 1.5
-  quickDrawTime: 8
-  explosiveRoundDamage: 0
-  explosiveRoundRadius: 0
+  betterBarrelReloadTime: 1.5
+  quickDrawTime: 10
   revautoFirerate: 0.25
   largerMagazines: 1.5
   numFrag: 10
@@ -12155,7 +12153,7 @@ PrefabInstance:
     - target: {fileID: 2471374183572980297, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: skillInfo
       value: 
-      objectReference: {fileID: 11400000, guid: 723ba89daeadc204582faffdc8959e68, type: 2}
+      objectReference: {fileID: 11400000, guid: 5442d05ab41f0634ba9ae1edbad6b282, type: 2}
     - target: {fileID: 2471374183572980297, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: playerLoadout
       value: 
@@ -12163,11 +12161,19 @@ PrefabInstance:
     - target: {fileID: 2987583234116012100, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: skillInfo
       value: 
-      objectReference: {fileID: 11400000, guid: db051020c752a584d9b02df9d128f49f, type: 2}
+      objectReference: {fileID: 11400000, guid: c9d504b61bb0eab4682072784eb811bb, type: 2}
     - target: {fileID: 2987583234116012100, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: playerLoadout
       value: 
       objectReference: {fileID: 8818609636147665015}
+    - target: {fileID: 3248875511137392379, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: m_Name
+      value: Revauto Module
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314116504561263343, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: skillInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: e7626ab98aeb188458bf6438a8442fc9, type: 2}
     - target: {fileID: 3314116504561263343, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: playerLoadout
       value: 
@@ -12178,7 +12184,7 @@ PrefabInstance:
       objectReference: {fileID: 8818609636147665015}
     - target: {fileID: 4720537564876040190, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: m_Name
-      value: Pistol - Faster Reload
+      value: Quick Draw
       objectReference: {fileID: 0}
     - target: {fileID: 5280868872447399401, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: m_text
@@ -12186,7 +12192,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5384235053646048755, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: m_Name
-      value: Skill Prefab
+      value: Better Barrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634206786811627352, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: m_Name
+      value: Explosive Round
       objectReference: {fileID: 0}
     - target: {fileID: 5655108832034293984, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: m_Pivot.x
@@ -12272,6 +12282,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5681556247932695372, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
+      propertyPath: skillInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 704eccd4d1ac8d0459e78cd99129ff89, type: 2}
     - target: {fileID: 5681556247932695372, guid: 57d68c64d81928542b53f50cb62aaab9, type: 3}
       propertyPath: playerLoadout
       value: 

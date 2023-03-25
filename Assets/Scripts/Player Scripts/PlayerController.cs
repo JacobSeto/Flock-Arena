@@ -403,6 +403,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [PunRPC]
     void RPC_TakeDamage(float damage, PhotonMessageInfo info)
     {
+        if(damage == 0)
+        {                                                         
+            return;
+        }
         currentHealth -= damage;
 
         hitUI.alpha += damage/maxHealth;

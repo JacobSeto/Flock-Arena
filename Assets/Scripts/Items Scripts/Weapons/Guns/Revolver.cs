@@ -6,6 +6,12 @@ using System.IO;
 
 public class Revolver : SingleShotGun
 {
+    public bool explosionRounds;
+    [SerializeField] string exploName;
+    [SerializeField] float exploDamage;
+    [SerializeField] float exploRadius;
+    GameObject explosiveRound;
+
     [Header("Coin")]
     public string coinName;
     public Transform coinSpawn;
@@ -29,6 +35,21 @@ public class Revolver : SingleShotGun
         false, 0, 0, 0,0, 0, 0, playerController);
         coinScript.coinRangeRadius = coinRangeRadius;
         coinScript.deflectDamage = deflectDamage;
+    }
+
+    public override void BulletHit(RaycastHit hit)
+    {
+        base.BulletHit(hit);
+        if (explosionRounds)
+            ExplosionRound(hit.point);
+    }
+
+    void ExplosionRound(Vector3 hitPoint)
+    {
+        explosiveRound = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", exploName), hitPoint, Quaternion.identity);
+        Projectile projectileScript = explosiveRound.GetComponent<Projectile>();
+        projectileScript.SetProjectile(0, 1, 0, 1,
+        true, exploDamage, exploRadius, 25, 200, 1, 1, playerController);
     }
 
 

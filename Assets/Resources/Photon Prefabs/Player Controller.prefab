@@ -687,13 +687,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190680518673092757}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e69600df8f1cbf4db53ea604f65afbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smooth: 10
-  multiplier: 10
+  smooth: 2
+  multiplier: 8
   player: {fileID: 6245256535259582154}
 --- !u!1 &1420387341913760351
 GameObject:
@@ -4475,7 +4475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: rotateX
-      value: -10
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: rotateZ
@@ -4488,6 +4488,10 @@ PrefabInstance:
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: coinSpeed
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
+      propertyPath: exploName
+      value: Explosive Round
       objectReference: {fileID: 0}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: m_Enabled
@@ -4505,6 +4509,14 @@ PrefabInstance:
       propertyPath: aimPosition
       value: 
       objectReference: {fileID: 5689864117997599077}
+    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
+      propertyPath: exploDamage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
+      propertyPath: exploRadius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: heavyChange
       value: 75
@@ -4530,6 +4542,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
+      propertyPath: explosionRounds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: largerMagazines
       value: 1.5
       objectReference: {fileID: 0}
@@ -4549,6 +4565,10 @@ PrefabInstance:
       propertyPath: quickHandReloadTime
       value: 1.75
       objectReference: {fileID: 0}
+    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
+      propertyPath: explosiveRoundExplosion
+      value: 
+      objectReference: {fileID: 7503346998604099719, guid: 224fb947625cfff42b8a1508fd5d76d2, type: 3}
     - target: {fileID: 4993796733056849387, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: m_Name
       value: Revolver
@@ -4876,13 +4896,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
+      propertyPath: boomerTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
       propertyPath: aimPosition
       value: 
       objectReference: {fileID: 3800034268704657509}
     - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
+      propertyPath: boomerSpawn
+      value: 
+      objectReference: {fileID: 2298337894400403276}
+    - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
+      propertyPath: boomerSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
       propertyPath: hipPosition
       value: 
       objectReference: {fileID: 5872896321627805152}
+    - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
+      propertyPath: boomerDamage
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
+      propertyPath: boomerHealth
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
       propertyPath: playerController
       value: 

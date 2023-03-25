@@ -345,7 +345,9 @@ MonoBehaviour:
   specialCooldown: 0
   hipSpread: -1
   aimSpread: -1
+  aimSpeed: -1
   ammo: 0
+  isAutoFire: 0
   bulletImpactPrefab: {fileID: 7310387583158887988, guid: a5423b9a087337d4b8fed3034de22753, type: 3}
   bulletMissPrefab: {fileID: 7310387583158887988, guid: a86b5b0fc02de734ea32681353ecd45d, type: 3}
   hipPosition: {fileID: 6109848724606004965}

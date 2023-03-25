@@ -50,10 +50,9 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
     [SerializeField] int titaniumHealth;  //increase health of coin to be shot multiple times
 
     [Header("Revolver Path 2")]
-    [SerializeField] float quickHandReloadTime; //faster reload time
+    [SerializeField] float betterBarrelReloadTime; //faster reload time
     [SerializeField] float quickDrawTime;  // aim-in much faster
-    [SerializeField] float explosiveRoundDamage;  //damage for the explosive round
-    [SerializeField] float explosiveRoundRadius;  //size of explosive round explosion
+    //Explosive Round damage for the explosive round
     [SerializeField] float revautoFirerate; //revauto:  auto fire enabled and faster firerate
 
 
@@ -252,6 +251,7 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         {
             case "Revolver":
                 Revolver revolver = weapon.gameObject.GetComponent<Revolver>();
+                //Path 1
                 if (skills[32].gameObject.GetComponent<Toggle>().isOn)
                     revolver.coinDamage += heavyChange;
                 if (skills[33].gameObject.GetComponent<Toggle>().isOn)
@@ -260,7 +260,19 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
                     revolver.deflectDamage *= silverDollarDamage;
                 if (skills[35].gameObject.GetComponent<Toggle>().isOn)
                     revolver.coinHealth = titaniumHealth;
-                    break;
+                //Path 2
+                if (skills[36].gameObject.GetComponent<Toggle>().isOn)
+                    revolver.reload = betterBarrelReloadTime;
+                if (skills[37].gameObject.GetComponent<Toggle>().isOn)
+                    revolver.aimSpeed = quickDrawTime;
+                if (skills[38].gameObject.GetComponent<Toggle>().isOn)
+                    revolver.explosionRounds = true;
+                if (skills[39].gameObject.GetComponent<Toggle>().isOn)
+                {
+                    revolver.isAutoFire = true;
+                    revolver.fireRate = revautoFirerate;
+                }
+                break;
             case "Rifle":
                 Debug.Log("rifle");
                 break;

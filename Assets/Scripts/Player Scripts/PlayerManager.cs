@@ -33,15 +33,6 @@ public class PlayerManager : MonoBehaviour
     {
         view = GetComponent<PhotonView>();
         SetPlayerLoadout();
-        if (view.IsMine)
-        {
-            mouseSlider.value = PlayerPrefs.GetFloat("Mouse Sensitivity", 300f);
-            isPlayer = true;
-        }
-        else
-        {
-            isPlayer = false;
-        }
     }
 
     private void Update()
@@ -87,12 +78,15 @@ public class PlayerManager : MonoBehaviour
     {
         if (view.IsMine)
         {
+            mouseSlider.value = PlayerPrefs.GetFloat("Mouse Sensitivity", 300f);
+            isPlayer = true;
             playerLoadoutUI.SetActive(true);
             loadoutCam = Instantiate(playerLoadoutCamera, cameraHolder.position, cameraHolder.rotation, cameraHolder);
         }
         else
         {
             Destroy(playerLoadoutUI);
+            isPlayer = false;
         }
     }
 
