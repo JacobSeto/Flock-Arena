@@ -15,6 +15,7 @@ public class Rifle : SingleShotGun
     public float boomerTime;
     public int boomerBounce;  //num times rifle bounces before despawns
     public float bounceBonusDamage;  //damage increase everytime rifle bounces
+    public int bounceAmmoBonus; //ammo added to rifle for every bounce
     [HideInInspector] public GameObject boomerang;
 
     public void RevolverUpgrades()
@@ -25,16 +26,17 @@ public class Rifle : SingleShotGun
 
     public override void Special()
     {
-        //Rifle Special: Throw rifle like a boomerang, shoots while
+        //Rifle Special: Throw rifle like a boomerang, add extra ammo for every bounce
         // spinning.  When hit object, return
         boomerang = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", boomerName), boomerSpawn.position, boomerSpawn.rotation);
         RifleProjectile boomerScript = boomerang.GetComponent<RifleProjectile>();
         boomerScript.SetProjectile(boomerSpeed, boomerHealth, boomerDamage, boomerTime,
         false, 0, 0, 0, 0, 0, 0, playerController);
         boomerScript.rifle = this;
-        boomerScript.numBounce = boomerBounce;
+        boomerScript.numBounceRemaining = boomerBounce;
         boomerScript.bounceBonus = bounceBonusDamage;
         RifleActive(false);
+        UpdateItemUI();
         
     }
 
@@ -47,8 +49,11 @@ public class Rifle : SingleShotGun
     [PunRPC]
     public void RPC_RifleActive(bool isActive)
     {
-        canShoot = isActive;
-       itemGameObject.SetActive(isActive);
+        toggleInactive = !isActive;
+        if (isEquip)
+        {
+            ItemSetActive(isActive);
+        }
     }
 
 }

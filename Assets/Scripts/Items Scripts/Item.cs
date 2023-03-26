@@ -10,6 +10,8 @@ public abstract class Item : MonoBehaviourPunCallbacks
     public bool InInventory;
     public ItemInfo itemInfo;
     public GameObject itemGameObject;
+    public bool toggleInactive = false; //checks if item can change from an inactive state
+    public bool isEquip; //checks if the item is currently equipped
     [HideInInspector] public PlayerController playerController;
 
 
@@ -20,8 +22,23 @@ public abstract class Item : MonoBehaviourPunCallbacks
         GetComponentInParent<PlayerController>();
         ItemOwnership();
     }
+    /**
+     * Specialized SetActive for Items
+     */
+    public virtual void ItemSetActive(bool isActive)
+    {
+        if(!toggleInactive && isActive)
+        {
+            ItemActive();
+        }
+        else
+        {
+            ItemInactive();
+        }
+    }
+    public abstract void ItemActive();
+    public abstract void ItemInactive();
 
-    public abstract void ItemNotActive();
 
     public abstract void Use();
 

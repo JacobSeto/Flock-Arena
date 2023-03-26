@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3561928353983386189}
   - component: {fileID: 2917624744176057291}
   - component: {fileID: -4415434835632810353}
-  - component: {fileID: 6340405756182717879}
+  - component: {fileID: 1939867020750410222}
   - component: {fileID: 1588705250326003454}
   - component: {fileID: -7125411985803825842}
   m_Layer: 7
@@ -76,8 +76,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &6340405756182717879
-CapsuleCollider:
+--- !u!135 &1939867020750410222
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -86,10 +86,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.325
-  m_Height: 1.3
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.11}
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1588705250326003454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: -4415434835632810353}
-  col: {fileID: 6340405756182717879}
+  col: {fileID: 1939867020750410222}
   explosionPrefab: {fileID: 0}
   view: {fileID: 2917624744176057291}
   speed: 0
@@ -120,7 +119,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   hit: 0
   rifle: {fileID: 0}
-  numBounce: 0
+  numBounceRemaining: 0
   bounceBonus: 0
   bounceMultiplyer: 1.3
 --- !u!114 &-7125411985803825842
@@ -251,5 +250,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeedX: 0
-  rotationSpeedY: 7.5
+  rotationSpeedY: 10
   rotationSpeedZ: 0

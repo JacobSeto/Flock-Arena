@@ -69,7 +69,6 @@ public abstract class Weapon : Item
         CheckUse();
         CheckSpecial();
         CheckReload();
-        UpdateItemUI();
     }
     public virtual void FixedUpdate()
     {
@@ -88,9 +87,16 @@ public abstract class Weapon : Item
         
     }
 
-    public override void ItemNotActive()
+    public override void ItemActive()
     {
-        reloading = false;
+        itemGameObject.SetActive(true);
+    }
+
+    public override void ItemInactive()
+    {
+        itemGameObject.SetActive(false);
+        if(!toggleInactive)
+            Reload();
         if(transform.position != hipPosition.position)
         {
             transform.position = hipPosition.position;
@@ -99,15 +105,15 @@ public abstract class Weapon : Item
     
     public override void Use()
     {
-        if (ammo == 0)
-            Reload();
-        if (canShoot && !reloading)
+        if (canShoot)
         {
             Shoot();
             nextShot = Time.time + fireRate;
             canShoot = false;
             if (ammo != -1)
                 ammo--;
+            Reload();
+            UpdateItemUI();
         }
     }
 
@@ -125,10 +131,12 @@ public abstract class Weapon : Item
         if (!specialActive && specialTime <= 0)
         {
             specialActive = true;
+            UpdateItemUI();
         }
-        else
+        if(specialTime > 0)
         {
             specialTime -= Time.deltaTime;
+            UpdateItemUI();
         }
         if (Input.GetKeyDown(KeyCode.Q) && specialActive)
         {
@@ -182,11 +190,10 @@ public abstract class Weapon : Item
 
     public override void Reload()
     {
-        if (ammo != -1 && reload != 0 && !reloading && ammo != maxAmmo)
+        if(ammo != -1)
         {
-            reloading = true;
             reloadTime = reload + Time.time;
-            UpdateItemUI();
+            reloading = true;
         }
     }
 
@@ -196,19 +203,20 @@ public abstract class Weapon : Item
         {
             ammo = maxAmmo;
             reloading = false;
+            UpdateItemUI();
         }
     }
 
     public override void UpdateItemUI()
     {
-        //ammo
-        if (reloading)
+        //ammoBoxText
+        if (toggleInactive)
         {
-            playerController.SetAmmoText("", "", reloading);
+            playerController.ammoText.text = "XXX";
         }
         else
         {
-            playerController.SetAmmoText(ammo.ToString(), ((WeaponInfo)itemInfo).ammo.ToString(), reloading);
+            playerController.ammoText.text = ammo.ToString()+ "/" + maxAmmo.ToString();
         }
         //weapon ability
         if (specialActive)

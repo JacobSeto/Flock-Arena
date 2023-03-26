@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     public GameObject playerUI;
     [SerializeField] Image healthbarImage;
     [SerializeField] TMP_Text healthText;
-    [SerializeField] TMP_Text ammoText;
+    public TMP_Text ammoText;
     public TMP_Text specialText;
     [SerializeField] TMP_Text boostText;
     [SerializeField] GameObject cameraHolder;
@@ -169,21 +169,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     {
         cameras.SetActive(isActive);
     }
-    public void SetAmmoText(string ammo, string maxAmmo, bool reloading)
-    {
-        if (!ammoText.gameObject.activeSelf)
-            ammoText.gameObject.SetActive(true);
-        if(ammo == "-1")
-            ammoText.gameObject.SetActive(false);
-        if (reloading)
-        {
-            ammoText.text = "reloading";
-        }
-        else
-        {
-            ammoText.text = ammo + '/' + maxAmmo;
-        }
-    }
 
     public void AddPlayerForce(Vector3 force)
     {
@@ -329,12 +314,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             return;
 
         itemIndex = _index;
-        items[itemIndex].itemGameObject.SetActive(true);
-
+        items[itemIndex].ItemSetActive(true);
+        items[itemIndex].isEquip = true;
+        items[itemIndex].UpdateItemUI();
         if (previousItemIndex != -1)
         {
-            items[previousItemIndex].ItemNotActive();
-            items[previousItemIndex].itemGameObject.SetActive(false);
+            items[previousItemIndex].ItemInactive();
+            items[previousItemIndex].isEquip = false;
         }
         previousItemIndex = itemIndex;
         view.RPC(nameof(EnemyEquip), RpcTarget.Others, itemIndex);

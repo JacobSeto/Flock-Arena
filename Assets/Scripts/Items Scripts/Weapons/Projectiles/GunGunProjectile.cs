@@ -107,7 +107,7 @@ public class GunGunProjectile : Projectile
     {
         if (playerController != null)
         {
-            playerController.SetAmmoText("0", "1", false);
+            playerController.ammoText.text = "drone";
             gunCamera.SetActive(false);
             playerController.camTransform = playerCamTransform;
             playerController.playerCamera = playerCamera;

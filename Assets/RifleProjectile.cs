@@ -6,7 +6,7 @@ using Photon.Pun;
 public class RifleProjectile : Projectile
 {
     [HideInInspector] public Rifle rifle;
-    [HideInInspector] public int numBounce;
+    [HideInInspector] public int numBounceRemaining;
     [HideInInspector] public float bounceBonus;
     [SerializeField] public float bounceMultiplyer;  //velocity multiplier everytime rifle bounces
 
@@ -20,20 +20,19 @@ public class RifleProjectile : Projectile
                 DestroyProjectile(0);
                 hit = true;
             }
-            else if(numBounce >= 1)
+            else if(numBounceRemaining >= 1)
             {
-                print(numBounce);
                 Ray ray = new Ray(transform.position, rb.velocity);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    rb.velocity = hit.normal * rb.velocity.magnitude * bounceMultiplyer;
+                    rb.velocity = Vector3.Reflect(rb.velocity, hit.normal) * bounceMultiplyer;
                 }
                 else
                 {
                     rb.velocity = -rb.velocity * bounceMultiplyer;
                 }
                 damage += bounceBonus;
-                numBounce--;
+                numBounceRemaining--;
             }
             else
             {
@@ -43,12 +42,16 @@ public class RifleProjectile : Projectile
 
     }
 
+    /**
+     * When rifle boomerang destroyed, set rifle active again and add bonus ammo
+     */
     private void OnDestroy()
     {
         if (view.IsMine)
         {
-            rifle.RifleActive(true);
+            rifle.ammo += (rifle.boomerBounce-numBounceRemaining)*rifle.bounceAmmoBonus;
         }
+        rifle.RifleActive(true);
     }
 
 
