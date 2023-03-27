@@ -32,7 +32,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4398195214021257578}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1095,6 +1095,82 @@ Transform:
   m_Father: {fileID: 1509205730289395753}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!1 &1933367706491577425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 700521936145949237}
+  - component: {fileID: 8552240560202571026}
+  - component: {fileID: 2269604027764801926}
+  m_Layer: 0
+  m_Name: Reload Bar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &700521936145949237
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933367706491577425}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4398195214021257578}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -700, y: -397.5}
+  m_SizeDelta: {x: 500, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8552240560202571026
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933367706491577425}
+  m_CullTransparentMesh: 1
+--- !u!114 &2269604027764801926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933367706491577425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.93281794, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 7482667652216324306, guid: c6d6fbe8d9914da4baed212a30dd3645, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 0
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1979569867318382518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,7 +1238,7 @@ RectTransform:
   - {fileID: 4199543146887146009}
   - {fileID: 1386178192450734472}
   m_Father: {fileID: 4398195214021257578}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1978,7 +2054,7 @@ RectTransform:
   - {fileID: 484867666482675176}
   - {fileID: 5829643594202876255}
   m_Father: {fileID: 4398195214021257578}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3000,6 +3076,7 @@ RectTransform:
   m_Children:
   - {fileID: 303609305404116737}
   - {fileID: 8516915644417438630}
+  - {fileID: 700521936145949237}
   - {fileID: 6882923809601893604}
   - {fileID: 3573744979192819012}
   - {fileID: 2457709948742264745}
@@ -3160,7 +3237,7 @@ RectTransform:
   - {fileID: 9087038124138360361}
   - {fileID: 3546889413533804250}
   m_Father: {fileID: 4398195214021257578}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3875,6 +3952,7 @@ MonoBehaviour:
   cameras: {fileID: 461850120584271468}
   playerUI: {fileID: 5817749375914883497}
   healthbarImage: {fileID: 6074212460841551209}
+  reloadBar: {fileID: 2269604027764801926}
   healthText: {fileID: 7574581230648399770}
   ammoText: {fileID: 2178766611537976199}
   specialText: {fileID: 5679725403150253919}

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] GameObject cameras;
     public GameObject playerUI;
     [SerializeField] Image healthbarImage;
+    public Image reloadBar;
     [SerializeField] TMP_Text healthText;
     public TMP_Text ammoText;
     public TMP_Text specialText;

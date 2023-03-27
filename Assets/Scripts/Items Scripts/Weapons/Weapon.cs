@@ -69,6 +69,7 @@ public abstract class Weapon : Item
         CheckUse();
         CheckSpecial();
         CheckReload();
+        UpdateItemUI();
     }
     public virtual void FixedUpdate()
     {
@@ -95,7 +96,7 @@ public abstract class Weapon : Item
     public override void ItemInactive()
     {
         itemGameObject.SetActive(false);
-        if(!toggleInactive)
+        if(!toggleInactive && !reloading && maxAmmo!=ammo)
             Reload();
         if(transform.position != hipPosition.position)
         {
@@ -105,15 +106,16 @@ public abstract class Weapon : Item
     
     public override void Use()
     {
-        if (canShoot)
+        if (canShoot && ammo != 0)
         {
             Shoot();
             nextShot = Time.time + fireRate;
             canShoot = false;
             if (ammo != -1)
+            {
                 ammo--;
-            Reload();
-            UpdateItemUI();
+                Reload();
+            }
         }
     }
 
@@ -131,12 +133,10 @@ public abstract class Weapon : Item
         if (!specialActive && specialTime <= 0)
         {
             specialActive = true;
-            UpdateItemUI();
         }
         if(specialTime > 0)
         {
             specialTime -= Time.deltaTime;
-            UpdateItemUI();
         }
         if (Input.GetKeyDown(KeyCode.Q) && specialActive)
         {
@@ -192,18 +192,21 @@ public abstract class Weapon : Item
     {
         if(ammo != -1)
         {
-            reloadTime = reload + Time.time;
+            reloadTime = reload+Time.time;
             reloading = true;
         }
     }
 
     public virtual void CheckReload()
     {
-        if (reloading && Time.time >= reloadTime)
+        if (reloading)
         {
-            ammo = maxAmmo;
-            reloading = false;
-            UpdateItemUI();
+            if(reloadTime <= Time.time)
+            {
+                ammo = maxAmmo;
+                reloading = false;
+            }
+
         }
     }
 
@@ -218,6 +221,14 @@ public abstract class Weapon : Item
         {
             playerController.ammoText.text = ammo.ToString()+ "/" + maxAmmo.ToString();
         }
+        //reload bar
+        if (reloading)
+        {
+            playerController.reloadBar.fillAmount = reloadTime - Time.time > .2 ? 1 - (reloadTime - Time.time) / reload : 0;
+
+        }
+        else if (playerController.reloadBar.fillAmount != 0)
+            playerController.reloadBar.fillAmount = 0;
         //weapon ability
         if (specialActive)
         {
