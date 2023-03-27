@@ -96,8 +96,6 @@ public abstract class Weapon : Item
     public override void ItemInactive()
     {
         itemGameObject.SetActive(false);
-        if(!toggleInactive && !reloading && maxAmmo!=ammo)
-            Reload();
         if(transform.position != hipPosition.position)
         {
             transform.position = hipPosition.position;

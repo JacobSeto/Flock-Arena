@@ -36,6 +36,7 @@ public class Rifle : SingleShotGun
         boomerScript.numBounceRemaining = boomerBounce;
         boomerScript.bounceBonus = bounceBonusDamage;
         RifleActive(false);
+        reloading = false;
         UpdateItemUI();
         
     }
