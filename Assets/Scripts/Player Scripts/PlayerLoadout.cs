@@ -228,14 +228,14 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
         {
             playerController.walkSpeed *= swift1;
             playerController.sprintSpeed *= swift1;
-            playerController.airSpeed *= swift1;
+            playerController.flockSpeed *= swift1;
         }
 
         if (skills[18].gameObject.GetComponent<Toggle>().isOn)
         {
             playerController.walkSpeed *= swift2;
             playerController.sprintSpeed *= swift2;
-            playerController.airSpeed *= swift2;
+            playerController.flockSpeed *= swift2;
         }
     }
     public void Utility(PlayerController playerController)

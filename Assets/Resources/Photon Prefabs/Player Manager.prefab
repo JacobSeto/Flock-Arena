@@ -1625,7 +1625,7 @@ MonoBehaviour:
   moneyHandsCooldown: 4
   silverDollarDamage: 1.5
   titaniumHealth: 100
-  betterBarrelReloadTime: 1.5
+  betterBarrelReloadTime: 3
   quickDrawTime: 10
   revautoFirerate: 0.25
   largerMagazines: 1.5

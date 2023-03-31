@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] float moveForceConstant;
     public float walkSpeed;
     public float sprintSpeed;
-    public float airSpeed;
-    [HideInInspector] public float airTime;  //num seconds of airtime, decrements over time
+    public float flockSpeed;
+    [HideInInspector] public float flockTime;  //num seconds of airtime, decrements over time
     float speed;
     public MovementState moveState;
     public enum MovementState
@@ -193,10 +193,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     private void UpdateMoveState()
     {
         //Mode Sprinting
-        if(airTime != 0)
+        if(flockTime != 0)
         {
             moveState = MovementState.air;
-            speed = airSpeed;
+            speed = flockSpeed;
         }
         else if(Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.Mouse1))
         {
@@ -243,12 +243,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     public void UpdateAirTime()
     {
         //decrements airTime
-        if (airTime == 0)
+        if (flockTime == 0)
             return;
-        airTime -= Time.deltaTime;
-        if(airTime <= 0 || isGrounded)
+        flockTime -= Time.deltaTime;
+        if(flockTime <= 0 || isGrounded)
         {
-            airTime = 0;
+            flockTime = 0;
         }
 
     }
@@ -348,7 +348,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             boostText.text = "E";
             if (Input.GetKeyDown(KeyCode.E))
             {
-                airTime += boostAirTime;
+                flockTime += boostAirTime;
                 rb.AddForce(cameraHolder.transform.forward * horizontalBoost + playerTransform.up * verticalBoost, ForceMode.Impulse);
                 nextBoost = Time.time + boostCooldown;
             }

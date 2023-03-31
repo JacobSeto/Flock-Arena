@@ -3967,14 +3967,14 @@ MonoBehaviour:
   mouseSens: 300
   hitRecoverySpeed: 1.4
   groundDrag: 1.5
-  airDrag: 0.3
+  airDrag: 0.5
   airMaxSpeed: 20
   maxYVelocity: 18
   moveForceConstant: 20
   walkSpeed: 4
   sprintSpeed: 7
-  airSpeed: 0.5
-  airTime: 0
+  flockSpeed: 0
+  flockTime: 0
   moveState: 0
   jumpHeight: 14
   healthRegen: 1

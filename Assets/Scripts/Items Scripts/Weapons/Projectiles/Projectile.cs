@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     [HideInInspector] public float explosionRadius;
     [HideInInspector] public float selfDamage;
     [HideInInspector] public float blastStrength;
-    [HideInInspector] public float blastAirTime;
+    [HideInInspector] public float flockTime;
     [HideInInspector] public float earlyExplosionMultiplyer;
     [HideInInspector] public PlayerController playerController = null;
     //prevent multiple collisions
@@ -30,23 +30,23 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     bool hitExplosion = false;
 
     GameObject explosion;
-    public virtual void SetProjectile(float sp, float h, float d, float t, bool e, float exD = 0, float exR = 0, float sD = 0, float bS = 0, float bA = 0, float exM = 0, PlayerController p = null)
+    public virtual void SetProjectile(float speed, float health, float damage, float time, bool explodes, float explosionDamage = 0, float explosionRadius = 0, float selfDamage = 0, float blastStrength = 0, float flockTime = 0, float earlyExplosionMultiplyer = 0, PlayerController p = null)
     {
         //sets all projectile components, accessed by projecctile gun
         //some setters are only handled by this projectile, others must be
         //sent through RPC for synced information
-        speed = sp;
-        health = h;
-        damage = d;
-        time = t;
-        explodes = e;
-        exploDamage = exD;
-        explosionRadius = exR;
-        selfDamage = sD;
-        blastStrength = bS;
-        blastAirTime = bA;
-        earlyExplosionMultiplyer = exM;
-        playerController = p;
+        this.speed = speed;
+        this.health = health;
+        this.damage = damage;
+        this.time = time;
+        this.explodes = explodes;
+        this.exploDamage = explosionDamage;
+        this.explosionRadius = explosionRadius;
+        this.selfDamage = selfDamage;
+        this.blastStrength = blastStrength;
+        this.flockTime = flockTime;
+        this.earlyExplosionMultiplyer = earlyExplosionMultiplyer;
+        this.playerController = p;
         view.RPC(nameof(RPC_SetProjectile), RpcTarget.Others, explodes, explosionRadius);
     }
     [PunRPC]
@@ -136,7 +136,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
                 PlayerController player = cols[i].GetComponentInParent<PlayerController>();
                 if (player.view == playerController.view)
                 {
-                    cols[i].GetComponentInParent<PlayerController>().airTime += blastAirTime;
+                    cols[i].GetComponentInParent<PlayerController>().flockTime += flockTime;
                     cols[i].GetComponentInParent<PlayerController>().AddPlayerForce(-transform.forward * blastStrength);
                     cols[i].GetComponentInParent<IDamageable>().TakeDamage(selfDamage);
                     i += cols.Length;

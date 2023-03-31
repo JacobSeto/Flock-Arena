@@ -150,7 +150,7 @@ public abstract class Weapon : Item
         {
             canShoot = true;
         }
-        if (isAutoFire && Input.GetMouseButton(0))
+        if (!playerController.isPaused && isAutoFire && Input.GetMouseButton(0))
         {
             Use();
         }
