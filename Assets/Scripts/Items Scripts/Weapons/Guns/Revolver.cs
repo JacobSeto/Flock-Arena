@@ -20,7 +20,7 @@ public class Revolver : SingleShotGun
     public float coinDamage;
     public float coinTime;
     public float coinRangeRadius;  //The range of the coin can deflect the bullet
-    public float deflectDamage;
+    public float deflectMultiplyer; //damaged multiplied when shot
     [HideInInspector] public GameObject coin;
 
 
@@ -34,7 +34,7 @@ public class Revolver : SingleShotGun
         coinScript.SetProjectile(coinSpeed, coinHealth, coinDamage, coinTime,
         false, 0, 0, 0,0, 0, 0, playerController);
         coinScript.coinRangeRadius = coinRangeRadius;
-        coinScript.deflectDamage = deflectDamage;
+        coinScript.deflectMultiplyer = this.deflectMultiplyer;
     }
 
     public override void BulletHit(RaycastHit hit)

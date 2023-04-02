@@ -1623,7 +1623,7 @@ MonoBehaviour:
   grenade1: 0
   heavyChange: 75
   moneyHandsCooldown: 4
-  silverDollarDamage: 1.5
+  silverDollarMultiplyer: 1.25
   titaniumHealth: 100
   betterBarrelReloadTime: 3
   quickDrawTime: 10

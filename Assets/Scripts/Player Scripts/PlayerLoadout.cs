@@ -46,7 +46,7 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
     [Header("Revolver Path 1")]
     [SerializeField] float heavyChange;  //increase damage of coin hitting players directly
     [SerializeField] float moneyHandsCooldown;  //shorter coin cooldown
-    [SerializeField] float silverDollarDamage;  //coin does more damage
+    [SerializeField] float silverDollarMultiplyer;  //coin deflect multipler increased
     [SerializeField] int titaniumHealth;  //increase health of coin to be shot multiple times
 
     [Header("Revolver Path 2")]
@@ -257,7 +257,7 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
                 if (skills[33].gameObject.GetComponent<Toggle>().isOn)
                     revolver.specialCooldown = moneyHandsCooldown;
                 if (skills[34].gameObject.GetComponent<Toggle>().isOn)
-                    revolver.deflectDamage *= silverDollarDamage;
+                    revolver.deflectMultiplyer = silverDollarMultiplyer;
                 if (skills[35].gameObject.GetComponent<Toggle>().isOn)
                     revolver.coinHealth = titaniumHealth;
                 //Path 2

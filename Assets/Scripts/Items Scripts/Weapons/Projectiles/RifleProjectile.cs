@@ -8,9 +8,9 @@ public class RifleProjectile : Projectile
     [HideInInspector] public Rifle rifle;
     [HideInInspector] public int numBounceRemaining;
     [HideInInspector] public float bounceBonus;
-    [SerializeField] public float bounceMultiplyer;  //velocity multiplier everytime rifle bounces
+    [HideInInspector] public float bounceMultiplyer;  //velocity multiplier everytime rifle bounces
 
-    public override void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider col)
     {
         if (numBounceRemaining >= 1)
         {
@@ -18,17 +18,33 @@ public class RifleProjectile : Projectile
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 rb.velocity = Vector3.Reflect(rb.velocity, hit.normal) * bounceMultiplyer;
+                
             }
-            else
+            IDamageable colDamage = col.gameObject.GetComponent<IDamageable>();
+            if (colDamage != null)
             {
-                rb.velocity = -rb.velocity * bounceMultiplyer;
+                PlayerController playerController = col.gameObject.GetComponentInParent<PlayerController>();
+                if (playerController != null)
+                {
+                    if (playerController == this.playerController) {
+                        colDamage.TakeDamage(selfDamage);
+                    }
+                    else
+                    {
+                        colDamage.TakeDamage(damage);
+                    }
+                }
+                else
+                {
+                    colDamage.TakeDamage(damage);
+                }
             }
             damage += bounceBonus;
             numBounceRemaining--;
         }
         else
         {
-            base.OnTriggerEnter(other);
+            base.OnTriggerEnter(col);
         }
 
     }

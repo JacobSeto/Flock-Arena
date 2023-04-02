@@ -44,6 +44,10 @@ public class Rifle : SingleShotGun
     public void RifleActive(bool isActive)
     {
         //sets the gameobject Active state
+        if (isActive)
+        {
+            Reload();
+        }
         view.RPC(nameof(RPC_RifleActive), RpcTarget.All, isActive);
     }
 

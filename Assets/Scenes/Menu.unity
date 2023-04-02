@@ -5249,7 +5249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e1486995f5ff34ab0e8f73263e8d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offline: 0
+  offline: 1
   roomNameInputField: {fileID: 1603840994}
   errorText: {fileID: 1829874972}
   roomNameText: {fileID: 22570500}
@@ -5258,7 +5258,6 @@ MonoBehaviour:
   roomListPrefab: {fileID: 8257338924451892982, guid: facc83b2611a0d5409a5e47bc297d713, type: 3}
   playerListPrefab: {fileID: 5407197571147220132, guid: 9bd67c1149790b647ad747dd8b01ec47, type: 3}
   startGameButton: {fileID: 1711468885}
-  gamemodeSceneIndexs: 01000000
 --- !u!114 &2069144418
 MonoBehaviour:
   m_ObjectHideFlags: 0

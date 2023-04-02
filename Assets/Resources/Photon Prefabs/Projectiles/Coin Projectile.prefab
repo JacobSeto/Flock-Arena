@@ -103,7 +103,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   projectileHit: []
   coinRangeRadius: 0
-  deflectDamage: 0
+  deflectMultiplyer: 0
   deflectPrefab: {fileID: 2819664866203712405, guid: fe71da1074d48e74380fd8509df95229, type: 3}
 --- !u!54 &3385047134231893579
 Rigidbody:

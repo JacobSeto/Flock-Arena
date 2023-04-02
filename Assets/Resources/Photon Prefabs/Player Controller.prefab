@@ -4696,6 +4696,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6245256535259582154}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
+      propertyPath: deflectMultiplyer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: moneyHandsCooldown
       value: 4.5
       objectReference: {fileID: 0}
@@ -5059,7 +5063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
       propertyPath: boomerDamage
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 293321925479975347, guid: 73548bd83da9db24d894a4927d767cb9, type: 3}
       propertyPath: boomerHealth
