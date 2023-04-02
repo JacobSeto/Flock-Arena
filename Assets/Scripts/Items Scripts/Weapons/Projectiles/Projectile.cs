@@ -25,10 +25,9 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     [HideInInspector] public float flockTime;
     [HideInInspector] public float earlyExplosionMultiplyer;
     [HideInInspector] public PlayerController playerController = null;
-    //prevent multiple collisions
-    public bool hit = false;
-    bool hitExplosion = false;
 
+    List<Transform> projectileHit = new List<Transform>();  //lsit of transforms projectile hits
+    List<Transform> explosionHit = new List<Transform>();  //list of transforms GameObjects explosion hits
     GameObject explosion;
     public virtual void SetProjectile(float speed, float health, float damage, float time, bool explodes, float explosionDamage = 0, float explosionRadius = 0, float selfDamage = 0, float blastStrength = 0, float flockTime = 0, float earlyExplosionMultiplyer = 0, PlayerController p = null)
     {
@@ -71,21 +70,22 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
             Destroy(col);
         }
     }
-    public virtual void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider col)
     {
-        if (view.IsMine && !hit)
+        if (view.IsMine)
         {
-            if(other.gameObject.GetComponentInParent<IDamageable>() != null)
+            IDamageable colDamage = col.gameObject.GetComponent<IDamageable>();
+            if (colDamage != null && !projectileHit.Contains(colDamage.DamageTransform()))
             {
-                other.gameObject.GetComponentInParent<IDamageable>().TakeDamage(damage);
+                colDamage.TakeDamage(damage);
+                projectileHit.Add(colDamage.DamageTransform());
             }
             if (explodes)
             {
+                this.col.enabled = false;
                 Explosion(exploDamage);
-            }   
-            
+            }
             DestroyProjectile(0);
-            hit = true;
         }
     }
 
@@ -93,6 +93,11 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     {
         if(view.IsMine)
             speed += addSpeed;
+    }
+
+    public Transform DamageTransform()
+    {
+        return gameObject.transform;
     }
     public virtual void TakeDamage(float damage)
     {
@@ -116,6 +121,35 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     }
     public void Explosion(float damage)
     {
+        var cols = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider col in cols)
+        {
+            IDamageable colDamage = col.gameObject.GetComponent<IDamageable>();
+            if (!col.CompareTag("Head") && colDamage != null && !explosionHit.Contains(colDamage.DamageTransform()))
+            {
+                //if player, take the normalized vector between projectile impact and player to blast them away and add flock time
+                PlayerController playerController = col.gameObject.GetComponentInParent<PlayerController>();
+                if (playerController != null)
+                {
+                    if(playerController == this.playerController)
+                    {
+                        playerController.AddPlayerForce(
+                            (playerController.playerTransform.position - transform.position).normalized * blastStrength);
+                        playerController.flockTime += flockTime;
+                        colDamage.TakeDamage(selfDamage);
+                    }
+                    else
+                    {
+                        colDamage.TakeDamage(exploDamage);
+                    }
+                }
+                else
+                {
+                    colDamage.TakeDamage(exploDamage);
+                }
+                explosionHit.Add(colDamage.DamageTransform());
+            }
+        }
         view.RPC(nameof(RPC_Explosion), RpcTarget.All, damage, transform.position.x, transform.position.y, transform.position.z);
     }
 
@@ -125,31 +159,6 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
         GameObject explosion = Instantiate(explosionPrefab, new Vector3(x,y,z), Quaternion.identity);
         explosion.transform.localScale = new Vector3(2 * explosionRadius, 2 * explosionRadius, 2 * explosionRadius);
         Destroy(explosion, .5f);
-        if (!view.IsMine || hitExplosion)
-            return;
-        var cols = Physics.OverlapSphere(transform.position, explosionRadius);
-
-        for (int i = 0; i < cols.Length; i++)
-        {
-            if (cols[i].GetComponentInParent<PlayerController>() != null)
-            {
-                PlayerController player = cols[i].GetComponentInParent<PlayerController>();
-                if (player.view == playerController.view)
-                {
-                    cols[i].GetComponentInParent<PlayerController>().flockTime += flockTime;
-                    cols[i].GetComponentInParent<PlayerController>().AddPlayerForce(-transform.forward * blastStrength);
-                    cols[i].GetComponentInParent<IDamageable>().TakeDamage(selfDamage);
-                    i += cols.Length;
-                }
-                else
-                {
-                    cols[i].GetComponentInParent<IDamageable>().TakeDamage(damage);
-                    i += cols.Length;
-                }
-                hitExplosion = true;
-            }
-            
-        }
         Destroy(gameObject);
     }
 

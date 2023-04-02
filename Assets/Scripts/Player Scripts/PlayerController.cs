@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     private void Start()
     {
-        
+
         if (view.IsMine)
         {
             PlayerSetters();
@@ -381,6 +381,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         isGrounded = _grounded;
     }
 
+    public Transform DamageTransform()
+    {
+        return playerTransform;
+    }
+
     public void TakeDamage(float damage)
     {
         view.RPC(nameof(RPC_TakeDamage),view.Owner, damage);
@@ -441,7 +446,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         nextRegen = Time.time + regenTime;
     }
 
-    void Die()
+    public void Die()
     {
         if(view.IsMine)
             Cursor.lockState = CursorLockMode.None;

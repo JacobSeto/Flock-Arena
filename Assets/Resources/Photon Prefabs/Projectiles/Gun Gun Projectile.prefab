@@ -300,10 +300,9 @@ MonoBehaviour:
   explosionRadius: 0
   selfDamage: 0
   blastStrength: 0
-  blastAirTime: 0
+  flockTime: 0
   earlyExplosionMultiplyer: 0
   playerController: {fileID: 0}
-  hit: 0
   gunCamera: {fileID: 665303885764832988}
   vSens: 0.2
   hSens: 0.9
@@ -326,6 +325,8 @@ MonoBehaviour:
   InInventory: 0
   itemInfo: {fileID: 11400000, guid: 329f915923048644f868008b718d793e, type: 2}
   itemGameObject: {fileID: 4042241079041345639}
+  toggleInactive: 0
+  isEquip: 0
   playerController: {fileID: 0}
   weaponAudio: []
   moveX: 0

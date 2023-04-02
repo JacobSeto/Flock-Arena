@@ -36,19 +36,21 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log("Connecting To Master");
         if (offline)
+        {
             PhotonNetwork.OfflineMode = true;
-        PhotonNetwork.ConnectUsingSettings();
+            PhotonNetwork.CreateRoom("Offline");
+            StartGameMode(1);
+        }
+        else
+        {
+            PhotonNetwork.ConnectUsingSettings();
+        }
     }
     public override void OnConnectedToMaster()
     {
         Debug.Log("Joined Master");
         PhotonNetwork.AutomaticallySyncScene = true;
-        if (offline)
-        {
-            PhotonNetwork.CreateRoom("offline");
-            PhotonNetwork.LoadLevel(1);
-        }
-        else
+        if (!offline)
         {
             PhotonNetwork.JoinLobby();
         }
@@ -99,10 +101,10 @@ public class Launcher : MonoBehaviourPunCallbacks
         MenuManager.Instance.OpenMenu("error");
     }
 
-    public void StartGame()
+    public void StartGameMode(int sceneBuildIndex)
     {
         //level num must be same num as build index of game
-        PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.LoadLevel(sceneBuildIndex);
     }
 
     public void LeaveRoom()

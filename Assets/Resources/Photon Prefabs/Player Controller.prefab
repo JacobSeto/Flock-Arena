@@ -921,9 +921,10 @@ GameObject:
   - component: {fileID: 6965634358956857738}
   - component: {fileID: 7391858808518107518}
   - component: {fileID: 1779288783960947309}
+  - component: {fileID: 1279866309666728813}
   m_Layer: 0
   m_Name: Chest
-  m_TagString: Untagged
+  m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1006,6 +1007,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1279866309666728813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729521777847296285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e685dbdabd03b14bbb438c0fd10c51e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageTransform: {fileID: 3734202351384468184}
+  damageMultiplyer: 1
 --- !u!1 &1789116611483234986
 GameObject:
   m_ObjectHideFlags: 0
@@ -2204,9 +2219,10 @@ GameObject:
   - component: {fileID: 180180700316972118}
   - component: {fileID: 9154439361786977037}
   - component: {fileID: 7359459916171108827}
+  - component: {fileID: 2931462441587014314}
   m_Layer: 0
   m_Name: Right Arm
-  m_TagString: Untagged
+  m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2290,6 +2306,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2931462441587014314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3996054621361528014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e685dbdabd03b14bbb438c0fd10c51e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageTransform: {fileID: 3734202351384468184}
+  damageMultiplyer: 1
 --- !u!1 &4104167139291393502
 GameObject:
   m_ObjectHideFlags: 0
@@ -2538,9 +2568,10 @@ GameObject:
   - component: {fileID: 4083087668578670709}
   - component: {fileID: 5469973322826417262}
   - component: {fileID: 7888240050808122914}
+  - component: {fileID: 7107280291731884357}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2623,6 +2654,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7107280291731884357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5369316905607472942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e685dbdabd03b14bbb438c0fd10c51e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageTransform: {fileID: 3734202351384468184}
+  damageMultiplyer: 1.5
 --- !u!1 &5403014689984797619
 GameObject:
   m_ObjectHideFlags: 0
@@ -2635,9 +2680,10 @@ GameObject:
   - component: {fileID: 7540795118301677777}
   - component: {fileID: 2734643865989803267}
   - component: {fileID: 2427700402622259648}
+  - component: {fileID: 7672875557141674817}
   m_Layer: 0
   m_Name: Left Arm
-  m_TagString: Untagged
+  m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2721,6 +2767,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7672875557141674817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5403014689984797619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e685dbdabd03b14bbb438c0fd10c51e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageTransform: {fileID: 3734202351384468184}
+  damageMultiplyer: 1
 --- !u!1 &5479488953686948971
 GameObject:
   m_ObjectHideFlags: 0

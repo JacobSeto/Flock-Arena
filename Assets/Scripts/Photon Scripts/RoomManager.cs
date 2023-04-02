@@ -8,7 +8,8 @@ using System.IO;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     public static RoomManager Instance;
-    [SerializeField] List<string> gamemodeNames;
+
+    [SerializeField] List<string> gamemodeNames;  //the list of game modes player can choose from.  Their names are used to load the correct scene
 
     private void Awake()
     {
