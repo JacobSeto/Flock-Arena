@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     [HideInInspector] public float earlyExplosionMultiplyer;
     [HideInInspector] public PlayerController playerController = null;
 
-    List<Transform> projectileHit = new List<Transform>();  //lsit of transforms projectile hits
+    public List<Transform> projectileHit = new List<Transform>();  //lsit of transforms projectile hits
     List<Transform> explosionHit = new List<Transform>();  //list of transforms GameObjects explosion hits
     GameObject explosion;
     public virtual void SetProjectile(float speed, float health, float damage, float time, bool explodes, float explosionDamage = 0, float explosionRadius = 0, float selfDamage = 0, float blastStrength = 0, float flockTime = 0, float earlyExplosionMultiplyer = 0, PlayerController p = null)

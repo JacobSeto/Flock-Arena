@@ -11,7 +11,7 @@ public class Katana : Weapon
     [SerializeField] Image chargeBar;
     [SerializeField] TMP_Text chargeText;
     [Space]
-    [SerializeField] GameObject swingCollider;
+    [SerializeField] Collider swordCollider;
     [SerializeField] float swingAngleStop;
     [SerializeField] float swingSpeed;
     [SerializeField] float aimCooldown;
@@ -46,7 +46,7 @@ public class Katana : Weapon
     float lastSlashDistance;
     float slashCharge;
     float slashCoolDown;
-
+    public List<Transform> swordHit = new List<Transform>();  //lsit of transforms swordHits
 
     public void KatanaUpgrades()
     {
@@ -58,7 +58,7 @@ public class Katana : Weapon
     {
         base.Awake();
         view = GetComponent<PhotonView>();
-        ammo = ((WeaponInfo)itemInfo).ammo;
+        swordCollider.enabled = false;
         UpdateSlashPercent();
     }
 
@@ -71,7 +71,6 @@ public class Katana : Weapon
         if (aimCooldownTime <= Time.time)
         {
             canAim = true;
-            swinging = false;
         }
         if (swinging)
             Swinging();
@@ -148,8 +147,64 @@ public class Katana : Weapon
 
     public override void Shoot()
     {
+
         base.Shoot();
         Swing();
+    }
+    void Swing()
+    {
+        canAim = false;
+        aimCooldownTime =  reload + aimCooldown + Time.time;
+        swinging = true;
+        swingleft = !swingleft;
+        swordCollider.enabled = true;
+        if (swingleft)
+        {
+            transform.rotation = swing1Start.rotation;
+            transform.position = swing1Start.position;
+        }
+        else
+        {
+            transform.rotation = swing2Start.rotation;
+            transform.position = swing2Start.position;
+        }
+    }
+
+    public void Swinging()
+    {
+        if (swingleft)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, swing1End.rotation, swingSpeed * Time.deltaTime);
+            if (Quaternion.Angle(transform.rotation, swing1End.rotation) <= swingAngleStop)
+            {
+                swordCollider.enabled = false;
+                swordHit.Clear();
+                swinging = false;
+            }
+        }
+        else
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, swing2End.rotation, swingSpeed * Time.deltaTime);
+            if (Quaternion.Angle(transform.rotation, swing2End.rotation) <= swingAngleStop)
+            {
+                swordCollider.enabled = false;
+                swordHit.Clear();
+                swinging = false;
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (view.IsMine)
+        {
+            IDamageable colDamage = col.gameObject.GetComponent<IDamageable>();
+            if (colDamage != null && !swordHit.Contains(colDamage.DamageTransform()))
+            {
+                colDamage.TakeDamage(damage);
+                swordHit.Add(colDamage.DamageTransform());
+            }
+        }
     }
 
     public void Slash()
@@ -192,44 +247,6 @@ public class Katana : Weapon
         chargeText.text = (slashPercent * 100).ToString() + "%";
     }
 
-    void Swing()
-    {
-        canAim = false;
-        aimCooldownTime = ((WeaponInfo)itemInfo).reload + aimCooldown + Time.time;
-        swinging = true;
-        swingleft = !swingleft;
-        swingCollider.SetActive(true);
-        if (swingleft)
-        {
-            transform.rotation = swing1Start.rotation;
-            transform.position = swing1Start.position;
-        }
-        else
-        {
-            transform.rotation = swing2Start.rotation;
-            transform.position = swing2Start.position;
-        }
-    }
-
-    public void Swinging()
-    {
-        if (swingleft)
-        {
-            transform.rotation = Quaternion.Lerp(transform.rotation, swing1End.rotation, swingSpeed * Time.deltaTime);
-            if (Quaternion.Angle(transform.rotation, swing1End.rotation) <= swingAngleStop)
-            {
-                swingCollider.SetActive(false);
-            }
-        }
-        else
-        {
-            transform.rotation = Quaternion.Lerp(transform.rotation, swing2End.rotation, swingSpeed * Time.deltaTime);
-            if (Quaternion.Angle(transform.rotation, swing2End.rotation) <= swingAngleStop)
-            {
-                swingCollider.SetActive(false);
-            }
-        }
-    }
 
     public override void Special()
     {

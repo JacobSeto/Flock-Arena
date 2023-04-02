@@ -20,29 +20,26 @@ public class CoinProjectile : Projectile
     public void DeflectBullet()
     {
         //When coin is shot, a revolver shot originating from the coin position
-        //targets the enemies in range
+        //targets the enemies head in range
         var cols = Physics.OverlapSphere(transform.position, coinRangeRadius);
-        List<PlayerController> playersHit = new List<PlayerController>();
-        for (int i = 0; i < cols.Length; i++)
+        foreach (Collider col in cols)
         {
-            if (cols[i].GetComponentInParent<PlayerController>() != null)
+            IDamageable colDamage = col.gameObject.GetComponent<IDamageable>();
+            PlayerController playerController = col.gameObject.GetComponentInParent<PlayerController>();
+            if (col.CompareTag("Head") && playerController != this.playerController && !projectileHit.Contains(colDamage.DamageTransform()))
             {
-                PlayerController player = cols[i].GetComponentInParent<PlayerController>();
-                if (!playersHit.Contains(player) &&  player.view != playerController.view)
-                {
-                    playersHit.Add(player);
-                    cols[i].GetComponentInParent<IDamageable>().TakeDamage(deflectDamage);
-                    DeflectLine(player);
-                }
+                colDamage.TakeDamage(deflectDamage);
+                DeflectLine(col.transform);
+                projectileHit.Add(colDamage.DamageTransform());
             }
         }
     }
-    public void DeflectLine(PlayerController player)
+    public void DeflectLine(Transform target)
     {
-        Vector3 halfPoint = (transform.position +player.playerTransform.position)/2;
-        transform.LookAt(player.playerTransform);
+        Vector3 halfPoint = (transform.position +target.position)/2;
+        transform.LookAt(target);
         GameObject deflectLine = Instantiate(deflectPrefab, halfPoint, transform.rotation);
-        deflectLine.transform.localScale = new Vector3(0.1f, 0.1f, (transform.position-player.playerTransform.position).magnitude);
+        deflectLine.transform.localScale = new Vector3(0.1f, 0.1f, (transform.position-target.position).magnitude);
         Destroy(deflectLine, .75f);
     }
 }

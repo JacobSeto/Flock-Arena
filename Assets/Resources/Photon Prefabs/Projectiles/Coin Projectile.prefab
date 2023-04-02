@@ -101,7 +101,7 @@ MonoBehaviour:
   flockTime: 0
   earlyExplosionMultiplyer: 0
   playerController: {fileID: 0}
-  hit: 0
+  projectileHit: []
   coinRangeRadius: 0
   deflectDamage: 0
   deflectPrefab: {fileID: 2819664866203712405, guid: fe71da1074d48e74380fd8509df95229, type: 3}

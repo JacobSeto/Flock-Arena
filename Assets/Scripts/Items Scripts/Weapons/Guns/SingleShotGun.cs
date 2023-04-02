@@ -29,34 +29,25 @@ public class SingleShotGun : Weapon
     public virtual void BulletHit(RaycastHit hit)
     {
         //item info class does not have the damage info,so cast iteminfo class to weaponinfo class to access damage variable
-        hit.collider.gameObject.GetComponentInParent<IDamageable>()?.TakeDamage(((WeaponInfo)itemInfo).damage);
-        bool isPlayer = false;
-        if (hit.collider.gameObject.name == "Player Controller(Clone)")
-        {
-            isPlayer = true;
-        }
-        view.RPC(nameof(RPC_Shoot), RpcTarget.All, hit.point, hit.normal, isPlayer);
+        hit.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(damage);
+        view.RPC(nameof(RPC_Shoot), RpcTarget.All, hit.point, hit.normal);
     }
 
     [PunRPC]
-    public void RPC_Shoot(Vector3 hitPosition, Vector3 hitNormal, bool isPlayer)
+    public void RPC_Shoot(Vector3 hitPosition, Vector3 hitNormal)
     {
-
-        Collider[] colliders = Physics.OverlapSphere(hitPosition, .3f);
-        if(colliders.Length != 0)
+        GameObject bullet;
+        Collider[] cols = Physics.OverlapSphere(hitPosition, .1f);
+        if (cols[0].CompareTag("Head") || cols[0].CompareTag("Body"))
         {
-            GameObject bullet;
-            if (isPlayer)
-            {
-                bullet = Instantiate(bulletImpactPrefab, hitPosition + hitNormal * .001f, Quaternion.LookRotation(hitNormal, Vector3.up) * bulletImpactPrefab.transform.rotation);
-            }
-            else
-            {
-                bullet = Instantiate(bulletMissPrefab, hitPosition + hitNormal * .001f, Quaternion.LookRotation(hitNormal, Vector3.up) * bulletMissPrefab.transform.rotation);
-            }
-            Destroy(bullet, 2.5f);
-            bullet.transform.SetParent(colliders[0].transform);
+            bullet = Instantiate(bulletImpactPrefab, hitPosition + hitNormal * .001f, Quaternion.LookRotation(hitNormal, Vector3.up) * bulletImpactPrefab.transform.rotation);
         }
+        else
+        {
+            bullet = Instantiate(bulletMissPrefab, hitPosition + hitNormal * .001f, Quaternion.LookRotation(hitNormal, Vector3.up) * bulletMissPrefab.transform.rotation);
+        }
+        Destroy(bullet, 2.5f);
+        bullet.transform.SetParent(cols[0].transform);
     }
 
 }
