@@ -1,8 +1,11 @@
+using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour
+public class MenuManager : MonoBehaviourPunCallbacks
 {
     public static MenuManager Instance;
     [SerializeField] Menu[] menus;
@@ -42,6 +45,16 @@ public class MenuManager : MonoBehaviour
     public void CloseMenu(Menu menu)
     {
         menu.Close();
+    }
+
+    public void LeaveGame()
+    {
+        if ( PhotonNetwork.IsConnectedAndReady)
+        {
+            Destroy(RoomManager.Instance.gameObject);
+            PhotonNetwork.LoadLevel(0);
+            PhotonNetwork.LeaveRoom();
+        }
     }
 
     public void Quit()

@@ -6,7 +6,7 @@ using Photon.Pun;
 using TMPro;
 using System.IO;
 
-public class GameController : MonoBehaviourPunCallbacks
+public class Deathmatch : MonoBehaviourPunCallbacks
 {
     [SerializeField] GameObject gameHUD;
     [SerializeField] TMP_Text roundText;
@@ -25,6 +25,7 @@ public class GameController : MonoBehaviourPunCallbacks
     {
         timeLeft = startTime;
         view = GetComponent<PhotonView>();
+        PhotonNetwork.AutomaticallySyncScene = false;
     }
 
     private void Update()
