@@ -37,7 +37,11 @@ public class SingleShotGun : Weapon
     public void RPC_Shoot(Vector3 hitPosition, Vector3 hitNormal)
     {
         GameObject bullet;
-        Collider[] cols = Physics.OverlapSphere(hitPosition, .1f);
+        Collider[] cols = Physics.OverlapSphere(hitPosition, .5f);
+        if(cols.Length == 0)
+        {
+            return;
+        }
         if (cols[0].CompareTag("Head") || cols[0].CompareTag("Body"))
         {
             bullet = Instantiate(bulletImpactPrefab, hitPosition + hitNormal * .001f, Quaternion.LookRotation(hitNormal, Vector3.up) * bulletImpactPrefab.transform.rotation);

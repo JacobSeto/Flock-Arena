@@ -303,6 +303,7 @@ MonoBehaviour:
   flockTime: 0
   earlyExplosionMultiplyer: 0
   playerController: {fileID: 0}
+  projectileHit: []
   gunCamera: {fileID: 665303885764832988}
   vSens: 0.2
   hSens: 0.9

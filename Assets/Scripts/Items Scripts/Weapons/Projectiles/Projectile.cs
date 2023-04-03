@@ -80,11 +80,14 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
                 colDamage.TakeDamage(damage);
                 projectileHit.Add(colDamage.DamageTransform());
             }
-            if (explodes)
-            {
-                this.col.enabled = false;
-                Explosion(exploDamage);
-            }
+        }
+        if (explodes)
+        {
+            this.col.enabled = false;
+            Explosion(exploDamage);
+        }
+        else
+        {
             DestroyProjectile(0);
         }
     }
@@ -101,22 +104,19 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     }
     public virtual void TakeDamage(float damage)
     {
-        view.RPC(nameof(RPC_TakeDamage), RpcTarget.All, damage);
-    }
-
-    [PunRPC]
-    public virtual void RPC_TakeDamage(float damage)
-    {
+        if (!view.IsMine)
+        {
+            return;
+        }
         health -= damage;
         if (health <= 0)
         {
-            //exploding it early does 4 times damage
-            if(explodes)
-                Explosion(exploDamage * earlyExplosionMultiplyer);
-            else
+            if (explodes)
             {
-                Destroy(gameObject);
+                col.enabled = false;
+                Explosion(exploDamage * earlyExplosionMultiplyer);
             }
+            DestroyProjectile(0);
         }
     }
     public void Explosion(float damage)
@@ -131,7 +131,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
                 PlayerController playerController = col.gameObject.GetComponentInParent<PlayerController>();
                 if (playerController != null)
                 {
-                    if(playerController == this.playerController)
+                    if (playerController == this.playerController)
                     {
                         playerController.AddPlayerForce(
                             (playerController.playerTransform.position - transform.position).normalized * blastStrength);
@@ -150,13 +150,14 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
                 explosionHit.Add(colDamage.DamageTransform());
             }
         }
-        view.RPC(nameof(RPC_Explosion), RpcTarget.All, damage, transform.position.x, transform.position.y, transform.position.z);
+        view.RPC(nameof(RPC_Explosion), RpcTarget.All, transform.position.x, transform.position.y, transform.position.z);
+        Destroy(gameObject);
     }
 
     [PunRPC]
-    public void RPC_Explosion(float damage, float x, float y, float z)
+    public void RPC_Explosion(float x, float y, float z)
     {
-        GameObject explosion = Instantiate(explosionPrefab, new Vector3(x,y,z), Quaternion.identity);
+        GameObject explosion = Instantiate(explosionPrefab, new Vector3(x, y, z), Quaternion.identity);
         explosion.transform.localScale = new Vector3(2 * explosionRadius, 2 * explosionRadius, 2 * explosionRadius);
         Destroy(explosion, .5f);
         Destroy(gameObject);

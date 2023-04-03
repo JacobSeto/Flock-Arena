@@ -9,12 +9,13 @@ public class CoinProjectile : Projectile
     [HideInInspector] public float deflectMultiplyer;
     [SerializeField] GameObject deflectPrefab;
 
-    [PunRPC]
-    public override void RPC_TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         if (view.IsMine)
-            DeflectBullet(damage*deflectMultiplyer);
-        base.RPC_TakeDamage(damage);
+        {
+            DeflectBullet(damage * deflectMultiplyer);
+        }
+        base.TakeDamage(damage);
     }
 
     public void DeflectBullet(float deflectDamage)
@@ -37,16 +38,20 @@ public class CoinProjectile : Projectile
 
     public void DeflectLine(Transform target)
     {
-        view.RPC(nameof(RPC_DelfectLine), RpcTarget.All, target);
-    }
-
-    [PunRPC]
-    public void RPC_DelfectLine(Transform target)
-    {
-        Vector3 halfPoint = (transform.position + target.position) / 2;
+        Vector3 targetPosition = target.position;
+        Vector3 halfPoint = (transform.position + targetPosition) / 2;
         transform.LookAt(target);
+        view.RPC(nameof(RPC_DelfectLine), RpcTarget.All, halfPoint.x,halfPoint.y, halfPoint.z,
+            targetPosition.x,targetPosition.y,targetPosition.z);
+    }
+    //pass vectors as their x,y, and z components
+    [PunRPC]
+    public void RPC_DelfectLine(float hX, float hY, float hZ, float tX, float tY, float tZ)
+    {
+        Vector3 halfPoint = new Vector3(hX, hY, hZ);
+        Vector3 targetPosition = new Vector3(tX, tY, tZ);
         GameObject deflectLine = Instantiate(deflectPrefab, halfPoint, transform.rotation);
-        deflectLine.transform.localScale = new Vector3(0.1f, 0.1f, (transform.position - target.position).magnitude);
+        deflectLine.transform.localScale = new Vector3(0.1f, 0.1f, (transform.position - targetPosition).magnitude);
         Destroy(deflectLine, .75f);
     }
 }

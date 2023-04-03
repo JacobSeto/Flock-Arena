@@ -21,7 +21,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] Transform playerListContent;
     [SerializeField] GameObject roomListPrefab;
     [SerializeField] GameObject playerListPrefab;
-    [SerializeField] GameObject startGameButton;
+    [SerializeField] GameObject startDeathMatchButton;
+    [SerializeField] GameObject startPracticeRange;
     [Space]
     int gameIndex;
 
@@ -89,12 +90,14 @@ public class Launcher : MonoBehaviourPunCallbacks
             Instantiate(playerListPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
         }
 
-        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
+        startDeathMatchButton.SetActive(PhotonNetwork.IsMasterClient);
+        startPracticeRange.SetActive(PhotonNetwork.IsMasterClient);
     }
 
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
-        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
+        startDeathMatchButton.SetActive(PhotonNetwork.IsMasterClient);
+        startPracticeRange.SetActive(PhotonNetwork.IsMasterClient);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)

@@ -184,3 +184,4 @@ MonoBehaviour:
   flockTime: 0
   earlyExplosionMultiplyer: 0
   playerController: {fileID: 0}
+  projectileHit: []

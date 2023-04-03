@@ -2031,7 +2031,7 @@ MonoBehaviour:
   heavyChange: 75
   moneyHandsCooldown: 4
   silverDollarMultiplyer: 1.25
-  titaniumHealth: 100
+  titaniumHealth: 90
   betterBarrelReloadTime: 3
   quickDrawTime: 10
   revautoFirerate: 0.25

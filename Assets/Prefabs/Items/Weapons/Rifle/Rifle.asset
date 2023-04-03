@@ -19,7 +19,7 @@ MonoBehaviour:
   reload: 4
   specialCooldown: 5
   isAutoFire: 1
-  hipSpread: 0
+  hipSpread: 0.1
   aimSpread: 0.01
   aimSpeed: 5.25
   hipSpeed: 6
