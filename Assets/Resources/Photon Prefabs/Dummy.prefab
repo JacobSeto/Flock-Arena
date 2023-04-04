@@ -256,10 +256,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: {fileID: 2239898583963388308}
+  invincible: 1
+  displayDamage: 1
   health: 100
   damageDisplayPrefab: {fileID: 4526099926788511367, guid: b635b08a93ce16e4c91e7b7576ba7f0a, type: 3}
   damageDisplay: {fileID: 1490307280150478980}
-  invincible: 1
 --- !u!1 &8898495263333765363
 GameObject:
   m_ObjectHideFlags: 0

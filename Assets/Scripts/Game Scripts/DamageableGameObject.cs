@@ -7,10 +7,11 @@ using TMPro;
 public class DamageableGameObject : MonoBehaviourPunCallbacks, IDamageable
 {
     public PhotonView view;
+    public bool invincible;
+    public bool displayDamage;
     public float health;
     public GameObject damageDisplayPrefab;
     public Transform damageDisplay;
-    public bool invincible;
 
     public Transform DamageTransform()
     {
@@ -20,7 +21,8 @@ public class DamageableGameObject : MonoBehaviourPunCallbacks, IDamageable
     public void TakeDamage(float damage)
     {
         view.RPC(nameof(RPC_TakeDamage), view.Owner, damage);
-        view.RPC(nameof(RPC_DisplayDamage), RpcTarget.All, damage);
+        if(displayDamage)
+            view.RPC(nameof(RPC_DisplayDamage), RpcTarget.All, damage);
     }
 
     [PunRPC]
