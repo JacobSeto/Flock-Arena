@@ -8,6 +8,10 @@ public class Utility : Item
     {
         throw new System.NotImplementedException();
     }
+    public override void UseItem()
+    {
+        throw new System.NotImplementedException();
+    }
 
     public override void ItemInactive()
     {

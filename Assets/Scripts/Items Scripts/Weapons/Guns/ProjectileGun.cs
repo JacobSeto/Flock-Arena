@@ -31,8 +31,6 @@ public class ProjectileGun : Weapon
     public override void Awake()
     {
         base.Awake();
-        ammo = ((WeaponInfo)itemInfo).ammo;
-        spread = ((WeaponInfo)itemInfo).hipSpread;
     }
 
     public override void Shoot()
@@ -62,12 +60,12 @@ public class ProjectileGun : Weapon
     }
     void IncreaseProjectileSpeed()
     {
-        projectileSpeed = Mathf.Lerp(projectileSpeed, aimProjectileSpeed, ((WeaponInfo)itemInfo).aimSpeed * Time.deltaTime);
+        projectileSpeed = Mathf.Lerp(projectileSpeed, aimProjectileSpeed, aimSpeed * Time.deltaTime);
     }
 
     void DecreaseProjectileSpeed()
     {
-        projectileSpeed = Mathf.Lerp(projectileSpeed, hipProjectileSpeed, ((WeaponInfo)itemInfo).hipSpeed * Time.deltaTime);
+        projectileSpeed = Mathf.Lerp(projectileSpeed, hipProjectileSpeed, hipSpeed * Time.deltaTime);
     }
 
 

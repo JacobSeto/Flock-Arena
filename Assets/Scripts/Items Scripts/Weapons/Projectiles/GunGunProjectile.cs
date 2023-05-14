@@ -22,6 +22,11 @@ public class GunGunProjectile : Projectile
 
     //TODO: add customizaiton to gungun for upgrades
 
+    private void Awake()
+    {
+        gungun.playerController = playerController;
+    }
+
     public override void Start()
     {
         base.Start();

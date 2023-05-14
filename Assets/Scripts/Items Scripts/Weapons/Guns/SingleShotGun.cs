@@ -5,14 +5,6 @@ using UnityEngine;
 
 public class SingleShotGun : Weapon
 {
-
-    public override void Awake()
-    {
-        base.Awake();
-        ammo = ((WeaponInfo)itemInfo).ammo;
-        spread = ((WeaponInfo)itemInfo).hipSpread;
-    }
-
     public override void Shoot()
     {
         base.Shoot();

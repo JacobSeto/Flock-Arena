@@ -188,7 +188,7 @@ MonoBehaviour:
   r: {fileID: 0}
   numRecursive: 0
   recursiveRoundName: 
-  spawnHeight: 0.5
-  recursiveAngle: 70
+  spawnHeight: 0.55
+  recursiveAngle: 80
   ranAngle: 25
-  ranPosition: 0.4
+  ranPosition: 0.45

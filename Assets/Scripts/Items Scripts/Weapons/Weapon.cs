@@ -24,11 +24,11 @@ public abstract class Weapon : Item
     [Header("Weapon Stats")]
     [HideInInspector] public float spread;
     public float damage;
-    public float fireRate;
     public float specialCooldown;
-    public float hipSpread = -1;
-    public float aimSpread = -1;
-    public float aimSpeed = -1;
+    public float hipSpread;
+    public float hipSpeed;
+    public float aimSpread;
+    public float aimSpeed;
     public bool isAutoFire;
     public override void Update()
     {
@@ -53,25 +53,15 @@ public abstract class Weapon : Item
         }
     }
 
-    public override void Use()
+    public override void UseItem()
     {
-        if (useItem && ammo != 0)
-        {
-            Shoot();
-            nextShot = Time.time + fireRate;
-            useItem = false;
-            if (ammo != -1)
-            {
-                ammo--;
-                Reload();
-            }
-        }
+        Shoot();
     }
 
     public override void CheckUse()
     {
         base.CheckUse();
-        if (!playerController.isPaused && isAutoFire && Input.GetMouseButton(0))
+        if (useItem && !playerController.isPaused && isAutoFire && Input.GetMouseButton(0))
         {
             Use();
         }
@@ -108,7 +98,7 @@ public abstract class Weapon : Item
     {
         if (!canAim || !playerController.canMove)
             return;
-        if (Input.GetKey(KeyCode.Mouse1))
+        else if (Input.GetKey(KeyCode.Mouse1))
         {
             AimPosition();
         }
@@ -120,16 +110,16 @@ public abstract class Weapon : Item
 
     public virtual void HipPosition()
     {
-        transform.position = Vector3.Lerp(transform.position, hipPosition.position, ((WeaponInfo)itemInfo).hipSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Lerp(transform.rotation, hipPosition.rotation, ((WeaponInfo)itemInfo).hipSpeed * Time.deltaTime);
-        SetFieldOfView(Mathf.Lerp(playerController.playerCamera.fieldOfView, ((WeaponInfo)itemInfo).hipFOV, ((WeaponInfo)itemInfo).hipSpeed * Time.deltaTime));
-        spread = Mathf.Lerp(spread, hipSpread, ((WeaponInfo)itemInfo).hipSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, hipPosition.position, hipSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, hipPosition.rotation, hipSpeed * Time.deltaTime);
+        SetFieldOfView(Mathf.Lerp(playerController.playerCamera.fieldOfView, ((WeaponInfo)itemInfo).hipFOV, hipSpeed * Time.deltaTime));
+        spread = Mathf.Lerp(spread, hipSpread, hipSpeed * Time.deltaTime);
     }
 
     public virtual void AimPosition()
     {
         transform.position = Vector3.Lerp(transform.position, aimPosition.position, aimSpeed * Time.deltaTime);
-        SetFieldOfView(Mathf.Lerp(playerController.playerCamera.fieldOfView, ((WeaponInfo)itemInfo).aimFOV, ((WeaponInfo)itemInfo).aimSpeed * Time.deltaTime));
+        SetFieldOfView(Mathf.Lerp(playerController.playerCamera.fieldOfView, ((WeaponInfo)itemInfo).aimFOV, aimSpeed * Time.deltaTime));
         spread = Mathf.Lerp(spread, aimSpread, aimSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, aimPosition.rotation, aimSpeed * Time.deltaTime);
     }

@@ -78,20 +78,7 @@ public class Katana : Weapon
         CheckUse();
         CheckReload();
         ChargeSlash();
-    }
-
-    public override void Use()
-    {
-        if (useItem && ammo != 0 && !reloading && !slashing)
-        {
-            Shoot();
-            nextShot = Time.time + ((WeaponInfo)itemInfo).fireRate;
-            useItem = false;
-            if (ammo != -1)
-                ammo--;
-            UpdateItemUI();
-        }
-
+        UpdateItemUI();
     }
 
     public override void Aim()
@@ -147,7 +134,6 @@ public class Katana : Weapon
 
     public override void Shoot()
     {
-
         base.Shoot();
         Swing();
     }

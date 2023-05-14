@@ -21,10 +21,12 @@ public class GunGun : ProjectileGun
     public override void Shoot()
     {
         base.Shoot();
+        canAim = false;
         GunGunProjectile gungunScript = projectile.GetComponent<GunGunProjectile>();
         gungunScript.boostTime = boostTime;
         gungunScript.boostStrength = boostStrength;
     }
+
 
     public override void Special()
     {

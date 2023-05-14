@@ -16,12 +16,13 @@ public abstract class Item : MonoBehaviourPunCallbacks
     public PlayerController playerController;
 
     [HideInInspector] public bool useItem = true;
-    [HideInInspector] public float nextShot;
     [HideInInspector] public bool reloading = false;
     float reloadTime;
     [HideInInspector] public float ammo;
+    [HideInInspector] public float nextUse;
     public float maxAmmo;
     public float reload;
+    public float fireRate;
 
 
     public virtual void Awake()
@@ -70,11 +71,27 @@ public abstract class Item : MonoBehaviourPunCallbacks
     }
 
 
-    public abstract void Use();
+    public virtual void Use()
+    {
+        if (!useItem)
+        {
+            return;
+        }
+        UseItem();
+        nextUse = Time.time + fireRate;
+        useItem = false;
+        if (ammo != -1)
+        {
+            ammo--;
+        }
+        Reload();
+    }
+
+    public abstract void UseItem();
 
     public virtual void CheckUse()
     {
-        if (Time.time >= nextShot && useItem == false)
+        if (ammo!=0.0 && Time.time >= nextUse && useItem == false)
         {
             useItem = true;
         }

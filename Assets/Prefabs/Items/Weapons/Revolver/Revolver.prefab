@@ -98,6 +98,7 @@ MonoBehaviour:
   fireRate: 0.3
   specialCooldown: 6
   hipSpread: 0.05
+  hipSpeed: 6
   aimSpread: 0.007
   aimSpeed: 5.25
   isAutoFire: 0
