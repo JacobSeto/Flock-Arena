@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e685dbdabd03b14bbb438c0fd10c51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTransform: {fileID: 0}
+  damageTransform: {fileID: 2595544037180690725}
   damageMultiplyer: 1
 --- !u!1 &3408918293052492703
 GameObject:
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e685dbdabd03b14bbb438c0fd10c51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTransform: {fileID: 0}
+  damageTransform: {fileID: 2595544037180690725}
   damageMultiplyer: 1
 --- !u!1 &4242694210338865570
 GameObject:
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e685dbdabd03b14bbb438c0fd10c51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTransform: {fileID: 0}
+  damageTransform: {fileID: 2595544037180690725}
   damageMultiplyer: 1
 --- !u!1 &8621209060725567538
 GameObject:
@@ -367,5 +367,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e685dbdabd03b14bbb438c0fd10c51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTransform: {fileID: 0}
+  damageTransform: {fileID: 2595544037180690725}
   damageMultiplyer: 1

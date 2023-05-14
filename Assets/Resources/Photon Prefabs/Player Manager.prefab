@@ -1813,7 +1813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4394bc897f00da94e8381eb88e18fe4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  view: {fileID: 0}
+  view: {fileID: 4063570903527637194}
   player: {fileID: 0}
   playerController: {fileID: 0}
   playerLoadout: {fileID: 8818609636147665015}

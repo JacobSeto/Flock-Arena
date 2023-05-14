@@ -135,7 +135,10 @@ public class Katana : Weapon
     public override void Shoot()
     {
         base.Shoot();
-        Swing();
+        if (!slashing)
+        {
+            Swing();
+        }
     }
     void Swing()
     {

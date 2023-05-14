@@ -9,7 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
-    [SerializeField] bool offline;
+     bool offline;
+    [SerializeField] GameObject offlinePrompt;
 
     public static Launcher Instance;
     private static Dictionary<string, RoomInfo> cachedRoomList = new Dictionary<string, RoomInfo>();
@@ -31,8 +32,17 @@ public class Launcher : MonoBehaviourPunCallbacks
         Instance = this;
     }
 
+    public void SetOffline(bool isOffline)
+    {
+        offline = isOffline;
+        gameObject.SetActive(true);
+        offlinePrompt.SetActive(false);
+
+    }
+
     private void Start()
     {
+        print("start");
         if (PhotonNetwork.IsConnected)
         {
             return;
