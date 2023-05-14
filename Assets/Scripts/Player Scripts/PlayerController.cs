@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         //gameObject.GetComponent<Renderer>().sharedMaterial = playerLoadout.GetMaterial();
        
         //set skill tree skills
-        playerLoadout.SkillTree(gameObject.GetComponent<PlayerController>());
+        playerLoadout.SkillTree(this);
         //set player weapon by destroying all other weapons in itemholder
         view.RPC(nameof(RPC_SetWeapon), RpcTarget.All, playerLoadout.weaponsSelected);
         //set weapon upgrades
@@ -317,7 +317,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         itemIndex = _index;
         items[itemIndex].ItemSetActive(true);
         items[itemIndex].isEquip = true;
-        items[itemIndex].UpdateItemUI();
         if (previousItemIndex != -1)
         {
             items[previousItemIndex].ItemInactive();

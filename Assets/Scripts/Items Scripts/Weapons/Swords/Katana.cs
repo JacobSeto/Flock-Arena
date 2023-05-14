@@ -82,11 +82,11 @@ public class Katana : Weapon
 
     public override void Use()
     {
-        if (canShoot && ammo != 0 && !reloading && !slashing)
+        if (useItem && ammo != 0 && !reloading && !slashing)
         {
             Shoot();
             nextShot = Time.time + ((WeaponInfo)itemInfo).fireRate;
-            canShoot = false;
+            useItem = false;
             if (ammo != -1)
                 ammo--;
             UpdateItemUI();

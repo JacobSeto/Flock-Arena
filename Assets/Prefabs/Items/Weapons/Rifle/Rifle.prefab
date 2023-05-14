@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3561928353983386189}
   - component: {fileID: 2917624744176057291}
-  - component: {fileID: 293321925479975347}
+  - component: {fileID: 6457655144919233774}
+  - component: {fileID: 4485735447635651144}
   m_Layer: 7
   m_Name: Rifle
   m_TagString: Untagged
@@ -53,11 +54,12 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 4485735447635651144}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &293321925479975347
+--- !u!114 &6457655144919233774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,39 +75,61 @@ MonoBehaviour:
   InInventory: 1
   itemInfo: {fileID: 11400000, guid: 3df2eb54686069b4fae18fdfae1c1d10, type: 2}
   itemGameObject: {fileID: 7842078318599845817}
+  toggleInactive: 0
+  isEquip: 0
   playerController: {fileID: 0}
+  useItem: 1
+  nextShot: 0
+  reloading: 0
+  ammo: 0
+  maxAmmo: 30
+  reload: 3.5
   weaponAudio: []
   moveX: 0
-  moveY: 0
-  moveZ: 0
-  rotateX: 0
+  moveY: 0.008
+  moveZ: 0.008
+  rotateX: -1.25
   rotateY: 0
   rotateZ: 0
   canAim: 1
-  canShoot: 1
-  nextShot: 0
-  reloading: 0
   spread: 0
-  damage: 0
-  fireRate: 0
-  reload: 0
-  specialCooldown: 0
-  hipSpread: -1
-  aimSpread: -1
-  aimSpeed: -1
-  ammo: 0
-  isAutoFire: 0
+  damage: 20
+  fireRate: 0.13
+  specialCooldown: 5
+  hipSpread: 0.1
+  aimSpread: 0.01
+  aimSpeed: 5.25
+  isAutoFire: 1
   bulletImpactPrefab: {fileID: 7310387583158887988, guid: a5423b9a087337d4b8fed3034de22753, type: 3}
   bulletMissPrefab: {fileID: 7310387583158887988, guid: a86b5b0fc02de734ea32681353ecd45d, type: 3}
   hipPosition: {fileID: 0}
   aimPosition: {fileID: 0}
   boomerName: Rifle Boomerang
-  boomerSpawn: {fileID: 0}
-  boomerSpeed: 0
-  boomerHealth: 0
-  boomerDamage: 0
-  boomerTime: 0
+  boomerSpawn: {fileID: 3561928353983386189}
+  boomerSpeed: 10
+  boomerHealth: 75
+  boomerDamage: 25
+  boomerTime: 3.5
+  boomerBounce: 4
+  bounceBonusDamage: 25
+  bounceAmmoBonus: 4
   boomerang: {fileID: 0}
+--- !u!114 &4485735447635651144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842078318599845817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1001 &3710917668782394284
 PrefabInstance:
   m_ObjectHideFlags: 0
