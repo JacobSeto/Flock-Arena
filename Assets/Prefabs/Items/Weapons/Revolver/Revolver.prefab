@@ -84,15 +84,18 @@ MonoBehaviour:
   ammo: 0
   nextUse: 0
   maxAmmo: 6
-  reload: 3
+  reload: 4
   fireRate: 0.3
   weaponAudio: []
-  moveX: 0
-  moveY: 0
-  moveZ: 0
-  rotateX: 0
+  moveX: 0.01
+  moveY: 0.01
+  moveZ: 0.01
+  rotateX: -7
   rotateY: 0
   rotateZ: 0
+  playerRotateX: 1.8
+  playerRotateY: 0
+  rotateVector: {x: 0, y: 0, z: 0}
   canAim: 1
   spread: 0
   damage: 60
@@ -106,10 +109,6 @@ MonoBehaviour:
   bulletMissPrefab: {fileID: 7310387583158887988, guid: a86b5b0fc02de734ea32681353ecd45d, type: 3}
   hipPosition: {fileID: 0}
   aimPosition: {fileID: 0}
-  explosionRounds: 0
-  exploName: Explosive Round
-  exploDamage: 25
-  exploRadius: 0.25
   coinName: Coin Projectile
   coinSpawn: {fileID: 2965364154634681250}
   coinSpeed: 8
@@ -119,6 +118,21 @@ MonoBehaviour:
   coinRangeRadius: 10
   deflectMultiplyer: 1
   coin: {fileID: 0}
+  heavyChange: 100
+  moneyHandsCooldown: 4
+  silverDollarMultiplyer: 1.5
+  titaniumHealth: 100
+  betterBarrelReloadTime: 2.5
+  quickDrawTime: 3
+  explosionRounds: 0
+  exploRoundName: Explosive Round
+  exploDamage: 25
+  exploRadius: 0.35
+  revautoFirerate: 0.25
+  largerMagazines: 0
+  numFrag: 0
+  oiledBulletsDamageBonus: 0
+  recursiveCoinRadiusBonus: 0
 --- !u!114 &3519381943675185610
 MonoBehaviour:
   m_ObjectHideFlags: 0

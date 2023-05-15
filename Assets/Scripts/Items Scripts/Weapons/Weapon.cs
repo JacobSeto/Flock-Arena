@@ -16,6 +16,7 @@ public abstract class Weapon : Item
     [SerializeField] float rotateX;
     [SerializeField] float rotateY;
     [SerializeField] float rotateZ;
+    [SerializeField] float playerRotateX; //player rotation after firing gun
 
     public bool canAim = true;
     float specialTime;
@@ -61,7 +62,7 @@ public abstract class Weapon : Item
     public override void CheckUse()
     {
         base.CheckUse();
-        if (useItem && !playerController.isPaused && isAutoFire && Input.GetMouseButton(0))
+        if (useItem&&!playerController.isPaused && isAutoFire && Input.GetMouseButton(0))
         {
             Use();
         }
@@ -73,6 +74,8 @@ public abstract class Weapon : Item
         //weaponAudio[UnityEngine.Random.Range(0, weaponAudio.Length - 1)].Play();
         transform.position += new Vector3(UnityEngine.Random.Range(-moveX, moveX), UnityEngine.Random.Range(-moveY, moveY), UnityEngine.Random.Range(-moveZ, moveZ));
         transform.Rotate(rotateX, rotateY, rotateZ);
+        //vertical rotation for non-autofire weapons
+        playerController.verticalLookRotation += playerRotateX;
     }
     public virtual void Special() { }
 

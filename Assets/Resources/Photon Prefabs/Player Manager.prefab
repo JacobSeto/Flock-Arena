@@ -2028,17 +2028,6 @@ MonoBehaviour:
   swift2: 1.1
   medkit1: 0
   grenade1: 0
-  heavyChange: 75
-  moneyHandsCooldown: 4
-  silverDollarMultiplyer: 1.25
-  titaniumHealth: 90
-  betterBarrelReloadTime: 3
-  quickDrawTime: 10
-  revautoFirerate: 0.25
-  largerMagazines: 1.5
-  numFrag: 10
-  oiledBulletsDamageBonus: 75
-  recursiveCoinRadiusBonus: 2
   SpawnButton: {fileID: 8838079433137896918}
   StartCountdown: {fileID: 5253588683700796750}
 --- !u!1 &2712104579498965602

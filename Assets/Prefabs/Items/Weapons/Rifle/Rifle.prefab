@@ -79,11 +79,12 @@ MonoBehaviour:
   isEquip: 0
   playerController: {fileID: 0}
   useItem: 1
-  nextShot: 0
   reloading: 0
   ammo: 0
+  nextUse: 0
   maxAmmo: 30
   reload: 3.5
+  fireRate: 0.13
   weaponAudio: []
   moveX: 0
   moveY: 0.008
@@ -91,10 +92,10 @@ MonoBehaviour:
   rotateX: -1.25
   rotateY: 0
   rotateZ: 0
+  playerRotateX: 1.4
   canAim: 1
   spread: 0
   damage: 20
-  fireRate: 0.13
   specialCooldown: 5
   hipSpread: 0.1
   hipSpeed: 6

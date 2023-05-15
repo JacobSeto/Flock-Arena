@@ -688,13 +688,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190680518673092757}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e69600df8f1cbf4db53ea604f65afbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smooth: 2
-  multiplier: 8
+  smooth: 2.5
+  multiplier: 75
   player: {fileID: 6245256535259582154}
 --- !u!1 &1420387341913760351
 GameObject:
@@ -1285,7 +1285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2178191432236131489}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.11, z: 0.55}
+  m_LocalPosition: {x: 0, y: -0.11, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4051,6 +4051,7 @@ MonoBehaviour:
   currentHealth: 200
   itemHolder: {fileID: 883647691862817334}
   items: []
+  verticalLookRotation: 0
   playerTransform: {fileID: 3734202351384468184}
   rb: {fileID: 2024073888913952704}
   view: {fileID: 2239898583963388308}
@@ -4601,50 +4602,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: view
-      value: 
-      objectReference: {fileID: 1745464367007335973}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: moveX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: moveY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: moveZ
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: rotateX
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: rotateZ
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: coinName
-      value: Coin Projectile
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: coinTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: itemInfo
-      value: 
-      objectReference: {fileID: 11400000, guid: 55086f7673a65b140a857b9a8d1a801f, type: 2}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: coinSpawn
-      value: 
-      objectReference: {fileID: 2442847336811612794}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: coinSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: exploName
       value: Explosive Round
       objectReference: {fileID: 0}
@@ -4653,33 +4610,9 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: coinDamage
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: coinHealth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: InInventory
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: aimPosition
       value: 
       objectReference: {fileID: 5689864117997599077}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: exploDamage
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: exploRadius
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: heavyChange
-      value: 75
-      objectReference: {fileID: 0}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: hipPosition
       value: 
@@ -4689,19 +4622,7 @@ PrefabInstance:
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: quickDrawTime
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: explosiveRound
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: itemGameObject
-      value: 
-      objectReference: {fileID: 5587891689296192563}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: coinRangeRadius
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
@@ -4709,33 +4630,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: largerMagazines
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: revautoFirerate
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: bulletMissPrefab
-      value: 
-      objectReference: {fileID: 7310387583158887988, guid: a86b5b0fc02de734ea32681353ecd45d, type: 3}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 6245256535259582154}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: deflectMultiplyer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: bulletImpactPrefab
-      value: 
-      objectReference: {fileID: 7310387583158887988, guid: a5423b9a087337d4b8fed3034de22753, type: 3}
-    - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
-      propertyPath: moneyHandsCooldown
-      value: 4.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3699387094385625076, guid: 85668d320a71d49458c18e721c727861, type: 3}
       propertyPath: quickHandReloadTime
       value: 1.75
@@ -4764,38 +4661,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 427087305237447228, guid: 85668d320a71d49458c18e721c727861, type: 3}
   m_PrefabInstance: {fileID: 630972653544894936}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1745464367007335973 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1222877730162636797, guid: 85668d320a71d49458c18e721c727861, type: 3}
-  m_PrefabInstance: {fileID: 630972653544894936}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5587891689296192563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &2442847336811612794 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2965364154634681250, guid: 85668d320a71d49458c18e721c727861, type: 3}
-  m_PrefabInstance: {fileID: 630972653544894936}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4041683188482414610 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3519381943675185610, guid: 85668d320a71d49458c18e721c727861, type: 3}
   m_PrefabInstance: {fileID: 630972653544894936}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5587891689296192563}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5587891689296192563 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4993796733056849387, guid: 85668d320a71d49458c18e721c727861, type: 3}
-  m_PrefabInstance: {fileID: 630972653544894936}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1086736337255397186
 PrefabInstance:
   m_ObjectHideFlags: 0

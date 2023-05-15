@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     [Space]
     [Header("Player Controller")]
-    float verticalLookRotation;
+    public float verticalLookRotation;
     bool isGrounded;
     public Transform playerTransform;
 
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         verticalLookRotation += Input.GetAxisRaw("Mouse Y") * mouseSens;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
 
-        cameraHolder.transform.localEulerAngles = Vector3.left * verticalLookRotation;
+        camTransform.localEulerAngles = Vector3.left * verticalLookRotation;
     }
 
     private void UpdateMoveState()
@@ -387,6 +387,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (damage == 0)
+        {
+            return;
+        }
         view.RPC(nameof(RPC_TakeDamage),view.Owner, damage);
         view.RPC(nameof(RPC_DisplayDamage), RpcTarget.All, damage);
     }
@@ -394,10 +398,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [PunRPC]
     void RPC_TakeDamage(float damage, PhotonMessageInfo info)
     {
-        if(damage == 0)
-        {                                                         
-            return;
-        }
         currentHealth -= damage;
 
         hitUI.alpha += damage/maxHealth;

@@ -26,45 +26,21 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
     string teamName = "blue";
     [Space]
     [Header("Tank")]
-    [SerializeField] float vital1 = 25f;
-    [SerializeField] float vital2 = 40f;
+    [SerializeField] float vital1;
+    [SerializeField] float vital2;
     [Space]
     [Header("Support")]
-    [SerializeField] float regen1 = .3f;
-    [SerializeField] float regen2 = .2f;
+    [SerializeField] float regen1;
+    [SerializeField] float regen2;
     [Space]
     [Header("Mobility")]
-    [SerializeField] float swift1 = 1.2f;
-    [SerializeField] float swift2 = 1.2f;
+    [SerializeField] float swift1;
+    [SerializeField] float swift2;
 
     [Space]
     [Header("Utility")]
     [SerializeField] int medkit1;
     [SerializeField] int grenade1;
-
-    //Revolver
-    [Header("Revolver Path 1")]
-    [SerializeField] float heavyChange;  //increase damage of coin hitting players directly
-    [SerializeField] float moneyHandsCooldown;  //shorter coin cooldown
-    [SerializeField] float silverDollarMultiplyer;  //coin deflect multipler increased
-    [SerializeField] int titaniumHealth;  //increase health of coin to be shot multiple times
-
-    [Header("Revolver Path 2")]
-    [SerializeField] float betterBarrelReloadTime; //faster reload time
-    [SerializeField] float quickDrawTime;  // aim-in much faster
-    //Explosive Round damage for the explosive round
-    [SerializeField] float revautoFirerate; //revauto:  auto fire enabled and faster firerate
-
-
-    [Header("Revolver Path 3")]
-    [SerializeField] float largerMagazines;  //increase the ammo capacity of both revolver and rifle.  multiply ammo
-    [SerializeField] int numFrag;  //when shotgun shoots coin, the coin fragments and shoots multiple projectiles
-    [SerializeField] float oiledBulletsDamageBonus;  //RPG projectiles shot by revolver do extra explosion damage
-    [SerializeField] float recursiveCoinRadiusBonus; //When coin hits recursive round (not projectile), increase explosion radius
-
-
-
-
 
 
     [Space]
@@ -253,24 +229,24 @@ public class PlayerLoadout : MonoBehaviourPunCallbacks
                 Revolver revolver = weapon.gameObject.GetComponent<Revolver>();
                 //Path 1
                 if (skills[32].gameObject.GetComponent<Toggle>().isOn)
-                    revolver.coinDamage += heavyChange;
+                    revolver.coinDamage += revolver.heavyChange;
                 if (skills[33].gameObject.GetComponent<Toggle>().isOn)
-                    revolver.specialCooldown = moneyHandsCooldown;
+                    revolver.specialCooldown = revolver.moneyHandsCooldown;
                 if (skills[34].gameObject.GetComponent<Toggle>().isOn)
-                    revolver.deflectMultiplyer = silverDollarMultiplyer;
+                    revolver.deflectMultiplyer = revolver.silverDollarMultiplyer;
                 if (skills[35].gameObject.GetComponent<Toggle>().isOn)
-                    revolver.coinHealth = titaniumHealth;
+                    revolver.coinHealth = revolver.titaniumHealth;
                 //Path 2
                 if (skills[36].gameObject.GetComponent<Toggle>().isOn)
-                    revolver.reload = betterBarrelReloadTime;
+                    revolver.reload = revolver.betterBarrelReloadTime;
                 if (skills[37].gameObject.GetComponent<Toggle>().isOn)
-                    revolver.aimSpeed = quickDrawTime;
+                    revolver.aimSpeed = revolver.quickDrawTime;
                 if (skills[38].gameObject.GetComponent<Toggle>().isOn)
                     revolver.explosionRounds = true;
                 if (skills[39].gameObject.GetComponent<Toggle>().isOn)
                 {
                     revolver.isAutoFire = true;
-                    revolver.fireRate = revautoFirerate;
+                    revolver.fireRate = revolver.revautoFirerate;
                 }
                 break;
             case "Rifle":

@@ -20,6 +20,10 @@ public class DamageableGameObject : MonoBehaviourPunCallbacks, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (damage == 0)
+        {
+            return;
+        }
         view.RPC(nameof(RPC_TakeDamage), view.Owner, damage);
         if(displayDamage)
             view.RPC(nameof(RPC_DisplayDamage), RpcTarget.All, damage);
@@ -28,7 +32,7 @@ public class DamageableGameObject : MonoBehaviourPunCallbacks, IDamageable
     [PunRPC]
     void RPC_TakeDamage(float damage, PhotonMessageInfo info)
     {
-        if (invincible || damage == 0)
+        if (invincible)
         {
             return;
         }
