@@ -335,6 +335,7 @@ MonoBehaviour:
   nextUse: 0
   maxAmmo: -1
   reload: -1
+  fireRate: 0.15
   weaponAudio: []
   moveX: 0
   moveY: 0
@@ -342,10 +343,10 @@ MonoBehaviour:
   rotateX: 0
   rotateY: 0
   rotateZ: 0
+  playerRotateX: 0
   canAim: 0
   spread: 0
   damage: 15
-  fireRate: 0.15
   specialCooldown: 0
   hipSpread: 0
   hipSpeed: 0

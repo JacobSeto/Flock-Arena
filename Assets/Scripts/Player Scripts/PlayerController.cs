@@ -392,7 +392,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             return;
         }
         view.RPC(nameof(RPC_TakeDamage),view.Owner, damage);
-        view.RPC(nameof(RPC_DisplayDamage), RpcTarget.All, damage);
     }
 
     [PunRPC]
@@ -410,6 +409,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         {
             Die();
             PlayerManager.Find(info.Sender).GetKill();
+        }
+        else
+        {
+            view.RPC(nameof(RPC_DisplayDamage), RpcTarget.All, damage);
         }
     }
 

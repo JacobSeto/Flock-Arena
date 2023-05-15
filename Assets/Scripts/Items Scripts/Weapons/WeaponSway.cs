@@ -1,17 +1,18 @@
 using System;
 using UnityEngine;
+using Photon.Pun;
 
-public class WeaponSway : MonoBehaviour
+public class WeaponSway : MonoBehaviourPunCallbacks
 {
-
+    [SerializeField] PhotonView view;
     [Header("Sway Settings")]
     [SerializeField] private float smooth;
     [SerializeField] private float multiplier;
     [SerializeField] PlayerController player;
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (player.isPaused)
+        if (!view.IsMine || player.isPaused)
             return;
         // get mouse input
         float mouseX = Input.GetAxisRaw("Mouse X") * -multiplier;

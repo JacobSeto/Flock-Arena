@@ -693,6 +693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e69600df8f1cbf4db53ea604f65afbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  view: {fileID: 2239898583963388308}
   smooth: 2.5
   multiplier: 75
   player: {fileID: 6245256535259582154}

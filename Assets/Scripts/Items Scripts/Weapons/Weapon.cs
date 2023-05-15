@@ -33,6 +33,10 @@ public abstract class Weapon : Item
     public bool isAutoFire;
     public override void Update()
     {
+        if (!view.IsMine)
+        {
+            return;
+        }
         base.Update();
         CheckSpecial();
     }
@@ -42,11 +46,16 @@ public abstract class Weapon : Item
         {
             return;
         }
-        Aim();
+        if (!playerController.isPaused)
+            Aim();
     }
 
     public override void ItemInactive()
     {
+        if (!view.IsMine)
+        {
+            return;
+        }
         base.ItemInactive();
         if (transform.position != hipPosition.position)
         {
@@ -89,7 +98,7 @@ public abstract class Weapon : Item
         {
             specialTime -= Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.Q) && specialActive)
+        if (Input.GetKeyDown(KeyCode.Q) && specialActive && !playerController.isPaused)
         {
             Special();
             specialActive = false;
