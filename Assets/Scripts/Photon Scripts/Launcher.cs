@@ -10,7 +10,6 @@ using UnityEngine.SceneManagement;
 public class Launcher : MonoBehaviourPunCallbacks
 {
      bool offline;
-    [SerializeField] GameObject offlinePrompt;
 
     public static Launcher Instance;
     private static Dictionary<string, RoomInfo> cachedRoomList = new Dictionary<string, RoomInfo>();
@@ -32,27 +31,14 @@ public class Launcher : MonoBehaviourPunCallbacks
         Instance = this;
     }
 
-    public void SetOffline(bool isOffline)
+    public void StartLauncher(bool isOffline)
     {
         offline = isOffline;
-        gameObject.SetActive(true);
-        offlinePrompt.SetActive(false);
-
-    }
-
-    private void Start()
-    {
-        print("start");
-        if (PhotonNetwork.IsConnected)
-        {
-            return;
-        }
+        print("start launcher");
         Debug.Log("Connecting To Master");
         if (offline)
         {
             PhotonNetwork.OfflineMode = true;
-            PhotonNetwork.CreateRoom("Offline");
-            StartGameMode(1);
         }
         else
         {
@@ -63,7 +49,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log("Joined Master");
         PhotonNetwork.AutomaticallySyncScene = true;
-        if (!offline)
+        if (offline)
+        {
+            PhotonNetwork.CreateRoom("Offline");
+        }
+        else
         {
             PhotonNetwork.JoinLobby();
         }
@@ -78,6 +68,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         if (roomNameInputField.text.Length > 0)
         {
+            print("creating room");
             PhotonNetwork.CreateRoom(roomNameInputField.text);
             MenuManager.Instance.OpenMenu("loading");
         }
@@ -116,10 +107,10 @@ public class Launcher : MonoBehaviourPunCallbacks
         MenuManager.Instance.OpenMenu("error");
     }
 
-    public void StartGameMode(int sceneBuildIndex)
+    public void StartGameMode(int buildIndex)
     {
         //level num must be same num as build index of game
-        PhotonNetwork.LoadLevel(sceneBuildIndex);
+        PhotonNetwork.LoadLevel(buildIndex);
     }
 
     public void LeaveRoom()
