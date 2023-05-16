@@ -49,12 +49,26 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
     public void LeaveGame()
     {
-        if ( PhotonNetwork.IsConnectedAndReady)
+        if (PhotonNetwork.IsConnectedAndReady)
         {
             Destroy(RoomManager.Instance.gameObject);
-            PhotonNetwork.LoadLevel(0);
-            PhotonNetwork.LeaveRoom();
+            if (PhotonNetwork.OfflineMode)
+            {
+                PhotonNetwork.Disconnect();
+                SceneManager.LoadScene("Menu");
+            }
+            else
+            {
+                PhotonNetwork.LeaveRoom();
+                PhotonNetwork.LoadLevel(0);
+            }
         }
+    }
+
+    public void DisconnectGame()
+    {
+        PhotonNetwork.Disconnect();
+        OpenMenu("start");
     }
 
     public void Quit()

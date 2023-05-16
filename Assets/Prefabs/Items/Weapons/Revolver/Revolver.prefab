@@ -84,7 +84,7 @@ MonoBehaviour:
   ammo: 0
   nextUse: 0
   maxAmmo: 6
-  reload: 4
+  reload: 4.5
   fireRate: 0.3
   weaponAudio: []
   moveX: 0.01
@@ -94,8 +94,6 @@ MonoBehaviour:
   rotateY: 0
   rotateZ: 0
   playerRotateX: 1.8
-  playerRotateY: 0
-  rotateVector: {x: 0, y: 0, z: 0}
   canAim: 1
   spread: 0
   damage: 60
@@ -127,7 +125,7 @@ MonoBehaviour:
   explosionRounds: 0
   exploRoundName: Explosive Round
   exploDamage: 25
-  exploRadius: 0.35
+  exploRadius: 0.75
   revautoFirerate: 0.25
   largerMagazines: 0
   numFrag: 0

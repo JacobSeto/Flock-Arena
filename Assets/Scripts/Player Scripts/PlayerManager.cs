@@ -24,8 +24,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Slider mouseSlider;
     public bool inGame = false;
     bool isPaused = false;
-    int kills;
-    int deaths;
+    public int kills;
+    public int deaths;
 
     [HideInInspector] public bool isPlayer;
 
@@ -116,6 +116,7 @@ public class PlayerManager : MonoBehaviour
         Hashtable hash = new Hashtable();
         hash.Add("deaths", deaths);
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void GetKill()

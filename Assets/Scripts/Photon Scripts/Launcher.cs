@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
-     bool offline;
+     public bool offline;
 
     public static Launcher Instance;
     private static Dictionary<string, RoomInfo> cachedRoomList = new Dictionary<string, RoomInfo>();
@@ -115,8 +115,15 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
-        PhotonNetwork.LeaveRoom();
-        MenuManager.Instance.OpenMenu("loading");
+        if (offline)
+        {
+            MenuManager.Instance.DisconnectGame();
+        }
+        else
+        {
+            PhotonNetwork.LeaveRoom();
+            MenuManager.Instance.OpenMenu("loading");
+        }
     }
 
     public void JoinRoom(RoomInfo info)

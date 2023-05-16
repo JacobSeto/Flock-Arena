@@ -21,6 +21,13 @@ public class Deathmatch : MonoBehaviourPunCallbacks
     float timeLeft;
     bool isGameDone = false;
 
+    //End Screen
+    [SerializeField] GameObject EndScreen;
+    [SerializeField] TMP_Text winnerText;
+    [SerializeField] TMP_Text killsText;
+
+    PlayerManager[] playerManagers;
+
     private void Awake()
     {
         timeLeft = startTime;
@@ -48,7 +55,7 @@ public class Deathmatch : MonoBehaviourPunCallbacks
             timeLeft = roundTime;
             roundText.text = "Round: " + round.ToString();
             //add skill points as long as it isn't starting round
-            PlayerManager[] playerManagers = GameObject.FindObjectsOfType<PlayerManager>();
+            playerManagers = GameObject.FindObjectsOfType<PlayerManager>();
             if (round == 1)
             {
                 foreach (PlayerManager playerManager in playerManagers)
@@ -122,5 +129,24 @@ public class Deathmatch : MonoBehaviourPunCallbacks
     {
         isGameDone = true;
         Debug.Log("end game");
+        //kill all players and disable playerManager
+        gameHUD.SetActive(false);
+        int highestKill = 0;
+        string winnerName = "!?";
+        foreach (PlayerManager playerManager in playerManagers)
+        {
+            if(playerManager.player!=null)
+                playerManager.Die();
+            if(playerManager.kills > highestKill)
+            {
+                highestKill = playerManager.kills;
+                winnerName = playerManager.view.Owner.NickName;
+            }
+            winnerName = playerManager.view.Owner.NickName;
+            playerManager.gameObject.SetActive(false);
+        }
+        winnerText.text = winnerName + " Wins!!!";
+        killsText.text = highestKill + " Kills";
+        EndScreen.SetActive(true);
     }
 }
