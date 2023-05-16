@@ -93,8 +93,15 @@ MonoBehaviour:
   rotateX: -7
   rotateY: 0
   rotateZ: 0
-  playerRotateX: 1.8
+  recoil: {fileID: 0}
+  hipRecoilX: 8
+  hipRecoilY: 8
+  hipRecoilZ: 8
+  aimRecoilX: 3
+  aimRecoilY: 1
+  aimRecoilZ: 1
   canAim: 1
+  isAiming: 0
   spread: 0
   damage: 60
   specialCooldown: 6

@@ -16,9 +16,19 @@ public abstract class Weapon : Item
     [SerializeField] float rotateX;
     [SerializeField] float rotateY;
     [SerializeField] float rotateZ;
-    [SerializeField] float playerRotateX; //player rotation after firing gun
+    [SerializeField] Recoil recoil;
+    //Hipfire Recoil
+    [SerializeField] private float hipRecoilX;
+    [SerializeField] private float hipRecoilY;
+    [SerializeField] private float hipRecoilZ;
+
+    //Aim Recoil
+    [SerializeField] private float aimRecoilX;
+    [SerializeField] private float aimRecoilY;
+    [SerializeField] private float aimRecoilZ;
 
     public bool canAim = true;
+    public bool isAiming;
     float specialTime;
     bool specialActive;
     //default value is 0, except some which 0 is valid
@@ -79,12 +89,23 @@ public abstract class Weapon : Item
 
     public virtual void Shoot()
     {
+        //IMPORTANT:  Call the base method AFTER firing.  This is to avoid random movement before the bullet is fired
+
+
         //play weapon audio
         //weaponAudio[UnityEngine.Random.Range(0, weaponAudio.Length - 1)].Play();
         transform.position += new Vector3(UnityEngine.Random.Range(-moveX, moveX), UnityEngine.Random.Range(-moveY, moveY), UnityEngine.Random.Range(-moveZ, moveZ));
         transform.Rotate(rotateX, rotateY, rotateZ);
         //vertical rotation for non-autofire weapons
-        playerController.verticalLookRotation += playerRotateX;
+        if (isAiming)
+        {
+            recoil.RecoilFire(aimRecoilX, aimRecoilY, aimRecoilZ);
+        }
+        else
+        {
+            recoil.RecoilFire(hipRecoilX, hipRecoilY, hipRecoilZ);
+        }
+
     }
     public virtual void Special() { }
 
@@ -109,13 +130,18 @@ public abstract class Weapon : Item
     public virtual void Aim()
     {
         if (!canAim || !playerController.canMove)
+        {
+            isAiming = false;
             return;
+        }
         else if (Input.GetKey(KeyCode.Mouse1))
         {
+            isAiming = true;
             AimPosition();
         }
         else
         {
+            isAiming = false;
             HipPosition();
         }
     }

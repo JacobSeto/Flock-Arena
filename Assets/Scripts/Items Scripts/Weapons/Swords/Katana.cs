@@ -33,8 +33,6 @@ public class Katana : Weapon
     [SerializeField] float slashChargeTime;
     [SerializeField] float slashDelay;
     [SerializeField] float slashCoolDownTime;
-
-    bool slashing;
     float slashUpdate;
     GameObject slashLine;
     GameObject slashHit;
@@ -99,11 +97,8 @@ public class Katana : Weapon
             lastSlashDistance = slashDistance;
             lastSlashDamage = slashDamage;
             Invoke(nameof(Slash), slashDelay);
-            slashing = false;
             slashCoolDown = Time.time + slashCoolDownTime;
         }
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-            slashing = true;
         if (Input.GetKey(KeyCode.Mouse1))
         {
             if (!chargeUI.activeSelf)
@@ -135,7 +130,7 @@ public class Katana : Weapon
     public override void Shoot()
     {
         base.Shoot();
-        if (!slashing)
+        if (!isAiming)
         {
             Swing();
         }

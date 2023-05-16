@@ -92,7 +92,9 @@ MonoBehaviour:
   rotateX: -1.25
   rotateY: 0
   rotateZ: 0
-  playerRotateX: 1.4
+  recoilForce: 2
+  recoilDampTime: 4
+  dampSpeed: 6
   canAim: 1
   spread: 0
   damage: 20

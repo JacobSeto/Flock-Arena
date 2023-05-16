@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] List<Item> items;
     int itemIndex = 0;
     int previousItemIndex = -1;
+    public Item currentItem;  //item player is currently holding
 
     [Space]
     [Header("Player Controller")]
@@ -300,12 +301,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             return;
         if (Input.GetMouseButtonDown(0))
         {
-            items[itemIndex].Use();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            items[itemIndex].Reload();
+            currentItem.Use();
         }
     }
 
@@ -315,8 +311,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             return;
 
         itemIndex = _index;
-        items[itemIndex].ItemSetActive(true);
-        items[itemIndex].isEquip = true;
+        currentItem = items[itemIndex];
+        currentItem.ItemSetActive(true);
+        currentItem.isEquip = true;
         if (previousItemIndex != -1)
         {
             items[previousItemIndex].ItemInactive();
@@ -331,7 +328,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     public void EnemyEquip(int _index)
     {
         itemIndex = _index;
-        items[itemIndex].itemGameObject.SetActive(true);
+        currentItem = items[itemIndex];
+        currentItem.itemGameObject.SetActive(true);
 
         if (previousItemIndex != -1)
         {
