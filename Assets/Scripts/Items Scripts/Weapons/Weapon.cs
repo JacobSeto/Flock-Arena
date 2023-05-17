@@ -16,7 +16,7 @@ public abstract class Weapon : Item
     [SerializeField] float rotateX;
     [SerializeField] float rotateY;
     [SerializeField] float rotateZ;
-    [SerializeField] Recoil recoil;
+    public Recoil recoil;
     //Hipfire Recoil
     [SerializeField] private float hipRecoilX;
     [SerializeField] private float hipRecoilY;
@@ -41,6 +41,7 @@ public abstract class Weapon : Item
     public float aimSpread;
     public float aimSpeed;
     public bool isAutoFire;
+
     public override void Update()
     {
         if (!view.IsMine)

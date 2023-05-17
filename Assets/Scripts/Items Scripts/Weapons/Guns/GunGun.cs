@@ -23,6 +23,7 @@ public class GunGun : ProjectileGun
         base.Shoot();
         canAim = false;
         GunGunProjectile gungunScript = projectile.GetComponent<GunGunProjectile>();
+        gungunScript.gungun.recoil = recoil;
         gungunScript.boostTime = boostTime;
         gungunScript.boostStrength = boostStrength;
     }

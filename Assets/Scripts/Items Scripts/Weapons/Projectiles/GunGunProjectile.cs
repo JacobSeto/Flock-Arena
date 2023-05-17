@@ -16,7 +16,7 @@ public class GunGunProjectile : Projectile
     PlayerManager playerManager;
     private bool boostDone = false;
 
-    [SerializeField] SingleShotGun gungun;
+    public SingleShotGun gungun;
     public float boostTime;
     public float boostStrength;
 

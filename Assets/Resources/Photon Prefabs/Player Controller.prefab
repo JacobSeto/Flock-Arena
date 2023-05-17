@@ -4863,6 +4863,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5339694701153362055, guid: 0444f00c43d873247b885ea9ce474297, type: 3}
+      propertyPath: recoil
+      value: 
+      objectReference: {fileID: 7692946126908019351}
+    - target: {fileID: 5339694701153362055, guid: 0444f00c43d873247b885ea9ce474297, type: 3}
       propertyPath: aimPosition
       value: 
       objectReference: {fileID: 3050047015889915438}
@@ -5328,6 +5332,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9071650641665276232, guid: 8c222b60d24fbc34a83cce31551117e1, type: 3}
+      propertyPath: recoil
+      value: 
+      objectReference: {fileID: 7692946126908019351}
+    - target: {fileID: 9071650641665276232, guid: 8c222b60d24fbc34a83cce31551117e1, type: 3}
       propertyPath: aimPosition
       value: 
       objectReference: {fileID: 4155401381819178640}
@@ -5474,6 +5482,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8664965513817791192, guid: b4fb460072e6c2d4883406ed827c76b9, type: 3}
+      propertyPath: recoil
+      value: 
+      objectReference: {fileID: 7692946126908019351}
+    - target: {fileID: 8664965513817791192, guid: b4fb460072e6c2d4883406ed827c76b9, type: 3}
       propertyPath: aimPosition
       value: 
       objectReference: {fileID: 4617922560138957174}
@@ -5563,6 +5575,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
+      propertyPath: recoil
+      value: 
+      objectReference: {fileID: 7692946126908019351}
+    - target: {fileID: 8215411483118738923, guid: 24256c63e5b9fc74fbca04fa712eef6f, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -5646,7 +5662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6708384082263663749, guid: 0a64c7f8c994506469dbfa6e8e83e1b9, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6708384082263663749, guid: 0a64c7f8c994506469dbfa6e8e83e1b9, type: 3}
       propertyPath: playerController
@@ -5686,6 +5702,10 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3238822956813436068, guid: 1ce19eaee0ad875449f10c50f3b0359b, type: 3}
+      propertyPath: recoil
+      value: 
+      objectReference: {fileID: 7692946126908019351}
     - target: {fileID: 3238822956813436068, guid: 1ce19eaee0ad875449f10c50f3b0359b, type: 3}
       propertyPath: chargeUI
       value: 

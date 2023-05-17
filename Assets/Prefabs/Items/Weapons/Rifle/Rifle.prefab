@@ -92,10 +92,15 @@ MonoBehaviour:
   rotateX: -1.25
   rotateY: 0
   rotateZ: 0
-  recoilForce: 2
-  recoilDampTime: 4
-  dampSpeed: 6
+  recoil: {fileID: 0}
+  hipRecoilX: 3
+  hipRecoilY: 2
+  hipRecoilZ: 2
+  aimRecoilX: 1.5
+  aimRecoilY: 0.5
+  aimRecoilZ: 0.5
   canAim: 1
+  isAiming: 0
   spread: 0
   damage: 20
   specialCooldown: 5

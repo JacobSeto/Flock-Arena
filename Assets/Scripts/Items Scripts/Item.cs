@@ -29,7 +29,6 @@ public abstract class Item : MonoBehaviourPunCallbacks
     {
         if (!InInventory)
             return;
-        GetComponentInParent<PlayerController>();
         ItemOwnership();
         ammo = maxAmmo;
     }

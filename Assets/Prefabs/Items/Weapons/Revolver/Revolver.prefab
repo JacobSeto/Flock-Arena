@@ -94,10 +94,10 @@ MonoBehaviour:
   rotateY: 0
   rotateZ: 0
   recoil: {fileID: 0}
-  hipRecoilX: 8
-  hipRecoilY: 8
-  hipRecoilZ: 8
-  aimRecoilX: 3
+  hipRecoilX: 4
+  hipRecoilY: 2
+  hipRecoilZ: 2
+  aimRecoilX: 2
   aimRecoilY: 1
   aimRecoilZ: 1
   canAim: 1
