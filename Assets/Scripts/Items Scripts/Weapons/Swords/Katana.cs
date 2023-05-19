@@ -66,25 +66,28 @@ public class Katana : Weapon
         {
             return;
         }
+        base.Update();
         if (aimCooldownTime <= Time.time)
         {
             canAim = true;
         }
         if (swinging)
             Swinging();
-        Aim();
-        CheckUse();
-        CheckReload();
+    }
+
+    public override void FixedUpdate()
+    {
+        if (!view.IsMine) return;
+        base.FixedUpdate();
         ChargeSlash();
-        UpdateItemUI();
     }
 
     public override void Aim()
     {
-        if (slashCoolDown > Time.time && !swinging)
+        if(!swinging && !isAiming)
+        {
             HipPosition();
-        else
-            base.Aim();
+        }
     }
 
     public void ChargeSlash()
@@ -101,6 +104,8 @@ public class Katana : Weapon
         }
         if (Input.GetKey(KeyCode.Mouse1))
         {
+            isAiming = true;
+            AimPosition();
             if (!chargeUI.activeSelf)
                 chargeUI.SetActive(true);
             slashCharge += Time.deltaTime;
@@ -116,6 +121,7 @@ public class Katana : Weapon
         }
         else
         {
+            isAiming = false;
             if (slashCharge != 0)
             {
                 Destroy(slashLine); Destroy(slashHit);
@@ -137,6 +143,7 @@ public class Katana : Weapon
     }
     void Swing()
     {
+        swordHit.Clear();
         canAim = false;
         aimCooldownTime =  reload + aimCooldown + Time.time;
         swinging = true;
@@ -162,7 +169,6 @@ public class Katana : Weapon
             if (Quaternion.Angle(transform.rotation, swing1End.rotation) <= swingAngleStop)
             {
                 swordCollider.enabled = false;
-                swordHit.Clear();
                 swinging = false;
             }
         }
@@ -172,7 +178,6 @@ public class Katana : Weapon
             if (Quaternion.Angle(transform.rotation, swing2End.rotation) <= swingAngleStop)
             {
                 swordCollider.enabled = false;
-                swordHit.Clear();
                 swinging = false;
             }
         }

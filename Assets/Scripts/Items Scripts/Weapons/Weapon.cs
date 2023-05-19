@@ -130,12 +130,7 @@ public abstract class Weapon : Item
 
     public virtual void Aim()
     {
-        if (!canAim || !playerController.canMove)
-        {
-            isAiming = false;
-            return;
-        }
-        else if (Input.GetKey(KeyCode.Mouse1))
+        if (canAim && playerController.canMove && Input.GetKey(KeyCode.Mouse1))
         {
             isAiming = true;
             AimPosition();

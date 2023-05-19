@@ -91,7 +91,15 @@ MonoBehaviour:
   rotateX: 0
   rotateY: 0
   rotateZ: 0
+  recoil: {fileID: 0}
+  hipRecoilX: 0
+  hipRecoilY: 0
+  hipRecoilZ: 0
+  aimRecoilX: 0
+  aimRecoilY: 0
+  aimRecoilZ: 0
   canAim: 1
+  isAiming: 0
   spread: 0
   damage: 50
   specialCooldown: 0
@@ -116,11 +124,15 @@ MonoBehaviour:
   explosionRadius: 3
   selfDamage: 15
   blastStrength: 250
-  blastAirTime: 1
+  blastAirTime: 4
   earlyExplosionMultiplyer: 0.5
   projectile: {fileID: 0}
   boostTime: 0.75
   boostStrength: 10
+  gungunDamage: 10
+  gungunFirerate: 0.15
+  gungunSpread: 0.095
+  turnMax: 10
 --- !u!1 &4136868881592427159
 GameObject:
   m_ObjectHideFlags: 0

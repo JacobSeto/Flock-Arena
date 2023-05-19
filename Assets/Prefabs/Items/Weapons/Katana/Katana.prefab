@@ -83,7 +83,7 @@ MonoBehaviour:
   nextUse: 0
   maxAmmo: -1
   reload: 0
-  fireRate: 0.8
+  fireRate: 0.7
   weaponAudio: []
   moveX: 0
   moveY: 0
@@ -91,7 +91,15 @@ MonoBehaviour:
   rotateX: 0
   rotateY: 0
   rotateZ: 0
+  recoil: {fileID: 0}
+  hipRecoilX: 0
+  hipRecoilY: 0
+  hipRecoilZ: 0
+  aimRecoilX: 0
+  aimRecoilY: 0
+  aimRecoilZ: 0
   canAim: 1
+  isAiming: 0
   spread: 0
   damage: 75
   specialCooldown: 0
@@ -108,7 +116,7 @@ MonoBehaviour:
   chargeBar: {fileID: 0}
   chargeText: {fileID: 0}
   swordCollider: {fileID: 2381909824225213243}
-  swingAngleStop: 5
+  swingAngleStop: 0.1
   swingSpeed: 7
   aimCooldown: 1
   swing1Start: {fileID: 0}

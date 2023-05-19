@@ -448,9 +448,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     public void Die()
     {
-        if(view.IsMine)
+        if (view.IsMine)
+        {
             Cursor.lockState = CursorLockMode.None;
-        playerManager.Die();
+            Cursor.visible = true;
+            playerManager.Die();
+
+        }
     }
 
 }

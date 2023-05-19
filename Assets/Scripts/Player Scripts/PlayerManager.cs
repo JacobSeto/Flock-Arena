@@ -44,12 +44,16 @@ public class PlayerManager : MonoBehaviour
 
     public void SliderMouseSensitivity()
     {
+        if (!view.IsMine)
+            return;
         playerController.mouseSens = mouseSlider.value / 100;
         PlayerPrefs.SetFloat("Mouse Sensitivity", mouseSlider.value);
     }
 
     void Pause()
     {
+        if (!view.IsMine)
+            return;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             isPaused = !isPaused;
@@ -98,7 +102,9 @@ public class PlayerManager : MonoBehaviour
         //When Loadout set, create the player controller
         Transform spawnpoint = SpawnManager.Instance.GetSpawnpoint();
         //Instantiate the player controller
+        print("before");
         player = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Player Controller"), spawnpoint.position, spawnpoint.rotation, 0, new object[] { view.ViewID});
+        print("after");
         playerController = player.GetComponent<PlayerController>();   
         playerLoadoutUI.SetActive(false);
         inGame = true;
@@ -107,7 +113,10 @@ public class PlayerManager : MonoBehaviour
 
     public void Die()
     {
-        if (view.IsMine)
+        if (!view.IsMine)
+        {
+            return;
+        }
             inGame = false;
         PhotonNetwork.Destroy(player);
         SetPlayerLoadout();
@@ -116,7 +125,6 @@ public class PlayerManager : MonoBehaviour
         Hashtable hash = new Hashtable();
         hash.Add("deaths", deaths);
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-        Cursor.lockState = CursorLockMode.None;
     }
 
     public void GetKill()
