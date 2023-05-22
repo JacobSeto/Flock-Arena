@@ -15,7 +15,6 @@ public class PlayerManager : MonoBehaviour
     public PlayerController playerController;
     public PlayerLoadout playerLoadout;
     public GameObject playerLoadoutUI;
-    [SerializeField] GameObject playerLoadoutCamera;
     [SerializeField] Transform cameraHolder;
     GameObject loadoutCam;
 
@@ -26,8 +25,6 @@ public class PlayerManager : MonoBehaviour
     bool isPaused = false;
     public int kills;
     public int deaths;
-
-    [HideInInspector] public bool isPlayer;
 
     private void Awake()
     {
@@ -46,8 +43,9 @@ public class PlayerManager : MonoBehaviour
     {
         if (!view.IsMine)
             return;
-        playerController.mouseSens = mouseSlider.value / 100;
-        PlayerPrefs.SetFloat("Mouse Sensitivity", mouseSlider.value);
+        if(inGame)
+            playerController.mouseSens = mouseSlider.value / 100;
+        PlayerPrefs.SetFloat("Mouse Sensitivity", mouseSlider.value / 100);
     }
 
     void Pause()
@@ -82,15 +80,12 @@ public class PlayerManager : MonoBehaviour
     {
         if (view.IsMine)
         {
-            mouseSlider.value = PlayerPrefs.GetFloat("Mouse Sensitivity", 300f);
-            isPlayer = true;
             playerLoadoutUI.SetActive(true);
-            loadoutCam = Instantiate(playerLoadoutCamera, cameraHolder.position, cameraHolder.rotation, cameraHolder);
+            mouseSlider.value = PlayerPrefs.GetFloat("Mouse Sensitivity", 300f)*100;
         }
         else
         {
             Destroy(playerLoadoutUI);
-            isPlayer = false;
         }
     }
 
@@ -98,15 +93,12 @@ public class PlayerManager : MonoBehaviour
     {
         if (!view.IsMine)
             return;
-        Destroy(loadoutCam);
         //When Loadout set, create the player controller
         Transform spawnpoint = SpawnManager.Instance.GetSpawnpoint();
         //Instantiate the player controller
-        print("before");
-        player = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Player Controller"), spawnpoint.position, spawnpoint.rotation, 0, new object[] { view.ViewID});
-        print("after");
-        playerController = player.GetComponent<PlayerController>();   
         playerLoadoutUI.SetActive(false);
+        player = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Player Controller"), spawnpoint.position, spawnpoint.rotation, 0, new object[] { view.ViewID});
+        playerController = player.GetComponent<PlayerController>();   
         inGame = true;
     }
 
@@ -117,7 +109,9 @@ public class PlayerManager : MonoBehaviour
         {
             return;
         }
-            inGame = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        inGame = false;
         PhotonNetwork.Destroy(player);
         SetPlayerLoadout();
 

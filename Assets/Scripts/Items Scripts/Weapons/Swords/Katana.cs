@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
 
 public class Katana : Weapon
 {
@@ -45,6 +46,14 @@ public class Katana : Weapon
     float slashCharge;
     float slashCoolDown;
     public List<Transform> swordHit = new List<Transform>();  //lsit of transforms swordHits
+    [Header("Beam")]
+    public string beamName;
+    public Transform beamSpawn;
+    public float beamSpeed;
+    public float beamHealth;
+    public float beamDamage;
+    public float beamTime;
+    [HideInInspector] public GameObject beam;
 
     public void KatanaUpgrades()
     {
@@ -141,6 +150,14 @@ public class Katana : Weapon
             Swing();
         }
     }
+
+    public override void Special()
+    {
+        beam = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Projectiles", beamName), beamSpawn.position, beamSpawn.rotation);
+        Projectile beamScript = beam.GetComponent<Projectile>();
+        beamScript.SetProjectile(beamSpeed, beamHealth, beamDamage, beamTime,
+        false, 0, 0, 0, 0, 0, 0, playerController);
+    }
     void Swing()
     {
         swordHit.Clear();
@@ -199,7 +216,7 @@ public class Katana : Weapon
     public void Slash()
     {
         Ray slashRay = playerController.playerCamera.ViewportPointToRay(new Vector3(.5f, .5f));
-        slashRay.origin = playerController.camTransform.position;
+        slashRay.origin = playerController.cameraTransform.position;
         if (Physics.Raycast(slashRay, out RaycastHit hit, lastSlashDistance))
         {
             hit.collider.gameObject.GetComponentInParent<IDamageable>()?.TakeDamage(lastSlashDamage);
@@ -207,7 +224,7 @@ public class Katana : Weapon
         }
         else
         {
-            slashTeleport = playerController.playerTransform.position + playerController.camTransform.forward * lastSlashDistance;
+            slashTeleport = playerController.playerTransform.position + playerController.cameraTransform.forward * lastSlashDistance;
         }
         playerController.playerTransform.position = slashTeleport;
     }
@@ -215,11 +232,11 @@ public class Katana : Weapon
     public void CreateSlashLine()
     {
         Destroy(slashLine); Destroy(slashHit);
-        Vector3 halfPoint = playerController.camTransform.position + playerController.camTransform.forward * slashDistance/2;
-        slashLine = Instantiate(slashLinePrefab, halfPoint + slashYOffset, playerController.camTransform.rotation);
+        Vector3 halfPoint = playerController.cameraTransform.position + playerController.cameraTransform.forward * slashDistance/2;
+        slashLine = Instantiate(slashLinePrefab, halfPoint + slashYOffset, playerController.cameraTransform.rotation);
         slashLine.transform.localScale = new Vector3(0.1f, 0.1f, slashDistance);
         Ray slashRay = playerController.playerCamera.ViewportPointToRay(new Vector3(.5f, .5f));
-        slashRay.origin = playerController.camTransform.position;
+        slashRay.origin = playerController.cameraTransform.position;
         if (Physics.Raycast(slashRay, out RaycastHit hit, slashDistance))
         {
             slashHit = Instantiate(slashHitPrefab, hit.point, Quaternion.identity);
@@ -236,11 +253,6 @@ public class Katana : Weapon
         chargeText.text = (slashPercent * 100).ToString() + "%";
     }
 
-
-    public override void Special()
-    {
-        //Katana Special:  Shoots a blade beam
-    }
     private void OnDestroy()
     {
         Destroy(slashLine); Destroy(slashHit);

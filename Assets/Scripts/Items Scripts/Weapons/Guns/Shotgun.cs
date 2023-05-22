@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class Shotgun : MultiShotGun
 {
-    public void ShotgunUpgrades()
-    {
-        //Checks each shotgun upgrade and applies to gun
-    }
+    public float shotgunBlastForce;
+    public float blastFlockTime;
 
     public override void Special()
     {
-        //Shotgun Special:  Shotgun shoots projectiles that
-        //apply knockback to enemies and launches player
+        //Shotgun Special:  Shotgun blasts player into the air!
+        Shoot();
+        playerController.flockTime += blastFlockTime;
+        playerController.AddPlayerForce(-playerController.cameraTransform.forward * shotgunBlastForce*100);
+
+
     }
 }

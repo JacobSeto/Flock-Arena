@@ -124,7 +124,15 @@ MonoBehaviour:
   rotateX: 0
   rotateY: 0
   rotateZ: 0
+  recoil: {fileID: 0}
+  hipRecoilX: 0
+  hipRecoilY: 0
+  hipRecoilZ: 0
+  aimRecoilX: 0
+  aimRecoilY: 0
+  aimRecoilZ: 0
   canAim: 1
+  isAiming: 0
   spread: 0
   damage: 50
   specialCooldown: 0
@@ -148,7 +156,7 @@ MonoBehaviour:
   exploDamage: 50
   explosionRadius: 2.75
   selfDamage: 10
-  blastStrength: 800
+  blastStrength: 1500
   blastAirTime: 1.5
   earlyExplosionMultiplyer: 1
   projectile: {fileID: 0}
@@ -161,7 +169,7 @@ MonoBehaviour:
   recursiveExploDamage: 20
   recursiveRadius: 0.6
   recursiveSelfDamage: 10
-  recursiveBlastStrength: 250
+  recursiveBlastStrength: 500
   recursiveBlastAirTime: 0.75
   recursiveEEM: 1
 --- !u!114 &4207281042635679034

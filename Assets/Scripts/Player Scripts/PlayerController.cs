@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] GameObject damageDisplayPrefab;
     [Space]
     public Camera playerCamera;
-    public Transform camTransform;
+    public Transform cameraTransform;
     public Camera itemCamera;
     public float mouseSens;
     [SerializeField] float hitRecoverySpeed;  //how fast it takes for hitUI to become transparent again
@@ -33,12 +33,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [Header("Player Stats")]
     [SerializeField] float groundDrag;
     [SerializeField] float airDrag;
-    [SerializeField] float airMaxSpeed;
+    [SerializeField] float flockMaxSpeed;
     [SerializeField] float maxYVelocity;
     [SerializeField] float moveForceConstant;
     public float walkSpeed;
     public float sprintSpeed;
-    public float flockSpeed;
     [HideInInspector] public float flockTime;  //num seconds of airtime, decrements over time
     float speed;
     public MovementState moveState;
@@ -46,7 +45,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     {
         walking,
         sprinting,
-        air
+        flock
     }
     public float jumpHeight;
     public float healthRegen;
@@ -85,12 +84,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     private void Start()
     {
-
         if (view.IsMine)
         {
+            playerCamera.tag = "Player Camera";
             PlayerSetters();
             Cursor.lockState = CursorLockMode.Locked;
-            playerManager.SliderMouseSensitivity();
+
         }
         else
         {
@@ -102,6 +101,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     }
     public void PlayerSetters()
     {
+        mouseSens = PlayerPrefs.GetFloat("Mouse Sensitivity");
+        print(mouseSens);
         playerManager = PhotonView.Find((int)view.InstantiationData[0]).GetComponent<PlayerManager>();
         SetLoadout(playerManager.playerLoadout);
         currentHealth = maxHealth;
@@ -188,7 +189,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         verticalLookRotation += Input.GetAxisRaw("Mouse Y") * mouseSens;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
 
-        camTransform.localEulerAngles = Vector3.left * verticalLookRotation;
+        cameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
     }
 
     private void UpdateMoveState()
@@ -196,8 +197,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         //Mode Sprinting
         if(flockTime != 0)
         {
-            moveState = MovementState.air;
-            speed = flockSpeed;
+            moveState = MovementState.flock;
         }
         else if(Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.Mouse1))
         {
@@ -209,10 +209,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             moveState = MovementState.walking;
             speed = walkSpeed;
         }
+        print(moveState);
     }
 
     private void Move()
     {
+        //cannot move player while flocking
+        if (moveState == MovementState.flock)
+            return;
         Vector3 moveDirection = playerTransform.forward * Input.GetAxisRaw("Vertical") + playerTransform.right * Input.GetAxisRaw("Horizontal");
         rb.AddForce(moveDirection.normalized * speed * moveForceConstant, ForceMode.Force);
     }
@@ -224,11 +228,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         else
             rb.drag = airDrag;
         Vector3 flatVect = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        if(moveState == MovementState.air)
+        if(moveState == MovementState.flock)
         {
-            if(flatVect.magnitude > airMaxSpeed)
+            if(flatVect.magnitude > flockMaxSpeed)
             {
-                Vector3 limitVect = flatVect.normalized * airMaxSpeed;
+                Vector3 limitVect = flatVect.normalized * flockMaxSpeed;
                 rb.velocity = new Vector3(limitVect.x, rb.velocity.y, limitVect.z);
             }
         }

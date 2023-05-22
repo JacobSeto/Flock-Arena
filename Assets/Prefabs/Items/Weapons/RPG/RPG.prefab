@@ -78,11 +78,12 @@ MonoBehaviour:
   isEquip: 0
   playerController: {fileID: 0}
   useItem: 1
-  nextShot: 0
   reloading: 0
   ammo: 0
+  nextUse: 0
   maxAmmo: 3
   reload: 4.5
+  fireRate: 0.4
   weaponAudio: []
   moveX: 0
   moveY: 0
@@ -90,10 +91,17 @@ MonoBehaviour:
   rotateX: 0
   rotateY: 0
   rotateZ: 0
+  recoil: {fileID: 0}
+  hipRecoilX: 0
+  hipRecoilY: 0
+  hipRecoilZ: 0
+  aimRecoilX: 0
+  aimRecoilY: 0
+  aimRecoilZ: 0
   canAim: 1
+  isAiming: 0
   spread: 0
   damage: 50
-  fireRate: 0.4
   specialCooldown: 0
   hipSpread: 0
   hipSpeed: 6
@@ -115,7 +123,7 @@ MonoBehaviour:
   exploDamage: 25
   explosionRadius: 4
   selfDamage: 10
-  blastStrength: 1500
+  blastStrength: 2500
   blastAirTime: 0
   earlyExplosionMultiplyer: 4
   projectile: {fileID: 0}

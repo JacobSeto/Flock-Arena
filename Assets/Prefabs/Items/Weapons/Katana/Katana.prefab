@@ -101,8 +101,8 @@ MonoBehaviour:
   canAim: 1
   isAiming: 0
   spread: 0
-  damage: 75
-  specialCooldown: 0
+  damage: 40
+  specialCooldown: 3
   hipSpread: 0
   hipSpeed: 6
   aimSpread: 0
@@ -133,6 +133,13 @@ MonoBehaviour:
   slashDelay: 0.1
   slashCoolDownTime: 2.5
   swordHit: []
+  beamName: Katana Beam
+  beamSpawn: {fileID: 0}
+  beamSpeed: 22
+  beamHealth: 250
+  beamDamage: 40
+  beamTime: 2.5
+  beam: {fileID: 0}
 --- !u!65 &2381909824225213243
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -169,7 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4042241079041345632}
-  col: {fileID: 4042241079041345634}
+  cols:
+  - {fileID: 4042241079041345634}
   explosionPrefab: {fileID: 7503346998604099719, guid: 55a15f089497ea54482e4712c4d7eb5c, type: 3}
   view: {fileID: 8633920270653301888}
   speed: 0

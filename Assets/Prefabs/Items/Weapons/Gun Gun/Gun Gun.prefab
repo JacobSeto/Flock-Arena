@@ -123,7 +123,7 @@ MonoBehaviour:
   exploDamage: 50
   explosionRadius: 3
   selfDamage: 15
-  blastStrength: 250
+  blastStrength: 6250
   blastAirTime: 4
   earlyExplosionMultiplyer: 0.5
   projectile: {fileID: 0}

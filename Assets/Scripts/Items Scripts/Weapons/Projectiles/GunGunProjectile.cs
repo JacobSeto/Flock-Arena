@@ -37,12 +37,12 @@ public class GunGunProjectile : Projectile
         AddSpeed(boostStrength);
         if (view.IsMine)
         {
-            playerCamTransform = playerController.camTransform;
+            playerCamTransform = playerController.cameraTransform;
             playerCamera = playerController.playerCamera;
             playerController.PlayerCamerasActive(false);
             singleShotGun.playerController = playerController;
             playerManager = playerController.playerManager;
-            playerController.camTransform = gunCamera.transform;
+            playerController.cameraTransform = gunCamera.transform;
             playerController.playerCamera = gunCamera;
             singleShotGun.UpdateItemUI();
             playerController.canMove = false;
@@ -99,12 +99,7 @@ public class GunGunProjectile : Projectile
 
     public void GunGunControl()
     {
-        if (!playerManager.inGame)
-        {
-            PhotonNetwork.Destroy(gameObject);
-            return;
-        }
-        if (!playerManager.isPlayer || playerController.isPaused)
+        if (playerController !=null && !playerController.isPaused)
             return;
         
         if (Input.GetMouseButtonDown(1) || Input.GetKey(KeyCode.Escape))
@@ -120,7 +115,7 @@ public class GunGunProjectile : Projectile
         if (playerController != null)
         {
             gunCamera.gameObject.SetActive(false);
-            playerController.camTransform = playerCamTransform;
+            playerController.cameraTransform = playerCamTransform;
             playerController.playerCamera = playerCamera;
             singleShotGun.playerController.PlayerCamerasActive(true);
             playerController.canMove = true;

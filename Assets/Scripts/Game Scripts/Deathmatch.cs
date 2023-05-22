@@ -15,7 +15,7 @@ public class Deathmatch : MonoBehaviourPunCallbacks
     [SerializeField] float roundTime;
     [SerializeField] float startTime;
 
-    PhotonView view;
+    [SerializeField] PhotonView view;
 
     int round = 0;  //round 0 is prepare round before game starts
     float timeLeft;
@@ -27,12 +27,22 @@ public class Deathmatch : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text killsText;
 
     PlayerManager[] playerManagers;
+    PlayerManager playerManager;
 
     private void Awake()
     {
         timeLeft = startTime;
-        view = GetComponent<PhotonView>();
         PhotonNetwork.AutomaticallySyncScene = false;
+
+    }
+    private void Start()
+    {
+        playerManagers = GameObject.FindObjectsOfType<PlayerManager>();
+        foreach (PlayerManager playerManager in playerManagers)
+        {
+            if (playerManager.view.IsMine)
+                this.playerManager = playerManager;
+        }
     }
 
     private void Update()
@@ -40,6 +50,8 @@ public class Deathmatch : MonoBehaviourPunCallbacks
         if (view.IsMine && !isGameDone)
         {
             UpdateTime();
+            if (round > numRounds)
+                EndGame();
         }
     }
 
@@ -47,38 +59,18 @@ public class Deathmatch : MonoBehaviourPunCallbacks
     public void RPC_UpdateRound(int _round)
     {
         round = _round;
-        if (round > numRounds)
-            EndGame();
+
+        timeLeft = roundTime;
+        roundText.text = "Round: " + round.ToString();
+        if(round == 1)
+        {
+            //beginning round
+            playerManager.playerLoadout.SpawnButton.SetActive(true);
+        }
         else
         {
-
-            timeLeft = roundTime;
-            roundText.text = "Round: " + round.ToString();
-            //add skill points as long as it isn't starting round
-            playerManagers = GameObject.FindObjectsOfType<PlayerManager>();
-            if (round == 1)
-            {
-                foreach (PlayerManager playerManager in playerManagers)
-                {
-                    if(playerManager.isPlayer)
-                        playerManager.playerLoadout.SpawnButton.SetActive(true);
-                }
-            }
-            else
-            {
-                foreach (PlayerManager playerManager in playerManagers)
-                {
-                    if (playerManager.isPlayer)
-                    {
-                        playerManager.playerLoadout.RoundSkillIncrease();
-                        playerManager.playerLoadout.SpawnButton.SetActive(true);
-
-                    }
-
-                }
-
-            }
-            gameHUD.SetActive(true);
+            playerManager.playerLoadout.RoundSkillIncrease();
+            playerManager.playerLoadout.SpawnButton.SetActive(true);
         }
     }
 
@@ -103,25 +95,23 @@ public class Deathmatch : MonoBehaviourPunCallbacks
     public void RPC_UpdateTimeText(int time)
     {
         if (round == 0)
-            UpdateStartCounter(time);
-        string minutes = ((int)(time / 60)).ToString();
-        string seconds = (time % 60).ToString();
-        if (seconds.Length == 1)
-            seconds = '0' + seconds;
-        gameTimeText.text = minutes + ":" + seconds;
-    }
-
-    public void UpdateStartCounter(int time)
-    {
-        //Updates the start counter in the player loadout before player can spawn in
-        PlayerManager[] playerManagers = GameObject.FindObjectsOfType<PlayerManager>();
-        foreach (PlayerManager playerManager in playerManagers)
         {
-            //set empty if reached 0
             if (time == 0)
+            {
                 playerManager.playerLoadout.StartCountdown.text = "";
+                gameHUD.SetActive(true);
+            }
             else
                 playerManager.playerLoadout.StartCountdown.text = time.ToString();
+        }
+        else
+        {
+            string minutes = ((int)(time / 60)).ToString();
+            string seconds = (time % 60).ToString();
+            if (seconds.Length == 1)
+                seconds = '0' + seconds;
+            gameTimeText.text = minutes + ":" + seconds;
+
         }
     }
 
@@ -135,18 +125,23 @@ public class Deathmatch : MonoBehaviourPunCallbacks
         string winnerName = "!?";
         foreach (PlayerManager playerManager in playerManagers)
         {
-            if(playerManager.player!=null)
-                playerManager.Die();
             if(playerManager.kills > highestKill)
             {
                 highestKill = playerManager.kills;
                 winnerName = playerManager.view.Owner.NickName;
             }
-            winnerName = playerManager.view.Owner.NickName;
-            playerManager.gameObject.SetActive(false);
         }
+        view.RPC(nameof(RPC_EndGame), RpcTarget.All, winnerName, highestKill);
+    }
+
+    [PunRPC]
+    public void RPC_EndGame(string winnerName, int highestKill)
+    {
+        if (playerManager.player != null)
+            playerManager.Die();
         winnerText.text = winnerName + " Wins!!!";
         killsText.text = highestKill + " Kills";
         EndScreen.SetActive(true);
+        playerManager.playerLoadoutUI.SetActive(false);
     }
 }

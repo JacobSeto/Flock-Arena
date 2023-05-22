@@ -79,11 +79,12 @@ MonoBehaviour:
   isEquip: 0
   playerController: {fileID: 0}
   useItem: 1
-  nextShot: 0
   reloading: 0
   ammo: 0
+  nextUse: 0
   maxAmmo: 3
   reload: 3
+  fireRate: 0.25
   weaponAudio: []
   moveX: 0
   moveY: 0
@@ -91,11 +92,18 @@ MonoBehaviour:
   rotateX: 0
   rotateY: 0
   rotateZ: 0
+  recoil: {fileID: 0}
+  hipRecoilX: 0
+  hipRecoilY: 0
+  hipRecoilZ: 0
+  aimRecoilX: 0
+  aimRecoilY: 0
+  aimRecoilZ: 0
   canAim: 1
+  isAiming: 0
   spread: 0
   damage: 12
-  fireRate: 0.25
-  specialCooldown: 0
+  specialCooldown: 4
   hipSpread: 0.125
   hipSpeed: 8
   aimSpread: 0.06
@@ -106,6 +114,8 @@ MonoBehaviour:
   hipPosition: {fileID: 0}
   aimPosition: {fileID: 0}
   numBullets: 10
+  shotgunBlastForce: 100
+  blastFlockTime: 3
 --- !u!114 &69220013185509426
 MonoBehaviour:
   m_ObjectHideFlags: 0

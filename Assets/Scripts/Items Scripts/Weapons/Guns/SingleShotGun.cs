@@ -9,7 +9,7 @@ public class SingleShotGun : Weapon
     {
         Ray ray = playerController.playerCamera.ViewportPointToRay(new Vector3(.5f, .5f));  //casts ray from the center of the screen
         ray.direction += new Vector3(Random.Range(-spread,spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
-        ray.origin = playerController.camTransform.position;
+        ray.origin = playerController.cameraTransform.position;
         if(Physics.Raycast(ray, out RaycastHit hit))
         {
             BulletHit(hit);

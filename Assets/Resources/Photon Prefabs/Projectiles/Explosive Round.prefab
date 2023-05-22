@@ -169,7 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4042241079041345632}
-  col: {fileID: 4042241079041345634}
+  cols:
+  - {fileID: 4042241079041345634}
   explosionPrefab: {fileID: 7503346998604099719, guid: 224fb947625cfff42b8a1508fd5d76d2, type: 3}
   view: {fileID: 8633920270653301888}
   speed: 0
@@ -181,7 +182,7 @@ MonoBehaviour:
   explosionRadius: 0
   selfDamage: 0
   blastStrength: 0
-  blastAirTime: 0
+  flockTime: 0
   earlyExplosionMultiplyer: 0
   playerController: {fileID: 0}
-  hit: 0
+  projectileHit: []

@@ -8,7 +8,7 @@ using System.IO;
 public class Projectile : MonoBehaviourPunCallbacks, IDamageable                                                                                                                
 {
     public Rigidbody rb;
-    public Collider col;
+    public Collider[] cols;
     public GameObject explosionPrefab;
     public PhotonView view;
 
@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     [HideInInspector] public float earlyExplosionMultiplyer;
     [HideInInspector] public PlayerController playerController = null;
 
-    public List<Transform> projectileHit = new List<Transform>();  //lsit of transforms projectile hits
+    [HideInInspector] public List<Transform> projectileHit = new List<Transform>();  //lsit of transforms projectile hits
     List<Transform> explosionHit = new List<Transform>();  //list of transforms GameObjects explosion hits
     GameObject explosion;
     public virtual void SetProjectile(float speed, float health, float damage, float time, bool explodes, float explosionDamage = 0, float explosionRadius = 0, float selfDamage = 0, float blastStrength = 0, float flockTime = 0, float earlyExplosionMultiplyer = 0, PlayerController p = null)
@@ -67,7 +67,10 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
         else
         {
             Destroy(rb);
-            Destroy(col);
+            foreach(Collider col in cols)
+            {
+                Destroy(col);
+            }
         }
     }
     public virtual void OnTriggerEnter(Collider col)
@@ -83,7 +86,10 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
         }
         if (explodes)
         {
-            this.col.enabled = false;
+            foreach (Collider c in cols)
+            {
+                c.enabled = false;
+            }
             Explosion(exploDamage);
         }
         else
@@ -113,7 +119,10 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
         {
             if (explodes)
             {
-                col.enabled = false;
+                foreach (Collider c in cols)
+                {
+                    c.enabled = false;
+                }
                 Explosion(exploDamage * earlyExplosionMultiplyer);
             }
             DestroyProjectile(0);

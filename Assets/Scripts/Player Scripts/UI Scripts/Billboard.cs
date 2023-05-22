@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
-    Camera cam;
+    Camera playerCamera;
     private void Update()
     {
-        if (cam == null)
-            cam = FindObjectOfType<Camera>();
+        if (playerCamera == null)
+            playerCamera = GameObject.FindWithTag("Player Camera")?.GetComponent<Camera>();
 
-        if (cam == null)
+        if (playerCamera == null)
             return;
-
-        transform.LookAt(cam.transform);
-        transform.Rotate(Vector3.up * 180);
+        else
+        {
+            transform.LookAt(playerCamera.transform);
+            transform.Rotate(Vector3.up * 180);
+        }
     }
 }
