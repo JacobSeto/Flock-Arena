@@ -51,6 +51,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
     [PunRPC]
     public void RPC_SetProjectile(bool ex, float radius)
     {
+
         explodes = ex;
         explosionRadius = radius;
     }
@@ -172,7 +173,7 @@ public class Projectile : MonoBehaviourPunCallbacks, IDamageable
         Destroy(gameObject);
     }
 
-    public void DestroyProjectile(float time)
+    public virtual void DestroyProjectile(float time)
     {
         view.RPC(nameof(RPC_DestoryProjectile), RpcTarget.All, time);
     }

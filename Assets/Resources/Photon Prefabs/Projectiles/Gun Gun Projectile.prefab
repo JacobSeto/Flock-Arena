@@ -29,7 +29,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5892731716938874016}
   m_Father: {fileID: 6109848724606004965}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -113,7 +114,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6313875773020967091}
-  - {fileID: 5892731716938874016}
   - {fileID: 950449656627743217}
   m_Father: {fileID: 4042241079041345661}
   m_RootOrder: 0
@@ -151,7 +151,7 @@ RectTransform:
   m_Children:
   - {fileID: 7819653270675626410}
   m_Father: {fileID: 6109848724606004965}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 3959131176881616914}
   - component: {fileID: 8633920270653301888}
   - component: {fileID: -4036204463048392228}
-  - component: {fileID: 4530561118155347647}
+  - component: {fileID: 1578024214579705675}
   m_Layer: 0
   m_Name: Gun Gun Projectile
   m_TagString: Untagged
@@ -491,8 +491,8 @@ MonoBehaviour:
   turnSens: 50
   turnMax: 0
   turnSpeed: 2.5
-  singleShotGun: {fileID: 4530561118155347647}
---- !u!114 &4530561118155347647
+  singleShotGun: {fileID: 1578024214579705675}
+--- !u!114 &1578024214579705675
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -628,7 +628,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 6109848724606004965}
+    m_TransformParent: {fileID: 6313875773020967091}
     m_Modifications:
     - target: {fileID: 1694449805434718, guid: 6f1a7354265853f44b0ed5e2e43676ad, type: 3}
       propertyPath: m_Name
@@ -636,7 +636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4952727429218122, guid: 6f1a7354265853f44b0ed5e2e43676ad, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4952727429218122, guid: 6f1a7354265853f44b0ed5e2e43676ad, type: 3}
       propertyPath: m_LocalScale.x
@@ -656,11 +656,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4952727429218122, guid: 6f1a7354265853f44b0ed5e2e43676ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.19999999
+      value: -0.19999997
       objectReference: {fileID: 0}
     - target: {fileID: 4952727429218122, guid: 6f1a7354265853f44b0ed5e2e43676ad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.85999995
+      value: 1.1599998
       objectReference: {fileID: 0}
     - target: {fileID: 4952727429218122, guid: 6f1a7354265853f44b0ed5e2e43676ad, type: 3}
       propertyPath: m_LocalRotation.w

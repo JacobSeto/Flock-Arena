@@ -69,7 +69,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         if (roomNameInputField.text.Length > 0)
         {
             print("creating room");
-            PhotonNetwork.CreateRoom(roomNameInputField.text);
+            PhotonNetwork.CreateRoom(roomNameInputField.text, new RoomOptions {IsVisible = true });
             MenuManager.Instance.OpenMenu("loading");
         }
     }

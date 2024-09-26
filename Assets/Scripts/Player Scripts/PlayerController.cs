@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     [Space]
     [Header("Items")]
-    [SerializeField] Transform itemHolder;
+    public Transform itemHolder;
     [SerializeField] List<Item> items;
     int itemIndex = 0;
     int previousItemIndex = -1;

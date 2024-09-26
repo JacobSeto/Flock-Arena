@@ -80,6 +80,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (view.IsMine)
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             playerLoadoutUI.SetActive(true);
             mouseSlider.value = PlayerPrefs.GetFloat("Mouse Sensitivity", 300f)*100;
         }
@@ -109,10 +111,8 @@ public class PlayerManager : MonoBehaviour
         {
             return;
         }
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        inGame = false;
         PhotonNetwork.Destroy(player);
+        inGame = false;
         SetPlayerLoadout();
 
         deaths++;

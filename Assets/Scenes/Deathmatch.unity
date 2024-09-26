@@ -3395,9 +3395,9 @@ MonoBehaviour:
   gameHUD: {fileID: 2009234843}
   roundText: {fileID: 1931603336}
   gameTimeText: {fileID: 1609767081}
-  numRounds: 3
-  roundTime: 10
-  startTime: 1
+  numRounds: 1
+  roundTime: 180
+  startTime: 30
   view: {fileID: 1212211708}
   EndScreen: {fileID: 1455238520}
   winnerText: {fileID: 1414099877}

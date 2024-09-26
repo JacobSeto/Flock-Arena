@@ -99,7 +99,7 @@ public class GunGunProjectile : Projectile
 
     public void GunGunControl()
     {
-        if (playerController !=null && !playerController.isPaused)
+        if (playerController ==null || playerController.isPaused)
             return;
         
         if (Input.GetMouseButtonDown(1) || Input.GetKey(KeyCode.Escape))
@@ -123,5 +123,6 @@ public class GunGunProjectile : Projectile
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = true;
         }
+        
     }
 }
